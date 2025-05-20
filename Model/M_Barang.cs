@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Project_SpareLog.App.Core;
+
+namespace Project_SpareLog.Model
+{
+    public class M_Barang
+    {
+        public int id_barang { get; set; }
+        public string nama_barang { get; set; }
+        public int stok_barang { get; set; }
+        public decimal harga_barang { get; set; }
+        public decimal hpp { get; set; }
+        public int supplier_id_supplier { get; set; }
+    }
+}

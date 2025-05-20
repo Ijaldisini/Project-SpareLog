@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Npgsql;
+using Project_SpareLog.App.Core;
+
+namespace Project_SpareLog.Controller
+{
+    public class C_Login
+    {
+        private readonly DatabaseWrapper db = new DatabaseWrapper();
+
+        public bool Login(string password)
+        {
+            string query = "SELECT * FROM users WHERE password = @password";
+            NpgsqlParameter[] parameters = {
+                new NpgsqlParameter("@password", password)
+            };
+
+            DataTable dt = db.queryExecutor(query, parameters);
+            return dt.Rows.Count > 0;
+        }
+    }
+}
