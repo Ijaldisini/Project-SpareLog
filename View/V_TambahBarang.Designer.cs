@@ -44,6 +44,7 @@
             dateTimePicker1 = new DateTimePicker();
             comboBox1 = new ComboBox();
             button1 = new Button();
+            button2 = new Button();
             SuspendLayout();
             // 
             // label1
@@ -169,6 +170,16 @@
             button1.Text = "Simpan";
             button1.UseVisualStyleBackColor = true;
             // 
+            // button2
+            // 
+            button2.Location = new Point(1170, 29);
+            button2.Name = "button2";
+            button2.Size = new Size(217, 75);
+            button2.TabIndex = 15;
+            button2.Text = "Restock";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
             // V_TambahBarang
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -176,6 +187,7 @@
             BackColor = Color.Transparent;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Zoom;
+            Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(comboBox1);
             Controls.Add(dateTimePicker1);
@@ -215,5 +227,6 @@
         private DateTimePicker dateTimePicker1;
         private ComboBox comboBox1;
         private Button button1;
+        private Button button2;
     }
 }

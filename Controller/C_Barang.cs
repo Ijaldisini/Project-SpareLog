@@ -59,5 +59,15 @@ namespace Project_SpareLog.Controller
                            $"VALUES ('{barang.id_barang}', '{barang.nama_barang}', '{barang.stok_barang}', '{barang.harga_barang}', '{barang.hpp}', '{barang.supplier_id_supplier}')";
             return db.ExecuteNonQuery(query) > 0;
         }
+
+        public DataTable GetBarangPerluRestock()
+        {
+            string query = @"SELECT b.id_barang, b.nama_barang, b.stok_barang, b.harga_barang, b.hpp, s.nama_supplier
+                    FROM barang b
+                    JOIN supplier s ON b.supplier_id_supplier = s.id_supplier
+                    WHERE b.stok_barang < 10
+                    ORDER BY b.stok_barang ASC";
+            return db.queryExecutor(query);
+        }
     }
 }

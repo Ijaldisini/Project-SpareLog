@@ -35,7 +35,8 @@
             button2 = new Button();
             v_ManajemenStok1 = new V_ManajemenStok();
             v_DashboardAwal1 = new V_DashboardAwal();
-            V_TambahBarang v_TambahBarang1 = new V_TambahBarang();
+            v_TambahBarang1 = new V_TambahBarang();
+            v_Restock1 = new V_Restock();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -120,6 +121,16 @@
             v_TambahBarang1.TabIndex = 4;
             v_TambahBarang1.Load += v_TambahBarang1_Load;
             // 
+            // v_Restock1
+            // 
+            v_Restock1.BackColor = Color.Transparent;
+            v_Restock1.BackgroundImage = (Image)resources.GetObject("v_Restock1.BackgroundImage");
+            v_Restock1.BackgroundImageLayout = ImageLayout.Zoom;
+            v_Restock1.Location = new Point(392, 62);
+            v_Restock1.Name = "v_Restock1";
+            v_Restock1.Size = new Size(1426, 941);
+            v_Restock1.TabIndex = 5;
+            // 
             // V_Dashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -132,6 +143,7 @@
             Controls.Add(panel1);
             Controls.Add(label1);
             Controls.Add(v_TambahBarang1);
+            Controls.Add(v_Restock1);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
             Name = "V_Dashboard";
@@ -151,5 +163,6 @@
         private V_DashboardAwal v_DashboardAwal1;
         private Button button2;
         private V_TambahBarang v_TambahBarang1;
+        private V_Restock v_Restock1;
     }
 }

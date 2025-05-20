@@ -90,5 +90,13 @@ namespace Project_SpareLog.View
                 MessageBox.Show($"Terjadi kesalahan: {ex.Message}");
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            V_Restock v_Restock = new V_Restock();
+            v_Restock.BringToFront();
+            v_Restock.Show();
+            this.Hide();
+        }
     }
 }
