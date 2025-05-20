@@ -57,12 +57,12 @@ namespace Project_SpareLog.View
         {
             if (decimal.TryParse(textBox4.Text, out decimal harga))
             {
-                int hpp = (int)(harga - (harga * 0.1m)); // HPP = 90% dari harga, hasilnya dikonversi ke int
+                int hpp = (int)(harga - (harga * 0.1m));
                 textBox5.Text = hpp.ToString();
             }
             else
             {
-                textBox5.Text = string.Empty; // kosongkan jika input tidak valid
+                textBox5.Text = string.Empty;
             }
         }
 
@@ -91,5 +91,4 @@ namespace Project_SpareLog.View
             }
         }
     }
-
 }

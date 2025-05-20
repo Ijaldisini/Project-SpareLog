@@ -26,7 +26,7 @@ namespace Project_SpareLog.Controller
         public int GetNextIdBarang()
         {
             string query = "SELECT MAX(id_barang) AS max_id FROM barang";
-            DataTable dt = db.queryExecutor(query); // Gunakan queryExecutor, BUKAN ExecuteNonQuery
+            DataTable dt = db.queryExecutor(query);
 
             if (dt.Rows.Count > 0 && dt.Rows[0]["max_id"] != DBNull.Value)
             {

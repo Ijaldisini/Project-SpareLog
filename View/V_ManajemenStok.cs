@@ -31,7 +31,6 @@ namespace Project_SpareLog.View
         {
             var controller = new C_Barang();
             DataTable dt = controller.GetAllBarang();
-
             dataGridView1.Rows.Clear();
             foreach (DataRow row in dt.Rows)
             {
@@ -88,6 +87,7 @@ namespace Project_SpareLog.View
         private void button1_Click(object sender, EventArgs e)
         {
             V_TambahBarang v_TambahBarang = new V_TambahBarang();
+            v_TambahBarang.BringToFront();
             v_TambahBarang.Show();
             this.Hide();
         }

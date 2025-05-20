@@ -34,10 +34,10 @@
             dataGridView1 = new DataGridView();
             Column1 = new DataGridViewTextBoxColumn();
             Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
             Column4 = new DataGridViewTextBoxColumn();
-            Column5 = new DataGridViewTextBoxColumn();
             Column6 = new DataGridViewTextBoxColumn();
+            Column5 = new DataGridViewTextBoxColumn();
+            Column3 = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -69,7 +69,7 @@
             // 
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6 });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column4, Column6, Column5, Column3 });
             dataGridView1.GridColor = Color.DarkGray;
             dataGridView1.Location = new Point(22, 162);
             dataGridView1.Name = "dataGridView1";
@@ -92,19 +92,19 @@
             Column2.Name = "Column2";
             Column2.Width = 125;
             // 
-            // Column3
-            // 
-            Column3.HeaderText = "ID Pemasok";
-            Column3.MinimumWidth = 6;
-            Column3.Name = "Column3";
-            Column3.Width = 125;
-            // 
             // Column4
             // 
             Column4.HeaderText = "Jumlah Stok";
             Column4.MinimumWidth = 6;
             Column4.Name = "Column4";
             Column4.Width = 125;
+            // 
+            // Column6
+            // 
+            Column6.HeaderText = "Harga Jual";
+            Column6.MinimumWidth = 6;
+            Column6.Name = "Column6";
+            Column6.Width = 125;
             // 
             // Column5
             // 
@@ -113,12 +113,12 @@
             Column5.Name = "Column5";
             Column5.Width = 125;
             // 
-            // Column6
+            // Column3
             // 
-            Column6.HeaderText = "Harga Jual";
-            Column6.MinimumWidth = 6;
-            Column6.Name = "Column6";
-            Column6.Width = 125;
+            Column3.HeaderText = "ID Pemasok";
+            Column3.MinimumWidth = 6;
+            Column3.Name = "Column3";
+            Column3.Width = 125;
             // 
             // V_ManajemenStok
             // 
@@ -146,9 +146,9 @@
         private DataGridView dataGridView1;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
         private DataGridViewTextBoxColumn Column4;
-        private DataGridViewTextBoxColumn Column5;
         private DataGridViewTextBoxColumn Column6;
+        private DataGridViewTextBoxColumn Column5;
+        private DataGridViewTextBoxColumn Column3;
     }
 }

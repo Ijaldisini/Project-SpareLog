@@ -35,7 +35,7 @@
             button2 = new Button();
             v_ManajemenStok1 = new V_ManajemenStok();
             v_DashboardAwal1 = new V_DashboardAwal();
-            v_TambahBarang1 = new V_TambahBarang();
+            V_TambahBarang v_TambahBarang1 = new V_TambahBarang();
             panel1.SuspendLayout();
             SuspendLayout();
             // 

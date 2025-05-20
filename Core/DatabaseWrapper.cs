@@ -64,7 +64,7 @@ namespace Project_SpareLog.App.Core
                     {
                         command.Parameters.AddRange(parameters);
                     }
-                    return command.ExecuteNonQuery(); // return jumlah baris yang terpengaruh
+                    return command.ExecuteNonQuery();
                 }
             }
         }
