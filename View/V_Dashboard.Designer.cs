@@ -37,6 +37,8 @@
             v_DashboardAwal1 = new V_DashboardAwal();
             v_TambahBarang1 = new V_TambahBarang();
             v_Restock1 = new V_Restock();
+            button3 = new Button();
+            v_TransaksiPelanggan1 = new V_TransaksiPelanggan();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -56,6 +58,7 @@
             panel1.BackColor = Color.Transparent;
             panel1.BackgroundImage = (Image)resources.GetObject("panel1.BackgroundImage");
             panel1.BackgroundImageLayout = ImageLayout.Zoom;
+            panel1.Controls.Add(button3);
             panel1.Controls.Add(button1);
             panel1.Controls.Add(button2);
             panel1.Dock = DockStyle.Left;
@@ -131,6 +134,29 @@
             v_Restock1.Size = new Size(1426, 941);
             v_Restock1.TabIndex = 5;
             // 
+            // button3
+            // 
+            button3.BackgroundImage = (Image)resources.GetObject("button3.BackgroundImage");
+            button3.BackgroundImageLayout = ImageLayout.Zoom;
+            button3.FlatAppearance.BorderSize = 0;
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.Location = new Point(33, 452);
+            button3.Name = "button3";
+            button3.Size = new Size(279, 82);
+            button3.TabIndex = 6;
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
+            // v_TransaksiPelanggan1
+            // 
+            v_TransaksiPelanggan1.BackColor = Color.Transparent;
+            v_TransaksiPelanggan1.BackgroundImage = (Image)resources.GetObject("v_TransaksiPelanggan1.BackgroundImage");
+            v_TransaksiPelanggan1.BackgroundImageLayout = ImageLayout.Zoom;
+            v_TransaksiPelanggan1.Location = new Point(392, 62);
+            v_TransaksiPelanggan1.Name = "v_TransaksiPelanggan1";
+            v_TransaksiPelanggan1.Size = new Size(1426, 941);
+            v_TransaksiPelanggan1.TabIndex = 6;
+            // 
             // V_Dashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -144,6 +170,7 @@
             Controls.Add(label1);
             Controls.Add(v_TambahBarang1);
             Controls.Add(v_Restock1);
+            Controls.Add(v_TransaksiPelanggan1);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
             Name = "V_Dashboard";
@@ -164,5 +191,7 @@
         private Button button2;
         private V_TambahBarang v_TambahBarang1;
         private V_Restock v_Restock1;
+        private Button button3;
+        private V_TransaksiPelanggan v_TransaksiPelanggan1;
     }
 }

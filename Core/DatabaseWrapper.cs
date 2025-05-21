@@ -52,7 +52,6 @@ namespace Project_SpareLog.App.Core
         //    }
         //}
 
-
         public int ExecuteNonQuery(string query, NpgsqlParameter[] parameters = null)
         {
             using (var connection = new NpgsqlConnection($"Host={DB_HOST};Username={DB_USERNAME};Password={DB_PASSWORD};Database={DB_DATABASE};Port={DB_PORT}"))

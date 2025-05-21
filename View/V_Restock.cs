@@ -19,6 +19,7 @@ namespace Project_SpareLog.View
             InitializeComponent();
             controller = new C_Barang();
             this.Load += V_Restock_Load; // Pastikan event handler terdaftar
+
         }
 
         private void V_Restock_Load(object sender, EventArgs e)
