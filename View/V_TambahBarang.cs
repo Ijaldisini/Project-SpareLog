@@ -24,6 +24,7 @@ namespace Project_SpareLog.View
                 controller = new C_Barang();
             }
 
+            textBox1.Leave += TextBox1_Leave;
             Load += V_TambahBarang_Load;
             textBox2.Leave += TextBox2_Leave;
             textBox4.TextChanged += TextBox4_TextChanged;
@@ -40,6 +41,20 @@ namespace Project_SpareLog.View
             comboBox1.DataSource = dt;
             comboBox1.DisplayMember = "nama_supplier";
             comboBox1.ValueMember = "id_supplier";
+        }
+
+        private void TextBox1_Leave(object sender, EventArgs e)
+        {
+            if (DesignMode) return;
+
+            if (int.TryParse(textBox1.Text.Trim(), out int idBarang))
+            {
+                string namaBarang = controller.GetNamaBarangById(idBarang);
+                if (!string.IsNullOrEmpty(namaBarang))
+                {
+                    textBox2.Text = namaBarang;
+                }
+            }
         }
 
         private void TextBox2_Leave(object sender, EventArgs e)
@@ -84,6 +99,12 @@ namespace Project_SpareLog.View
                 controller = controller ?? new C_Barang();
                 bool success = controller.SimpanBarang(barang);
                 MessageBox.Show(success ? "Barang berhasil disimpan." : "Gagal menyimpan barang.");
+
+                textBox1.Clear();
+                textBox2.Clear();
+                textBox3.Clear();
+                textBox4.Clear();
+                textBox5.Clear();
             }
             catch (Exception ex)
             {

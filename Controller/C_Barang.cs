@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Npgsql;
 using Project_SpareLog.App.Core;
 using Project_SpareLog.Model;
 
@@ -47,6 +48,17 @@ namespace Project_SpareLog.Controller
             return null;
         }
 
+        public string GetNamaBarangById(int id)
+        {
+            string query = $"SELECT nama_barang FROM barang WHERE id_barang = '{id}'";
+            DataTable dt = db.queryExecutor(query);
+
+            if (dt.Rows.Count > 0)
+            {
+                return dt.Rows[0]["nama_barang"].ToString();
+            }
+            return null;
+        }
 
         public DataTable GetSuppliers()
         {
@@ -55,9 +67,42 @@ namespace Project_SpareLog.Controller
 
         public bool SimpanBarang(M_Barang barang)
         {
-            string query = $"INSERT INTO barang (id_barang, nama_barang, stok_barang, harga_barang, hpp, supplier_id_supplier) " +
-                           $"VALUES ('{barang.id_barang}', '{barang.nama_barang}', '{barang.stok_barang}', '{barang.harga_barang}', '{barang.hpp}', '{barang.supplier_id_supplier}')";
-            return db.ExecuteNonQuery(query) > 0;
+            if (IsBarangExists(barang.id_barang))
+            {
+                string updateQuery = "UPDATE barang SET stok_barang = stok_barang + @tambahStok WHERE id_barang = @id";
+                var updateParams = new NpgsqlParameter[]
+                {
+                    new NpgsqlParameter("@tambahStok", barang.stok_barang),
+                    new NpgsqlParameter("@id", barang.id_barang)
+                };
+                return db.ExecuteNonQuery(updateQuery, updateParams) > 0;
+            }
+            else
+            {
+                string insertQuery = "INSERT INTO barang (id_barang, nama_barang, stok_barang, harga_barang, hpp, supplier_id_supplier) " +
+                                     "VALUES (@id, @nama, @stok, @harga, @hpp, @supplier)";
+                var insertParams = new NpgsqlParameter[]
+                {
+                    new NpgsqlParameter("@id", barang.id_barang),
+                    new NpgsqlParameter("@nama", barang.nama_barang),
+                    new NpgsqlParameter("@stok", barang.stok_barang),
+                    new NpgsqlParameter("@harga", barang.harga_barang),
+                    new NpgsqlParameter("@hpp", barang.hpp),
+                    new NpgsqlParameter("@supplier", barang.supplier_id_supplier)
+                };
+                return db.ExecuteNonQuery(insertQuery, insertParams) > 0;
+            }
+        }
+
+        public bool IsBarangExists(int idBarang)
+        {
+            string query = "SELECT COUNT(*) FROM barang WHERE id_barang = @id";
+            var parameters = new NpgsqlParameter[]
+            {
+        new NpgsqlParameter("@id", idBarang)
+            };
+            DataTable dt = db.queryExecutor(query, parameters);
+            return Convert.ToInt32(dt.Rows[0][0]) > 0;
         }
 
         public DataTable GetBarangPerluRestock()
