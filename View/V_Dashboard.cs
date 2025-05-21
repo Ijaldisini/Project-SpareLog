@@ -26,8 +26,10 @@ namespace Project_SpareLog.View
         private void button1_Click(object sender, EventArgs e)
         {
             v_ManajemenStok1.LoadDataStok();
+            v_Restock1.LoadBarangPerluRestock();
             v_ManajemenStok1.BringToFront();
             v_ManajemenStok1.Show();
+            v_TambahBarang1.Show();
             v_DashboardAwal1.Hide();
             button2.Show();
             button1.Hide();
@@ -50,6 +52,7 @@ namespace Project_SpareLog.View
 
         private void button3_Click(object sender, EventArgs e)
         {
+            v_TransaksiPelanggan1.LoadBarangToDictionary();
             v_TransaksiPelanggan1.BringToFront();
             v_TransaksiPelanggan1.Show();
             v_DashboardAwal1.Hide();

@@ -98,7 +98,7 @@ namespace Project_SpareLog.View
 
         private Dictionary<string, (int id, int harga)> barangDict = new();
 
-        private void LoadBarangToDictionary()
+        public void LoadBarangToDictionary()
         {
             var controller = new C_Transaksi();
             var dt = controller.GetDataBarang();

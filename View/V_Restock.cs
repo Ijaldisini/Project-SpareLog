@@ -28,7 +28,7 @@ namespace Project_SpareLog.View
             LoadBarangPerluRestock();
         }
 
-        private void LoadBarangPerluRestock()
+        public void LoadBarangPerluRestock()
         {
             try
             {
