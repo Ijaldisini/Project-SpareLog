@@ -19,7 +19,7 @@ namespace Project_SpareLog.View
             InitializeComponent();
         }
 
-        
+
 
         private void V_ManajemenStok_Load(object sender, EventArgs e)
         {

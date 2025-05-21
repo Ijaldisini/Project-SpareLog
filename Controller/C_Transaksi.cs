@@ -12,6 +12,8 @@ namespace Project_SpareLog.Controller
 {
     public class C_Transaksi
     {
+        
+
         private DatabaseWrapper db = new DatabaseWrapper();
 
         public bool SimpanTransaksi(M_Transaksi transaksi)
@@ -21,10 +23,10 @@ namespace Project_SpareLog.Controller
 
             NpgsqlParameter[] parameters = new NpgsqlParameter[]
             {
-        new NpgsqlParameter("@nama", transaksi.nama_transaksi),
-        new NpgsqlParameter("@tanggal", transaksi.tanggal_transaksi),
-        new NpgsqlParameter("@jumlah_barang", transaksi.jumlah_barang),
-        new NpgsqlParameter("@total", transaksi.total_transaksi)
+                new NpgsqlParameter("@nama", transaksi.nama_transaksi),
+                new NpgsqlParameter("@tanggal", transaksi.tanggal_transaksi),
+                new NpgsqlParameter("@jumlah_barang", transaksi.jumlah_barang),
+                new NpgsqlParameter("@total", transaksi.total_transaksi)
             };
 
             return db.ExecuteNonQuery(query, parameters) > 0;
