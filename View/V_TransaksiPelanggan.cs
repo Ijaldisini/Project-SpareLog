@@ -184,7 +184,7 @@ namespace Project_SpareLog.View
 
         private void UpdateBarangInfoFromDictionary(DataGridViewRow row)
         {
-            string nama_barang = row.Cells[1].Value?.ToString();
+            string nama_barang = row.Cells["nama_barang"].Value?.ToString();
             if (barangDict.TryGetValue(nama_barang, out var barangInfo))
             {
                 row.Cells[0].Value = barangInfo.id;
