@@ -32,12 +32,13 @@
             pictureBox1 = new PictureBox();
             button1 = new Button();
             dataGridView1 = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
-            Column6 = new DataGridViewTextBoxColumn();
-            Column5 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
+            id_barang = new DataGridViewTextBoxColumn();
+            nama_barang = new DataGridViewTextBoxColumn();
+            jumlah_stok = new DataGridViewTextBoxColumn();
+            harga_jual = new DataGridViewTextBoxColumn();
+            hpp = new DataGridViewTextBoxColumn();
+            id_pemasok = new DataGridViewTextBoxColumn();
+            hapus = new DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -69,7 +70,7 @@
             // 
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column4, Column6, Column5, Column3 });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { id_barang, nama_barang, jumlah_stok, harga_jual, hpp, id_pemasok, hapus });
             dataGridView1.GridColor = Color.DarkGray;
             dataGridView1.Location = new Point(22, 162);
             dataGridView1.Name = "dataGridView1";
@@ -78,47 +79,56 @@
             dataGridView1.TabIndex = 2;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
-            // Column1
+            // id_barang
             // 
-            Column1.HeaderText = "ID Barang";
-            Column1.MinimumWidth = 6;
-            Column1.Name = "Column1";
-            Column1.Width = 125;
+            id_barang.HeaderText = "ID Barang";
+            id_barang.MinimumWidth = 6;
+            id_barang.Name = "id_barang";
+            id_barang.Width = 125;
             // 
-            // Column2
+            // nama_barang
             // 
-            Column2.HeaderText = "Nama Barang";
-            Column2.MinimumWidth = 6;
-            Column2.Name = "Column2";
-            Column2.Width = 125;
+            nama_barang.HeaderText = "Nama Barang";
+            nama_barang.MinimumWidth = 6;
+            nama_barang.Name = "nama_barang";
+            nama_barang.Width = 125;
             // 
-            // Column4
+            // jumlah_stok
             // 
-            Column4.HeaderText = "Jumlah Stok";
-            Column4.MinimumWidth = 6;
-            Column4.Name = "Column4";
-            Column4.Width = 125;
+            jumlah_stok.HeaderText = "Jumlah Stok";
+            jumlah_stok.MinimumWidth = 6;
+            jumlah_stok.Name = "jumlah_stok";
+            jumlah_stok.Width = 125;
             // 
-            // Column6
+            // harga_jual
             // 
-            Column6.HeaderText = "Harga Jual";
-            Column6.MinimumWidth = 6;
-            Column6.Name = "Column6";
-            Column6.Width = 125;
+            harga_jual.HeaderText = "Harga Jual";
+            harga_jual.MinimumWidth = 6;
+            harga_jual.Name = "harga_jual";
+            harga_jual.Width = 125;
             // 
-            // Column5
+            // hpp
             // 
-            Column5.HeaderText = "HPP";
-            Column5.MinimumWidth = 6;
-            Column5.Name = "Column5";
-            Column5.Width = 125;
+            hpp.HeaderText = "HPP";
+            hpp.MinimumWidth = 6;
+            hpp.Name = "hpp";
+            hpp.Width = 125;
             // 
-            // Column3
+            // id_pemasok
             // 
-            Column3.HeaderText = "ID Pemasok";
-            Column3.MinimumWidth = 6;
-            Column3.Name = "Column3";
-            Column3.Width = 125;
+            id_pemasok.HeaderText = "ID Pemasok";
+            id_pemasok.MinimumWidth = 6;
+            id_pemasok.Name = "id_pemasok";
+            id_pemasok.Width = 125;
+            // 
+            // hapus
+            // 
+            hapus.HeaderText = "Hapus";
+            hapus.MinimumWidth = 6;
+            hapus.Name = "hapus";
+            hapus.Resizable = DataGridViewTriState.True;
+            hapus.SortMode = DataGridViewColumnSortMode.Automatic;
+            hapus.Width = 125;
             // 
             // V_ManajemenStok
             // 
@@ -144,11 +154,12 @@
         private PictureBox pictureBox1;
         private Button button1;
         private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column4;
-        private DataGridViewTextBoxColumn Column6;
-        private DataGridViewTextBoxColumn Column5;
-        private DataGridViewTextBoxColumn Column3;
+        private DataGridViewTextBoxColumn id_barang;
+        private DataGridViewTextBoxColumn nama_barang;
+        private DataGridViewTextBoxColumn jumlah_stok;
+        private DataGridViewTextBoxColumn harga_jual;
+        private DataGridViewTextBoxColumn hpp;
+        private DataGridViewTextBoxColumn id_pemasok;
+        private DataGridViewButtonColumn hapus;
     }
 }

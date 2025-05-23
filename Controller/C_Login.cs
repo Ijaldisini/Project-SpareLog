@@ -6,10 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Npgsql;
 using Project_SpareLog.App.Core;
+using Project_SpareLog.Model;
+using Project_SpareLog.Core.Interface;
 
 namespace Project_SpareLog.Controller
 {
-    public class C_Login
+    public class C_Login : ILoginService
     {
         private readonly DatabaseWrapper db = new DatabaseWrapper();
 

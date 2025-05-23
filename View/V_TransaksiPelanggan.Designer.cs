@@ -36,13 +36,13 @@
             label3 = new Label();
             dateTimePicker1 = new DateTimePicker();
             dataGridView1 = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
             label4 = new Label();
             button1 = new Button();
             textBox3 = new TextBox();
+            id_barang = new DataGridViewTextBoxColumn();
+            nama_barang = new DataGridViewTextBoxColumn();
+            jumlah_barang = new DataGridViewTextBoxColumn();
+            harga = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -97,40 +97,13 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4 });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { id_barang, nama_barang, jumlah_barang, harga });
             dataGridView1.Location = new Point(23, 437);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(1377, 386);
             dataGridView1.TabIndex = 7;
-            // 
-            // Column1
-            // 
-            Column1.HeaderText = "ID Barang";
-            Column1.MinimumWidth = 6;
-            Column1.Name = "id_barang";
-            Column1.Width = 125;
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "Nama Barang";
-            Column2.MinimumWidth = 6;
-            Column2.Name = "nama_barang";
-            Column2.Width = 125;
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "Jumlah Barang";
-            Column3.MinimumWidth = 6;
-            Column3.Name = "jumlah_barang";
-            Column3.Width = 125;
-            // 
-            // Column4
-            // 
-            Column4.HeaderText = "Harga";
-            Column4.MinimumWidth = 6;
-            Column4.Name = "harga";
-            Column4.Width = 125;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // label4
             // 
@@ -158,6 +131,34 @@
             textBox3.ReadOnly = true;
             textBox3.Size = new Size(125, 27);
             textBox3.TabIndex = 10;
+            // 
+            // id_barang
+            // 
+            id_barang.HeaderText = "ID Barang";
+            id_barang.MinimumWidth = 6;
+            id_barang.Name = "id_barang";
+            id_barang.Width = 125;
+            // 
+            // nama_barang
+            // 
+            nama_barang.HeaderText = "Nama Barang";
+            nama_barang.MinimumWidth = 6;
+            nama_barang.Name = "nama_barang";
+            nama_barang.Width = 125;
+            // 
+            // jumlah_barang
+            // 
+            jumlah_barang.HeaderText = "Jumlah Barang";
+            jumlah_barang.MinimumWidth = 6;
+            jumlah_barang.Name = "jumlah_barang";
+            jumlah_barang.Width = 125;
+            // 
+            // harga
+            // 
+            harga.HeaderText = "Harga";
+            harga.MinimumWidth = 6;
+            harga.Name = "harga";
+            harga.Width = 125;
             // 
             // V_TransaksiPelanggan
             // 
@@ -195,10 +196,10 @@
         private DataGridView dataGridView1;
         private Label label4;
         private Button button1;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column4;
         private TextBox textBox3;
+        private DataGridViewTextBoxColumn id_barang;
+        private DataGridViewTextBoxColumn nama_barang;
+        private DataGridViewTextBoxColumn jumlah_barang;
+        private DataGridViewTextBoxColumn harga;
     }
 }

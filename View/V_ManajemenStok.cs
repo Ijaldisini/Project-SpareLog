@@ -17,9 +17,8 @@ namespace Project_SpareLog.View
         public V_ManajemenStok()
         {
             InitializeComponent();
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
         }
-
-
 
         private void V_ManajemenStok_Load(object sender, EventArgs e)
         {
@@ -47,7 +46,33 @@ namespace Project_SpareLog.View
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            // Handle tombol hapus
+            if (e.ColumnIndex == dataGridView1.Columns["hapus"].Index && e.RowIndex >= 0)
+            {
+                // Dapatkan ID barang dari baris yang dipilih
+                int idBarang = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id_barang"].Value);
 
+                // Konfirmasi penghapusan
+                var confirmResult = MessageBox.Show("Apakah Anda yakin ingin menghapus barang ini?",
+                                                  "Konfirmasi Hapus",
+                                                  MessageBoxButtons.YesNo);
+                if (confirmResult == DialogResult.Yes)
+                {
+                    // Panggil controller untuk menghapus
+                    var controller = new C_Barang();
+                    bool success = controller.HapusBarang(idBarang);
+
+                    if (success)
+                    {
+                        MessageBox.Show("Barang berhasil dihapus");
+                        LoadDataStok(); // Refresh data
+                    }
+                    else
+                    {
+                        MessageBox.Show("Gagal menghapus barang");
+                    }
+                }
+            }
         }
 
         private void StyleDataGridView()
@@ -71,6 +96,11 @@ namespace Project_SpareLog.View
             dataGridView1.DefaultCellStyle.Padding = new Padding(8);
             dataGridView1.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
+            // Style khusus untuk tombol
+            dataGridView1.Columns["hapus"].DefaultCellStyle.BackColor = Color.FromArgb(255, 100, 100);
+            dataGridView1.Columns["hapus"].DefaultCellStyle.ForeColor = Color.White;
+            dataGridView1.Columns["hapus"].DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+
             // Border and lines
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dataGridView1.GridColor = Color.White;
@@ -80,6 +110,7 @@ namespace Project_SpareLog.View
             // Row and column sizing
             dataGridView1.RowTemplate.Height = 34;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.Columns["hapus"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None; // Biarkan lebar tetap
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToResizeRows = false;
         }

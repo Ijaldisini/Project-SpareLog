@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Npgsql;
 using Project_SpareLog.App.Core;
 using Project_SpareLog.Model;
+using Project_SpareLog.Core.Interface;
 
 namespace Project_SpareLog.Controller
 {
-    public class C_Transaksi
+    public class C_Transaksi : ITransaksiService
     {
-        
 
         private DatabaseWrapper db = new DatabaseWrapper();
 

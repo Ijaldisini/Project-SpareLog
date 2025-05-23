@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 using Npgsql;
 using Project_SpareLog.App.Core;
 using Project_SpareLog.Model;
+using Project_SpareLog.Core.Interface;
 
 namespace Project_SpareLog.Controller
 {
-    public class C_Barang
+    public class C_Barang : IBarangService
     {
         private DatabaseWrapper db;
 
@@ -113,6 +114,16 @@ namespace Project_SpareLog.Controller
                     WHERE b.stok_barang < 10
                     ORDER BY b.stok_barang ASC";
             return db.queryExecutor(query);
+        }
+
+        public bool HapusBarang(int idBarang)
+        {
+            string query = "DELETE FROM barang WHERE id_barang = @id";
+            var parameters = new NpgsqlParameter[]
+            {
+        new NpgsqlParameter("@id", idBarang)
+            };
+            return db.ExecuteNonQuery(query, parameters) > 0;
         }
     }
 }
