@@ -36,13 +36,14 @@
             label3 = new Label();
             dateTimePicker1 = new DateTimePicker();
             dataGridView1 = new DataGridView();
-            label4 = new Label();
-            button1 = new Button();
-            textBox3 = new TextBox();
             id_barang = new DataGridViewTextBoxColumn();
             nama_barang = new DataGridViewTextBoxColumn();
             jumlah_barang = new DataGridViewTextBoxColumn();
             harga = new DataGridViewTextBoxColumn();
+            label4 = new Label();
+            button1 = new Button();
+            textBox3 = new TextBox();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -105,33 +106,6 @@
             dataGridView1.TabIndex = 7;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(1138, 826);
-            label4.Name = "label4";
-            label4.Size = new Size(42, 20);
-            label4.TabIndex = 8;
-            label4.Text = "Total";
-            // 
-            // button1
-            // 
-            button1.Location = new Point(1306, 883);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 29);
-            button1.TabIndex = 9;
-            button1.Text = "Simpan";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
-            // textBox3
-            // 
-            textBox3.Location = new Point(1275, 826);
-            textBox3.Name = "textBox3";
-            textBox3.ReadOnly = true;
-            textBox3.Size = new Size(125, 27);
-            textBox3.TabIndex = 10;
-            // 
             // id_barang
             // 
             id_barang.HeaderText = "ID Barang";
@@ -160,6 +134,43 @@
             harga.Name = "harga";
             harga.Width = 125;
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(1138, 826);
+            label4.Name = "label4";
+            label4.Size = new Size(42, 20);
+            label4.TabIndex = 8;
+            label4.Text = "Total";
+            // 
+            // button1
+            // 
+            button1.Location = new Point(1306, 883);
+            button1.Name = "button1";
+            button1.Size = new Size(94, 29);
+            button1.TabIndex = 9;
+            button1.Text = "Simpan";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // textBox3
+            // 
+            textBox3.Location = new Point(1275, 826);
+            textBox3.Name = "textBox3";
+            textBox3.ReadOnly = true;
+            textBox3.Size = new Size(125, 27);
+            textBox3.TabIndex = 10;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(1288, 40);
+            button2.Name = "button2";
+            button2.Size = new Size(94, 29);
+            button2.TabIndex = 11;
+            button2.Text = "Toko";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
             // V_TransaksiPelanggan
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -167,6 +178,7 @@
             BackColor = Color.Transparent;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Zoom;
+            Controls.Add(button2);
             Controls.Add(textBox3);
             Controls.Add(button1);
             Controls.Add(label4);
@@ -201,5 +213,6 @@
         private DataGridViewTextBoxColumn nama_barang;
         private DataGridViewTextBoxColumn jumlah_barang;
         private DataGridViewTextBoxColumn harga;
+        private Button button2;
     }
 }

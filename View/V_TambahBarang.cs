@@ -92,7 +92,7 @@ namespace Project_SpareLog.View
                     nama_barang = textBox2.Text,
                     stok_barang = int.Parse(textBox3.Text),
                     harga_barang = int.Parse(textBox4.Text),
-                    hpp = decimal.Parse(textBox5.Text),
+                    hpp = int.Parse(textBox5.Text),
                     supplier_id_supplier = Convert.ToInt32(comboBox1.SelectedValue)
                 };
 

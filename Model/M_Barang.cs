@@ -13,8 +13,8 @@ namespace Project_SpareLog.Model
         public int id_barang { get; set; }
         public string nama_barang { get; set; }
         public int stok_barang { get; set; }
-        public decimal harga_barang { get; set; }
-        public decimal hpp { get; set; }
+        public int harga_barang { get; set; }
+        public int hpp { get; set; }
         public int supplier_id_supplier { get; set; }
     }
 }

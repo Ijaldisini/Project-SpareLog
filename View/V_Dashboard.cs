@@ -40,6 +40,8 @@ namespace Project_SpareLog.View
             v_DashboardAwal1.BringToFront();
             v_DashboardAwal1.Show();
             v_ManajemenStok1.Hide();
+            v_TambahBarang1.Hide();
+            v_Restock1.Hide();
             v_TransaksiPelanggan1.Hide();
             button1.Show();
             button2.Hide();

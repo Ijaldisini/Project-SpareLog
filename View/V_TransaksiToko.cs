@@ -10,12 +10,12 @@ using Project_SpareLog.Model;
 
 namespace Project_SpareLog.View
 {
-    public partial class V_TransaksiPelanggan : UserControl
+    public partial class V_TransaksiToko : UserControl
     {
         private readonly Dictionary<string, (int id, int harga)> barangDict = new Dictionary<string, (int id, int harga)>();
         private readonly C_Transaksi controller;
 
-        public V_TransaksiPelanggan()
+        public V_TransaksiToko()
         {
             InitializeComponent();
             controller = new C_Transaksi();
@@ -43,19 +43,29 @@ namespace Project_SpareLog.View
 
         private void ConfigureInitialRowHeight()
         {
-            dataGridView1.RowTemplate.Height = 40; // Increased row height
+            dataGridView1.RowTemplate.Height = 40;
             if (dataGridView1.Rows.Count == 0)
             {
                 dataGridView1.Rows.Add();
-                dataGridView1.Rows[0].Height = 50; // Extra height for first row
+                dataGridView1.Rows[0].Height = 50;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (!ValidateInputs()) return;
+
+            var (success, totalTransaksi, jumlahBarang) = ProcessTransactionItems();
+            if (!success) return;
+
+            SaveTransaction(totalTransaksi, jumlahBarang);
         }
 
         private bool ValidateInputs()
         {
-            if (string.IsNullOrWhiteSpace(textBox2.Text))
+            if (string.IsNullOrWhiteSpace(textBox1.Text))
             {
-                MessageBox.Show("Nomor polisi harus diisi");
+                MessageBox.Show("Nama toko harus diisi");
                 return false;
             }
             return true;
@@ -83,6 +93,8 @@ namespace Project_SpareLog.View
                 }
             }
 
+            // Hitung diskon 5% untuk toko
+            totalTransaksi = (int)(totalTransaksi * 0.95m);
             return (true, totalTransaksi, jumlahBarang);
         }
 
@@ -120,27 +132,27 @@ namespace Project_SpareLog.View
                 nama_transaksi = textBox1.Text.Trim(),
                 tanggal_transaksi = dateTimePicker1.Value,
                 jumlah_barang = jumlahBarang,
-                total_transaksi = totalTransaksi
+                total_transaksi = totalTransaksi,
+                diskon_toko = 5 // Diskon 5% untuk toko
             };
 
             if (controller.SimpanTransaksi(transaksi))
             {
-                MessageBox.Show("Transaksi berhasil disimpan!");
+                MessageBox.Show("Transaksi toko berhasil disimpan!");
                 ResetForm();
             }
             else
             {
-                MessageBox.Show("Gagal menyimpan transaksi.");
+                MessageBox.Show("Gagal menyimpan transaksi toko.");
             }
         }
 
         private void ResetForm()
         {
             textBox1.Clear();
-            textBox2.Clear();
             dateTimePicker1.Value = DateTime.Now;
             dataGridView1.Rows.Clear();
-            ConfigureInitialRowHeight(); // Reset with initial row
+            ConfigureInitialRowHeight();
         }
 
         public void LoadBarangToDictionary()
@@ -164,7 +176,7 @@ namespace Project_SpareLog.View
             var row = dataGridView1.Rows[e.RowIndex];
             row.ErrorText = string.Empty;
 
-            if (e.ColumnIndex == 1) // Nama barang column
+            if (e.ColumnIndex == dataGridView1.Columns["nama_barang"].Index)
             {
                 UpdateBarangInfoFromDictionary(row);
             }
@@ -177,14 +189,17 @@ namespace Project_SpareLog.View
             string nama_barang = row.Cells["nama_barang"].Value?.ToString();
             if (barangDict.TryGetValue(nama_barang, out var barangInfo))
             {
-                row.Cells[0].Value = barangInfo.id;
-                row.Cells[3].Value = barangInfo.harga;
+                row.Cells["id_barang"].Value = barangInfo.id;
+                row.Cells["harga"].Value = barangInfo.harga;
+                // Hitung harga toko dengan diskon 5%
+                row.Cells["harga_toko"].Value = (int)(barangInfo.harga * 0.95m);
             }
         }
 
         private void dataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            if (e.ColumnIndex == 2 || e.ColumnIndex == 3) // Quantity or price columns
+            if (e.ColumnIndex == dataGridView1.Columns["jumlah_barang"].Index ||
+                e.ColumnIndex == dataGridView1.Columns["harga"].Index)
             {
                 if (!int.TryParse(e.FormattedValue.ToString(), out _))
                 {
@@ -196,26 +211,30 @@ namespace Project_SpareLog.View
 
         private void HitungTotalHarga()
         {
-            int total = controller.HitungTotalHarga(dataGridView1);
-            textBox3.Text = total.ToString("N0");
+            int total = 0;
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                if (int.TryParse(row.Cells["jumlah_barang"].Value?.ToString(), out int qty) &&
+                    int.TryParse(row.Cells["harga_toko"].Value?.ToString(), out int hargaToko))
+                {
+                    total += qty * hargaToko;
+                }
+            }
+
+            textBox2.Text = total.ToString("N0");
         }
 
         private void ConfigureRowHeights()
         {
-            // Atur tinggi default untuk semua baris
             dataGridView1.RowTemplate.Height = 36;
-
-            // Tambahkan baris pertama jika belum ada
             if (dataGridView1.Rows.Count == 0)
             {
                 dataGridView1.Rows.Add();
             }
-
-            // Atur tinggi khusus untuk baris pertama
-            dataGridView1.Rows[0].Height = 34; // Tinggi lebih besar untuk baris pertama
-
-            // Atur padding untuk membuat teks lebih mudah dibaca
-            //dataGridView1.Rows[0].DefaultCellStyle.Padding = new Padding(0, 10, 0, 10);
+            dataGridView1.Rows[0].Height = 34;
         }
 
         private void StyleDataGridView()
@@ -258,10 +277,10 @@ namespace Project_SpareLog.View
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            // Handle aksi klik sel jika diperlukan
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
             if (!ValidateInputs()) return;
 
@@ -269,14 +288,6 @@ namespace Project_SpareLog.View
             if (!success) return;
 
             SaveTransaction(totalTransaksi, jumlahBarang);
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            V_TransaksiToko v_TransaksiToko = new V_TransaksiToko();
-            v_TransaksiToko.BringToFront();
-            v_TransaksiToko.Show();
-            this.Hide();
         }
     }
 }

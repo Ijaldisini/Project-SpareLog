@@ -12,6 +12,7 @@ namespace Project_SpareLog.Model
         public string nama_transaksi { get; set; }
         public DateTime tanggal_transaksi { get; set; }
         public int jumlah_barang { get; set; }
-        public decimal total_transaksi { get; set; }
+        public int total_transaksi { get; set; }
+        public int diskon_toko { get; set; } = 5;
     }
 }
