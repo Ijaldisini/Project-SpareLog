@@ -36,22 +36,6 @@ namespace Project_SpareLog.App.Core
             }
         }
 
-        //public void CommandExecutor(string query, NpgsqlParameter[] parameters = null)
-        //{
-        //    using (var connection = new NpgsqlConnection($"Host={DB_HOST};Username={DB_USERNAME};Password={DB_PASSWORD};Database={DB_DATABASE};Port={DB_PORT}"))
-        //    {
-        //        connection.Open();
-        //        using (var command = new NpgsqlCommand(query, connection))
-        //        {
-        //            if (parameters != null)
-        //            {
-        //                command.Parameters.AddRange(parameters);
-        //            }
-        //            command.ExecuteNonQuery();
-        //        }
-        //    }
-        //}
-
         public int ExecuteNonQuery(string query, NpgsqlParameter[] parameters = null)
         {
             using (var connection = new NpgsqlConnection($"Host={DB_HOST};Username={DB_USERNAME};Password={DB_PASSWORD};Database={DB_DATABASE};Port={DB_PORT}"))
@@ -68,5 +52,20 @@ namespace Project_SpareLog.App.Core
             }
         }
 
+        //public object ExecuteScalar(string query, NpgsqlParameter[] parameters = null)
+        //{
+        //    using (var connection = new NpgsqlConnection($"Host={DB_HOST};Username={DB_USERNAME};Password={DB_PASSWORD};Database={DB_DATABASE};Port={DB_PORT}"))
+        //    {
+        //        connection.Open();
+        //        using (var command = new NpgsqlCommand(query, connection))
+        //        {
+        //            if (parameters != null)
+        //            {
+        //                command.Parameters.AddRange(parameters);
+        //            }
+        //            return command.ExecuteScalar();
+        //        }
+        //    }
+        //}
     }
 }

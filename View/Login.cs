@@ -44,7 +44,7 @@ namespace Project_SpareLog.View
 
                 if (success)
                 {
-                    MessageBox.Show("Login successful!", "Success",
+                    MessageBox.Show("Login success!!", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                     V_Dashboard dashboard = new V_Dashboard();
                     dashboard.Show();
@@ -53,15 +53,13 @@ namespace Project_SpareLog.View
                 }
                 else
                 {
-                    MessageBox.Show("Password is incorrect.", "Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Wrong Password!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     textBox1.Clear();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

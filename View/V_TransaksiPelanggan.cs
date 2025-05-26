@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using Project_SpareLog.App.Core;
 using Project_SpareLog.Controller;
 using Project_SpareLog.Model;
 
@@ -14,6 +15,8 @@ namespace Project_SpareLog.View
     {
         private readonly Dictionary<string, (int id, int harga)> barangDict = new Dictionary<string, (int id, int harga)>();
         private readonly C_Transaksi controller;
+        private DatabaseWrapper db = new DatabaseWrapper();
+
 
         public V_TransaksiPelanggan()
         {
@@ -109,12 +112,51 @@ namespace Project_SpareLog.View
                 MessageBox.Show("Harga barang tidak valid");
                 return false;
             }
-
             return true;
         }
 
-        private void SaveTransaction(int totalTransaksi, int jumlahBarang)
+        private void SaveTransaction()
         {
+            // Validasi input terlebih dahulu
+            if (!ValidateInputs()) return;
+
+            // Hitung total dari DataGridView
+            int totalTransaksi = 0;
+            int jumlahBarang = 0;
+            List<M_DetailTransaksi> details = new List<M_DetailTransaksi>();
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                if (!ValidateRow(row, out int barangId, out int qty, out int harga))
+                {
+                    MessageBox.Show("Data barang tidak valid");
+                    return;
+                }
+
+                int subTotal = qty * harga;
+                totalTransaksi += subTotal;
+                jumlahBarang += qty;
+
+                details.Add(new M_DetailTransaksi
+                {
+                    id_barang = barangId,
+                    jumlah_barang = qty,
+                    harga_barang = harga,
+                    nopol = textBox2.Text.Trim()
+                });
+            }
+
+            // 1. Buat laporan penjualan terlebih dahulu
+            int? idLaporan = controller.BuatLaporanPenjualan(DateTime.Now);
+            if (!idLaporan.HasValue)
+            {
+                MessageBox.Show("Gagal membuat laporan penjualan");
+                return;
+            }
+
+            // 2. Simpan transaksi utama
             var transaksi = new M_Transaksi
             {
                 nama_transaksi = textBox1.Text.Trim(),
@@ -123,15 +165,52 @@ namespace Project_SpareLog.View
                 total_transaksi = totalTransaksi
             };
 
-            if (controller.SimpanTransaksi(transaksi))
+            int? idTransaksi = controller.SimpanTransaksi(transaksi);
+
+            if (idTransaksi.HasValue)
             {
-                MessageBox.Show("Transaksi berhasil disimpan!");
-                ResetForm();
+                // 3. Simpan detail transaksi dengan menyertakan id_laporan
+                if (controller.SimpanDetailTransaksi(idTransaksi.Value, idLaporan.Value, details)) // Perhatikan koma di sini
+                {
+                    // Update total transaksi di database
+                    controller.UpdateTotalTransaksi(idTransaksi.Value);
+
+                    MessageBox.Show($"Transaksi berhasil disimpan! Total: {totalTransaksi}");
+                    ResetForm();
+                }
+                else
+                {
+                    MessageBox.Show("Gagal menyimpan detail transaksi");
+                    controller.HapusTransaksi(idTransaksi.Value);
+                }
             }
             else
             {
-                MessageBox.Show("Gagal menyimpan transaksi.");
+                MessageBox.Show("Gagal menyimpan transaksi utama");
             }
+        }
+
+        private List<M_DetailTransaksi> GetDetailTransaksiFromGrid(int idTransaksi)
+        {
+            List<M_DetailTransaksi> details = new List<M_DetailTransaksi>();
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                details.Add(new M_DetailTransaksi
+                {
+                    id_transaksi = idTransaksi,
+                    id_barang = Convert.ToInt32(row.Cells["id_barang"].Value),
+                    nopol = textBox2.Text.Trim(),
+                    jumlah_barang = Convert.ToInt32(row.Cells["jumlah_barang"].Value),
+                    harga_barang = Convert.ToInt32(row.Cells["harga_barang"].Value),
+                    total_harga = Convert.ToInt32(row.Cells["jumlah_barang"].Value) *
+                                 Convert.ToInt32(row.Cells["harga_barang"].Value)
+                });
+            }
+
+            return details;
         }
 
         private void ResetForm()
@@ -265,10 +344,76 @@ namespace Project_SpareLog.View
         {
             if (!ValidateInputs()) return;
 
-            var (success, totalTransaksi, jumlahBarang) = ProcessTransactionItems();
-            if (!success) return;
+            // 1. Buat laporan penjualan terlebih dahulu
+            int? idLaporan = controller.BuatLaporanPenjualan(DateTime.Now);
+            if (!idLaporan.HasValue)
+            {
+                MessageBox.Show("Gagal membuat laporan penjualan");
+                return;
+            }
 
-            SaveTransaction(totalTransaksi, jumlahBarang);
+            // 2. Kumpulkan detail transaksi
+            List<M_DetailTransaksi> details = new List<M_DetailTransaksi>();
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                details.Add(new M_DetailTransaksi
+                {
+                    id_barang = Convert.ToInt32(row.Cells["id_barang"].Value),
+                    nopol = textBox2.Text.Trim(),
+                    jumlah_barang = Convert.ToInt32(row.Cells["jumlah_barang"].Value),
+                    harga_barang = Convert.ToInt32(row.Cells["harga"].Value)
+                });
+            }
+
+            // 3. Simpan transaksi utama
+            var transaksi = new M_Transaksi
+            {
+                nama_transaksi = textBox1.Text.Trim(),
+                tanggal_transaksi = dateTimePicker1.Value,
+                jumlah_barang = details.Sum(d => d.jumlah_barang),
+                nopol = textBox2.Text.Trim()
+            };
+
+            int? idTransaksi = controller.SimpanTransaksi(transaksi);
+
+            if (idTransaksi.HasValue)
+            {
+                // 4. Simpan detail transaksi dengan menyertakan id_laporan
+                if (controller.SimpanDetailTransaksi(idTransaksi.Value, idLaporan.Value, details))
+                {
+                    MessageBox.Show("Transaksi berhasil disimpan!");
+                    ResetForm();
+                }
+                else
+                {
+                    MessageBox.Show("Gagal menyimpan detail transaksi");
+                    controller.HapusTransaksi(idTransaksi.Value);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Gagal menyimpan transaksi utama");
+            }
+        }
+
+        private bool ValidateStokBarang()
+        {
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                if (int.TryParse(row.Cells["id_barang"].Value?.ToString(), out int barangId) &&
+                    int.TryParse(row.Cells["jumlah_barang"].Value?.ToString(), out int qty))
+                {
+                    if (!controller.CekStokBarang(barangId, qty))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
         private void button2_Click(object sender, EventArgs e)

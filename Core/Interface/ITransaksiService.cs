@@ -10,9 +10,13 @@ namespace Project_SpareLog.Core.Interface
 {
     public interface ITransaksiService
     {
-        bool SimpanTransaksi(M_Transaksi transaksi);
+        int? SimpanTransaksi(M_Transaksi transaksi); // Ubah return type dari bool ke int?
+        bool SimpanDetailTransaksi(int id_transaksi, int id_laporan, List<M_DetailTransaksi> details);
+        bool SimpanPelanggan(string nopol, string nama);
         bool KurangiStokBarang(int id_barang, int jumlah_barang);
         DataTable GetDataBarang();
         int HitungTotalHarga(DataGridView dgv);
+        DataTable GetRiwayatTransaksi();
+        bool HapusTransaksi(int id_transaksi); // Tambahkan ini jika belum ada
     }
 }

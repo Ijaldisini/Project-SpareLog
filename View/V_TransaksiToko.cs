@@ -125,18 +125,21 @@ namespace Project_SpareLog.View
             return true;
         }
 
-        private void SaveTransaction(int totalTransaksi, int jumlahBarang)
+        private void SaveTransaction(int totalTransaksiAsli, int jumlahBarang)
         {
+            int totalSetelahDiskon = (int)(totalTransaksiAsli * 0.95m); // Diskon 5%
+
             var transaksi = new M_Transaksi
             {
                 nama_transaksi = textBox1.Text.Trim(),
                 tanggal_transaksi = dateTimePicker1.Value,
                 jumlah_barang = jumlahBarang,
-                total_transaksi = totalTransaksi,
-                diskon_toko = 5 // Diskon 5% untuk toko
+                total_transaksi = totalTransaksiAsli,     // harga sebelum diskon
+                diskon_toko = totalSetelahDiskon          // harga setelah diskon
             };
 
-            if (controller.SimpanTransaksi(transaksi))
+            int? result = controller.SimpanTransaksi(transaksi);
+            if (result.HasValue && result.Value > 0) // Check if the result is valid and greater than 0
             {
                 MessageBox.Show("Transaksi toko berhasil disimpan!");
                 ResetForm();
@@ -146,6 +149,7 @@ namespace Project_SpareLog.View
                 MessageBox.Show("Gagal menyimpan transaksi toko.");
             }
         }
+
 
         private void ResetForm()
         {
@@ -284,10 +288,10 @@ namespace Project_SpareLog.View
         {
             if (!ValidateInputs()) return;
 
-            var (success, totalTransaksi, jumlahBarang) = ProcessTransactionItems();
+            var (success, totalTransaksiAsli, jumlahBarang) = ProcessTransactionItems();
             if (!success) return;
 
-            SaveTransaction(totalTransaksi, jumlahBarang);
+            SaveTransaction(totalTransaksiAsli, jumlahBarang);
         }
     }
 }
