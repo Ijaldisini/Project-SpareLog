@@ -59,6 +59,8 @@ namespace Project_SpareLog.View
             v_TransaksiPelanggan1.Show();
             v_DashboardAwal1.Hide();
             v_ManajemenStok1.Hide();
+            v_TambahBarang1.Hide();
+            v_Restock1.Hide();
         }
     }
 }

@@ -25,8 +25,7 @@ namespace Project_SpareLog.Controller
             {
                 new NpgsqlParameter("@nama", transaksi.nama_transaksi),
                 new NpgsqlParameter("@tanggal", transaksi.tanggal_transaksi),
-                new NpgsqlParameter("@jumlah_barang", transaksi.jumlah_barang),
-                new NpgsqlParameter("@total", transaksi.total_transaksi)
+            new NpgsqlParameter("@jumlah_barang", transaksi.jumlah_barang)
             };
 
             return db.ExecuteNonQuery(query, parameters) > 0;
@@ -54,7 +53,6 @@ namespace Project_SpareLog.Controller
         public int HitungTotalHarga(DataGridView dgv)
         {
             int total = 0;
-
             foreach (DataGridViewRow row in dgv.Rows)
             {
                 if (row.IsNewRow) continue;
