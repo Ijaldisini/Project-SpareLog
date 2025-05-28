@@ -17,7 +17,7 @@ namespace Project_SpareLog.View
         public V_ManajemenStok()
         {
             InitializeComponent();
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            //dataGridView1.CellContentClick += dataGridView1_CellContentClick;
         }
 
         private void V_ManajemenStok_Load(object sender, EventArgs e)
@@ -51,7 +51,7 @@ namespace Project_SpareLog.View
             {
                 int idBarang = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id_barang"].Value);
 
-                var confirmResult = MessageBox.Show("Apakah Anda yakin ingin menghapus barang ini?", "Konfirmasi Hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                var confirmResult = MessageBox.Show("Apakah Anda yakin ingin menghapus barang ini?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (confirmResult == DialogResult.Yes)
                 {
                     var controller = new C_Barang();
@@ -59,7 +59,7 @@ namespace Project_SpareLog.View
 
                     if (success)
                     {
-                        MessageBox.Show("Barang berhasil dihapus");
+                        MessageBox.Show("Barang berhasil dihapus", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         LoadDataStok();
                     }
                     else
@@ -72,23 +72,31 @@ namespace Project_SpareLog.View
                 {
                     return;
                 }
-
-                else
-                {
-                    return; 
-                }
             }
 
+            // Handle tombol update stok
             if (e.ColumnIndex == dataGridView1.Columns["tambah_stok"].Index && e.RowIndex >= 0)
             {
-                int idBarang = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id_barang"].Value);
-                
-                var controller = new C_Barang();
-                bool success = controller.SimpanBarang(new M_Barang
+                try
                 {
-                    id_barang = idBarang,
-                    stok_barang = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["jumlah_stok"].Value) + 10 // Tambah stok 10
-                });
+                    int idBarang = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id_barang"].Value);
+                    string namaBarang = dataGridView1.Rows[e.RowIndex].Cells["nama_barang"].Value.ToString();
+                    int stokSaatIni = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["jumlah_stok"].Value);
+
+                    // Langsung buka form update stok
+                    V_UpdateStok v_UpdateStok = new V_UpdateStok();
+                    v_UpdateStok.SetBarangData(idBarang, namaBarang, stokSaatIni);
+
+                    // Tampilkan form (sesuaikan dengan kebutuhan Anda)
+                    this.Controls.Add(v_UpdateStok);
+                    v_UpdateStok.BringToFront();
+                    v_UpdateStok.Show();
+                    LoadDataStok();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error: {ex.Message}");
+                }
             }
         }
 

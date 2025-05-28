@@ -31,6 +31,7 @@ namespace Project_SpareLog.View
             v_ManajemenStok1.Show();
             v_TambahBarang1.Show();
             v_Restock1.Show();
+            v_UpdateStok1.Show();
             v_DashboardAwal1.Hide();
             button2.Show();
             button1.Hide();
@@ -42,6 +43,7 @@ namespace Project_SpareLog.View
             v_DashboardAwal1.Show();
             v_ManajemenStok1.Hide();
             v_TambahBarang1.Hide();
+            v_UpdateStok1.Hide();
             v_Restock1.Hide();
             button1.Show();
             button2.Hide();
@@ -57,6 +59,7 @@ namespace Project_SpareLog.View
             v_DashboardAwal1.Hide();
             v_ManajemenStok1.Hide();
             v_TambahBarang1.Hide();
+            v_UpdateStok1.Hide();
             v_Restock1.Hide();
         }
     }

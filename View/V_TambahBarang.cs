@@ -27,7 +27,7 @@ namespace Project_SpareLog.View
             textBox1.Leave += TextBox1_Leave;
             Load += V_TambahBarang_Load;
             textBox2.Leave += TextBox2_Leave;
-            textBox4.TextChanged += TextBox4_TextChanged;
+            textBox5.TextChanged += TextBox5_TextChanged;
             button1.Click += Button1_Click;
         }
 
@@ -68,16 +68,16 @@ namespace Project_SpareLog.View
             textBox1.Text = idBarang?.ToString() ?? controller.GetNextIdBarang().ToString();
         }
 
-        private void TextBox4_TextChanged(object sender, EventArgs e)
+        private void TextBox5_TextChanged(object sender, EventArgs e)
         {
-            if (decimal.TryParse(textBox4.Text, out decimal harga))
+            if (decimal.TryParse(textBox5.Text, out decimal harga))
             {
-                int hpp = (int)(harga - (harga * 0.1m));
-                textBox5.Text = hpp.ToString();
+                int hpp = (int)(harga + (harga * 0.1m));
+                textBox4.Text = hpp.ToString();
             }
             else
             {
-                textBox5.Text = string.Empty;
+                textBox4.Text = string.Empty;
             }
         }
 
@@ -98,17 +98,25 @@ namespace Project_SpareLog.View
 
                 controller = controller ?? new C_Barang();
                 bool success = controller.SimpanBarang(barang);
-                MessageBox.Show(success ? "Barang berhasil disimpan." : "Gagal menyimpan barang.");
+                //MessageBox.Show(success ? "Barang berhasil disimpan." : "Gagal menyimpan barang.");
+                if (success)
+                {
+                    MessageBox.Show("Barang berhasil disimpan!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    textBox1.Clear();
+                    textBox2.Clear();
+                    textBox3.Clear();
+                    textBox4.Clear();
+                    textBox5.Clear();
+                }
 
-                textBox1.Clear();
-                textBox2.Clear();
-                textBox3.Clear();
-                textBox4.Clear();
-                textBox5.Clear();
+                else
+                {
+                    MessageBox.Show("Gagal menyimpan barang!", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Terjadi kesalahan: {ex.Message}");
+                MessageBox.Show($"Terjadi kesalahan: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
