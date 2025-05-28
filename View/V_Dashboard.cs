@@ -39,14 +39,7 @@ namespace Project_SpareLog.View
 
         private void button2_Click(object sender, EventArgs e)
         {
-            v_DashboardAwal1.BringToFront();
-            v_DashboardAwal1.Show();
-            v_ManajemenStok1.Hide();
-            v_TambahBarang1.Hide();
-            v_UpdateStok1.Hide();
-            v_Restock1.Hide();
-            button1.Show();
-            button2.Hide();
+
         }
 
         private void v_TambahBarang1_Load(object sender, EventArgs e)
@@ -56,11 +49,26 @@ namespace Project_SpareLog.View
 
         private void button3_Click(object sender, EventArgs e)
         {
+
             v_DashboardAwal1.Hide();
             v_ManajemenStok1.Hide();
             v_TambahBarang1.Hide();
             v_UpdateStok1.Hide();
             v_Restock1.Hide();
+            button2.Hide();
+            button1.Show();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            v_DashboardAwal1.BringToFront();
+            v_DashboardAwal1.Show();
+            v_ManajemenStok1.Hide();
+            v_TambahBarang1.Hide();
+            v_Restock1.Hide();
+            v_UpdateStok1.Hide();
+            button2.Hide();
+            button1.Show();
         }
     }
 }

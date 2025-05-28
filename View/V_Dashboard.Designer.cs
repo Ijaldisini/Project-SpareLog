@@ -39,7 +39,9 @@
             v_TambahBarang1 = new V_TambahBarang();
             v_Restock1 = new V_Restock();
             v_UpdateStok1 = new V_UpdateStok();
+            pictureBox1 = new PictureBox();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -58,6 +60,7 @@
             panel1.BackColor = Color.Transparent;
             panel1.BackgroundImage = (Image)resources.GetObject("panel1.BackgroundImage");
             panel1.BackgroundImageLayout = ImageLayout.Zoom;
+            panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(button3);
             panel1.Controls.Add(button1);
             panel1.Controls.Add(button2);
@@ -157,6 +160,15 @@
             v_UpdateStok1.Size = new Size(1426, 941);
             v_UpdateStok1.TabIndex = 6;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(33, 90);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(279, 156);
+            pictureBox1.TabIndex = 7;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
+            // 
             // V_Dashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -177,6 +189,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "V_Dashboard";
             panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -193,5 +206,6 @@
         private V_Restock v_Restock1;
         private Button button3;
         private V_UpdateStok v_UpdateStok1;
+        private PictureBox pictureBox1;
     }
 }
