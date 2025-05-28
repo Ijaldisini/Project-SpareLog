@@ -26,14 +26,14 @@ namespace Project_SpareLog.Controller
             {
             new NpgsqlParameter("@nama", transaksi.nama_transaksi),
             new NpgsqlParameter("@tanggal", transaksi.tanggal_transaksi),
-            new NpgsqlParameter("@jumlah", transaksi.jumlah_barang)
+                new NpgsqlParameter("@jumlah", transaksi.jumlah_barang),
+                new NpgsqlParameter("@nopol", transaksi.nopol ?? (object)DBNull.Value),
+                new NpgsqlParameter("@total", transaksi.total_transaksi)
             };
 
             // Gunakan queryExecutor karena RETURNING mengembalikan hasil dalam DataTable
             DataTable result = db.queryExecutor(query, parameters);
-            if (result.Rows.Count > 0)
-            {
-                return Convert.ToInt32(result.Rows[0]["id_transaksi"]);
+            return result.Rows.Count > 0 ? Convert.ToInt32(result.Rows[0]["id_transaksi"]) : null;
             }
             return null;
         }
