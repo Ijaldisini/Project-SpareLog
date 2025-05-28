@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Project_SpareLog.Controller;
-using Project_SpareLog.Model;
+using Project_SpareLog.Context;
+using Project_SpareLog.Core.Model;
 
 namespace Project_SpareLog.View
 {
@@ -49,28 +49,33 @@ namespace Project_SpareLog.View
             // Handle tombol hapus
             if (e.ColumnIndex == dataGridView1.Columns["hapus"].Index && e.RowIndex >= 0)
             {
-                // Dapatkan ID barang dari baris yang dipilih
                 int idBarang = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id_barang"].Value);
 
-                // Konfirmasi penghapusan
-                var confirmResult = MessageBox.Show("Apakah Anda yakin ingin menghapus barang ini?",
-                                                  "Konfirmasi Hapus",
-                                                  MessageBoxButtons.YesNo);
+                var confirmResult = MessageBox.Show("Apakah Anda yakin ingin menghapus barang ini?", "Konfirmasi Hapus", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (confirmResult == DialogResult.Yes)
                 {
-                    // Panggil controller untuk menghapus
                     var controller = new C_Barang();
                     bool success = controller.HapusBarang(idBarang);
 
                     if (success)
                     {
                         MessageBox.Show("Barang berhasil dihapus");
-                        LoadDataStok(); // Refresh data
+                        LoadDataStok();
                     }
                     else
                     {
                         MessageBox.Show("Gagal menghapus barang");
                     }
+                }
+
+                if (confirmResult == DialogResult.No)
+                {
+                    return;
+                }
+
+                else
+                {
+                    return;
                 }
             }
         }

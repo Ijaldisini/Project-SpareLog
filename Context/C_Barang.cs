@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Npgsql;
 using Project_SpareLog.App.Core;
-using Project_SpareLog.Model;
 using Project_SpareLog.Core.Interface;
+using Project_SpareLog.Core.Model;
 
-namespace Project_SpareLog.Controller
+namespace Project_SpareLog.Context
 {
     public class C_Barang : IBarangService
     {

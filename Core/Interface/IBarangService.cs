@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Project_SpareLog.Model;
+using Project_SpareLog.Core.Model;
 
 namespace Project_SpareLog.Core.Interface
 {

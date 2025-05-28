@@ -5,8 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Project_SpareLog.App.Core;
+using Project_SpareLog.Core.Interface;
 
-namespace Project_SpareLog.Model
+namespace Project_SpareLog.Core.Model
 {
     public class M_Barang
     {
@@ -16,5 +17,7 @@ namespace Project_SpareLog.Model
         public int harga_barang { get; set; }
         public int hpp { get; set; }
         public int supplier_id_supplier { get; set; }
+
+
     }
 }

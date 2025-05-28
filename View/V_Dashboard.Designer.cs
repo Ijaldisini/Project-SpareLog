@@ -38,9 +38,6 @@
             v_DashboardAwal1 = new V_DashboardAwal();
             v_TambahBarang1 = new V_TambahBarang();
             v_Restock1 = new V_Restock();
-            v_TransaksiPelanggan1 = new V_TransaksiPelanggan();
-            v_TransaksiToko1 = new V_TransaksiToko();
-            v_TransaksiToko2 = new V_TransaksiToko();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -149,35 +146,6 @@
             v_Restock1.Size = new Size(1426, 941);
             v_Restock1.TabIndex = 5;
             // 
-            // v_TransaksiPelanggan1
-            // 
-            v_TransaksiPelanggan1.BackColor = Color.Transparent;
-            v_TransaksiPelanggan1.BackgroundImage = (Image)resources.GetObject("v_TransaksiPelanggan1.BackgroundImage");
-            v_TransaksiPelanggan1.BackgroundImageLayout = ImageLayout.Zoom;
-            v_TransaksiPelanggan1.Location = new Point(392, 62);
-            v_TransaksiPelanggan1.Name = "v_TransaksiPelanggan1";
-            v_TransaksiPelanggan1.Size = new Size(1426, 941);
-            v_TransaksiPelanggan1.TabIndex = 6;
-            // 
-            // v_TransaksiToko1
-            // 
-            v_TransaksiToko1.BackColor = Color.Transparent;
-            v_TransaksiToko1.BackgroundImage = (Image)resources.GetObject("v_TransaksiToko1.BackgroundImage");
-            v_TransaksiToko1.BackgroundImageLayout = ImageLayout.Zoom;
-            v_TransaksiToko1.Location = new Point(392, 62);
-            v_TransaksiToko1.Name = "v_TransaksiToko1";
-            v_TransaksiToko1.Size = new Size(1426, 941);
-            v_TransaksiToko1.TabIndex = 7;
-            // 
-            // v_TransaksiToko2
-            // 
-            v_TransaksiToko2.BackColor = Color.Transparent;
-            v_TransaksiToko2.BackgroundImage = (Image)resources.GetObject("v_TransaksiToko2.BackgroundImage");
-            v_TransaksiToko2.BackgroundImageLayout = ImageLayout.Zoom;
-            v_TransaksiToko2.Location = new Point(392, 62);
-            v_TransaksiToko2.Name = "v_TransaksiToko2";
-            v_TransaksiToko2.Size = new Size(1426, 941);
-            v_TransaksiToko2.TabIndex = 8;
             // 
             // V_Dashboard
             // 
@@ -192,9 +160,6 @@
             Controls.Add(label1);
             Controls.Add(v_TambahBarang1);
             Controls.Add(v_Restock1);
-            Controls.Add(v_TransaksiPelanggan1);
-            Controls.Add(v_TransaksiToko1);
-            Controls.Add(v_TransaksiToko2);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
             Name = "V_Dashboard";
@@ -216,8 +181,5 @@
         private V_TambahBarang v_TambahBarang1;
         private V_Restock v_Restock1;
         private Button button3;
-        private V_TransaksiPelanggan v_TransaksiPelanggan1;
-        private V_TransaksiToko v_TransaksiToko1;
-        private V_TransaksiToko v_TransaksiToko2;
     }
 }

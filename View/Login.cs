@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Npgsql;
 using Project_SpareLog.App.Core;
-using Project_SpareLog.Controller;
+using Project_SpareLog.Context;
 
 namespace Project_SpareLog.View
 {

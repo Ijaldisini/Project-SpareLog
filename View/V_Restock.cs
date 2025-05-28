@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Project_SpareLog.Controller;
+using Project_SpareLog.Context;
 
 namespace Project_SpareLog.View
 {

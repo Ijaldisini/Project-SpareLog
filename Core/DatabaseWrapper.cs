@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,9 @@ namespace Project_SpareLog.App.Core
 {
     public class DatabaseWrapper
     {
+        private NpgsqlTransaction transaction;
+        private NpgsqlConnection _connection;
+
         private static readonly string DB_HOST = "localhost";
         private static readonly string DB_DATABASE = "DBProject";
         private static readonly string DB_USERNAME = "postgres";
