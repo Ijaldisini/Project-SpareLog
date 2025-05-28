@@ -114,7 +114,7 @@ namespace Project_SpareLog.View
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
+            V_TambahBarang_Load(sender, e);
             V_Restock v_Restock = new V_Restock();
             v_Restock.BringToFront();
             v_Restock.Show();

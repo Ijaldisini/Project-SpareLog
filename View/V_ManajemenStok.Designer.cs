@@ -38,6 +38,7 @@
             harga_jual = new DataGridViewTextBoxColumn();
             hpp = new DataGridViewTextBoxColumn();
             id_pemasok = new DataGridViewTextBoxColumn();
+            tambah_stok = new DataGridViewButtonColumn();
             hapus = new DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -70,7 +71,7 @@
             // 
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { id_barang, nama_barang, jumlah_stok, harga_jual, hpp, id_pemasok, hapus });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { id_barang, nama_barang, jumlah_stok, harga_jual, hpp, id_pemasok, tambah_stok, hapus });
             dataGridView1.GridColor = Color.DarkGray;
             dataGridView1.Location = new Point(22, 162);
             dataGridView1.Name = "dataGridView1";
@@ -121,6 +122,15 @@
             id_pemasok.Name = "id_pemasok";
             id_pemasok.Width = 125;
             // 
+            // tambah_stok
+            // 
+            tambah_stok.HeaderText = "Tambah";
+            tambah_stok.MinimumWidth = 6;
+            tambah_stok.Name = "tambah_stok";
+            tambah_stok.Resizable = DataGridViewTriState.True;
+            tambah_stok.SortMode = DataGridViewColumnSortMode.Automatic;
+            tambah_stok.Width = 125;
+            // 
             // hapus
             // 
             hapus.HeaderText = "Hapus";
@@ -160,6 +170,7 @@
         private DataGridViewTextBoxColumn harga_jual;
         private DataGridViewTextBoxColumn hpp;
         private DataGridViewTextBoxColumn id_pemasok;
+        private DataGridViewButtonColumn tambah_stok;
         private DataGridViewButtonColumn hapus;
     }
 }

@@ -75,8 +75,20 @@ namespace Project_SpareLog.View
 
                 else
                 {
-                    return;
+                    return; 
                 }
+            }
+
+            if (e.ColumnIndex == dataGridView1.Columns["tambah_stok"].Index && e.RowIndex >= 0)
+            {
+                int idBarang = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id_barang"].Value);
+                
+                var controller = new C_Barang();
+                bool success = controller.SimpanBarang(new M_Barang
+                {
+                    id_barang = idBarang,
+                    stok_barang = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["jumlah_stok"].Value) + 10 // Tambah stok 10
+                });
             }
         }
 
@@ -106,6 +118,10 @@ namespace Project_SpareLog.View
             dataGridView1.Columns["hapus"].DefaultCellStyle.ForeColor = Color.White;
             dataGridView1.Columns["hapus"].DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
 
+            dataGridView1.Columns["tambah_stok"].DefaultCellStyle.BackColor = Color.FromArgb(255, 100, 100);
+            dataGridView1.Columns["tambah_stok"].DefaultCellStyle.ForeColor = Color.White;
+            dataGridView1.Columns["tambah_stok"].DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+
             // Border and lines
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dataGridView1.GridColor = Color.White;
@@ -116,6 +132,12 @@ namespace Project_SpareLog.View
             dataGridView1.RowTemplate.Height = 34;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.Columns["hapus"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None; // Biarkan lebar tetap
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToResizeRows = false;
+
+            dataGridView1.RowTemplate.Height = 34;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.Columns["tambah_stok"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None; // Biarkan lebar tetap
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToResizeRows = false;
         }

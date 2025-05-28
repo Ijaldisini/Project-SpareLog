@@ -17,7 +17,5 @@ namespace Project_SpareLog.Core.Model
         public int harga_barang { get; set; }
         public int hpp { get; set; }
         public int supplier_id_supplier { get; set; }
-
-
     }
 }
