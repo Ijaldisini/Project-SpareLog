@@ -70,7 +70,7 @@ namespace Project_SpareLog.View
 
         private void TextBox5_TextChanged(object sender, EventArgs e)
         {
-            if (decimal.TryParse(textBox5.Text, out decimal harga))
+            if (int.TryParse(textBox5.Text, out int harga))
             {
                 int hpp = (int)(harga + (harga * 0.1m));
                 textBox4.Text = hpp.ToString();
@@ -98,7 +98,6 @@ namespace Project_SpareLog.View
 
                 controller = controller ?? new C_Barang();
                 bool success = controller.SimpanBarang(barang);
-                //MessageBox.Show(success ? "Barang berhasil disimpan." : "Gagal menyimpan barang.");
                 if (success)
                 {
                     MessageBox.Show("Barang berhasil disimpan!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);

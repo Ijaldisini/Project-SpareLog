@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             label1 = new Label();
             textBox1 = new TextBox();
             button1 = new Button();
@@ -36,6 +37,7 @@
             // label1
             // 
             label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
             label1.Location = new Point(1890, 9);
             label1.Name = "label1";
             label1.Size = new Size(18, 20);
@@ -45,30 +47,41 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(855, 874);
+            textBox1.BackColor = Color.LightGray;
+            textBox1.BorderStyle = BorderStyle.None;
+            textBox1.Font = new Font("Britannic Bold", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox1.ForeColor = Color.Black;
+            textBox1.Location = new Point(671, 697);
             textBox1.Name = "textBox1";
             textBox1.PasswordChar = '*';
-            textBox1.Size = new Size(209, 27);
+            textBox1.Size = new Size(497, 34);
             textBox1.TabIndex = 1;
             // 
             // button1
             // 
-            button1.Location = new Point(913, 931);
+            button1.BackColor = Color.Transparent;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            button1.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Location = new Point(801, 848);
             button1.Name = "button1";
-            button1.Size = new Size(94, 29);
+            button1.Size = new Size(317, 72);
             button1.TabIndex = 2;
-            button1.Text = "Login";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(1920, 1080);
             Controls.Add(button1);
             Controls.Add(textBox1);
             Controls.Add(label1);
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
             Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;

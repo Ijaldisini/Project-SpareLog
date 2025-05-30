@@ -32,8 +32,7 @@ namespace Project_SpareLog.View
             string password = textBox1.Text.Trim();
             if (string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Please enter your password.", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter your password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

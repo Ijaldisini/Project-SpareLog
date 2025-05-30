@@ -21,7 +21,7 @@ namespace Project_SpareLog.Context
         }
         public DataTable GetAllBarang()
         {
-            string query = "SELECT * FROM barang WHERE is_deleted = false";
+            string query = "SELECT * FROM barang WHERE terhapus = false";
             return db.queryExecutor(query);
         }
 
@@ -70,13 +70,8 @@ namespace Project_SpareLog.Context
         {
             if (IsBarangExists(barang.id_barang))
             {
-                string updateQuery = "UPDATE barang SET harga_barang = @ubahHarga WHERE id_barang = @id";
-                var updateParams = new NpgsqlParameter[]
-                {
-                    new NpgsqlParameter("@ubahHarga", barang.harga_barang),
-                    new NpgsqlParameter("@id", barang.id_barang)
-                };
-                return db.ExecuteNonQuery(updateQuery, updateParams) > 0;
+                MessageBox.Show("Barang dengan ID ini sudah ada.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
             }
             else
             {
@@ -106,6 +101,28 @@ namespace Project_SpareLog.Context
             return db.ExecuteNonQuery(query, parameters) > 0;
         }
 
+        public bool UpdateHPP(int idBarang, int hppBaru)
+        {
+            string query = "UPDATE barang SET hpp = @harga WHERE id_barang = @id";
+            var parameters = new NpgsqlParameter[]
+            {
+                new NpgsqlParameter("@harga", hppBaru),
+                new NpgsqlParameter("@id", idBarang)
+            };
+            return db.ExecuteNonQuery(query, parameters) > 0;
+        }
+
+        public bool UpdateHargaBarang(int idBarang, int hargaBaru)
+        {
+            string query = "UPDATE barang SET harga_barang = @harga WHERE id_barang = @id";
+            var parameters = new NpgsqlParameter[]
+            {
+                new NpgsqlParameter("@harga", hargaBaru),
+                new NpgsqlParameter("@id", idBarang)
+            };
+            return db.ExecuteNonQuery(query, parameters) > 0;
+        }
+
         public bool IsBarangExists(int idBarang)
         {
             string query = "SELECT COUNT(*) FROM barang WHERE id_barang = @id";
@@ -130,8 +147,8 @@ namespace Project_SpareLog.Context
         public bool HapusBarang(int idBarang)
         {
             string query = @"UPDATE barang 
-                            SET is_deleted = true, 
-                                deleted_at = @deletedAt 
+                            SET terhapus = true, 
+                                tanggal_hapus = @deletedAt 
                             WHERE id_barang = @id";
 
             var parameters = new NpgsqlParameter[]

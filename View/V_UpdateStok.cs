@@ -15,6 +15,7 @@ namespace Project_SpareLog.View
 {
     public partial class V_UpdateStok : UserControl
     {
+        private readonly M_Barang _barang = new M_Barang();
         private readonly C_Barang controller;
         private int _currentIdBarang;
         private int _currentStok;
@@ -23,7 +24,6 @@ namespace Project_SpareLog.View
         {
             InitializeComponent();
             controller = new C_Barang();
-
         }
 
         // Method untuk mengisi data barang yang akan diupdate
@@ -34,11 +34,6 @@ namespace Project_SpareLog.View
 
             textBox1.Text = idBarang.ToString();
         }
-
-        //internal void ShowDialog()
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -59,6 +54,8 @@ namespace Project_SpareLog.View
                 }
 
                 int jumlahStokBaru = Convert.ToInt32(textBox2.Text);
+                int hppBaru = Convert.ToInt32(textBox3.Text);
+                int hargaBaru = hppBaru + (int)(hppBaru * 0.1m);
 
                 if (jumlahStokBaru <= 0)
                 {
@@ -66,28 +63,23 @@ namespace Project_SpareLog.View
                     return;
                 }
 
+                if (hppBaru <= _barang.hpp)
+                {
+                    MessageBox.Show("Harga barang harus lebih dari harga barang awal", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 // Konfirmasi
-                var confirmResult = MessageBox.Show($"Tambahkan {jumlahStokBaru} ke stok saat ini ({_currentStok})?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                var confirmResult = MessageBox.Show($"Tambahkan {jumlahStokBaru} ke stok saat ini ({_currentStok})?" +
+                    $"/nTambahkan {hppBaru} ke hpp saat ini?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (confirmResult == DialogResult.Yes)
                 {
                     // Gunakan _controller yang sudah diinisialisasi
                     bool success = controller.UpdateStokBarang(_currentIdBarang, jumlahStokBaru);
-
-                    if (success)
-                    {
-                        MessageBox.Show($"Stok berhasil ditambahkan!\nStok baru: {_currentStok + jumlahStokBaru}", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        button1_Click(sender, e);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Gagal memperbarui stok", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    bool successHPP = controller.UpdateHPP(_currentIdBarang, hppBaru);
+                    bool successHarga = controller.UpdateHargaBarang(_currentIdBarang, hargaBaru);
                 }
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Jumlah stok harus berupa angka", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {

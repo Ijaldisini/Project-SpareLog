@@ -17,7 +17,6 @@ namespace Project_SpareLog.View
         public V_ManajemenStok()
         {
             InitializeComponent();
-            //dataGridView1.CellContentClick += dataGridView1_CellContentClick;
         }
 
         private void V_ManajemenStok_Load(object sender, EventArgs e)

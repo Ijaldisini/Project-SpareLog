@@ -35,6 +35,8 @@
             textBox2 = new TextBox();
             button1 = new Button();
             button2 = new Button();
+            label3 = new Label();
+            textBox3 = new TextBox();
             SuspendLayout();
             // 
             // label1
@@ -91,6 +93,22 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(76, 519);
+            label3.Name = "label3";
+            label3.Size = new Size(84, 20);
+            label3.TabIndex = 6;
+            label3.Text = "Harga Baru";
+            // 
+            // textBox3
+            // 
+            textBox3.Location = new Point(225, 516);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(125, 27);
+            textBox3.TabIndex = 7;
+            // 
             // V_UpdateStok
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -98,6 +116,8 @@
             BackColor = Color.Transparent;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Zoom;
+            Controls.Add(textBox3);
+            Controls.Add(label3);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(textBox2);
@@ -119,5 +139,7 @@
         private TextBox textBox2;
         private Button button1;
         private Button button2;
+        private Label label3;
+        private TextBox textBox3;
     }
 }

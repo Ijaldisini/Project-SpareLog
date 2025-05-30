@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LandingPage));
             label1 = new Label();
             button1 = new Button();
             SuspendLayout();
@@ -45,21 +46,29 @@
             // 
             // button1
             // 
-            button1.Location = new Point(921, 871);
+            button1.BackColor = Color.Transparent;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            button1.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Location = new Point(878, 901);
             button1.Name = "button1";
-            button1.Size = new Size(94, 29);
+            button1.Size = new Size(162, 70);
             button1.TabIndex = 1;
-            button1.Text = "Login";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
             // LandingPage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(1920, 1080);
             Controls.Add(button1);
             Controls.Add(label1);
+            DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
             MinimizeBox = false;
             Name = "LandingPage";
