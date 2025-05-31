@@ -84,12 +84,12 @@ namespace Project_SpareLog.View
 
                     // Langsung buka form update stok
                     V_UpdateStok v_UpdateStok = new V_UpdateStok();
+                    V_TambahBarang v_TambahBarang = new V_TambahBarang();
                     v_UpdateStok.SetBarangData(idBarang, namaBarang, stokSaatIni);
-
-                    // Tampilkan form (sesuaikan dengan kebutuhan Anda)
                     this.Controls.Add(v_UpdateStok);
                     v_UpdateStok.BringToFront();
                     v_UpdateStok.Show();
+                    v_TambahBarang.Hide();
                     LoadDataStok();
                 }
                 catch (Exception ex)
@@ -152,9 +152,9 @@ namespace Project_SpareLog.View
         private void button1_Click(object sender, EventArgs e)
         {
             V_TambahBarang v_TambahBarang = new V_TambahBarang();
+            this.Controls.Add(v_TambahBarang);
             v_TambahBarang.BringToFront();
             v_TambahBarang.Show();
-            this.Hide();
         }
     }
 }

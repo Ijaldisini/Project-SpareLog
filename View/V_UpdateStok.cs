@@ -15,7 +15,6 @@ namespace Project_SpareLog.View
 {
     public partial class V_UpdateStok : UserControl
     {
-        private readonly M_Barang _barang = new M_Barang();
         private readonly C_Barang controller;
         private int _currentIdBarang;
         private int _currentStok;
@@ -31,7 +30,6 @@ namespace Project_SpareLog.View
         {
             _currentIdBarang = idBarang;
             _currentStok = currentStok;
-
             textBox1.Text = idBarang.ToString();
         }
 
@@ -63,15 +61,9 @@ namespace Project_SpareLog.View
                     return;
                 }
 
-                if (hppBaru <= _barang.hpp)
-                {
-                    MessageBox.Show("Harga barang harus lebih dari harga barang awal", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
                 // Konfirmasi
-                var confirmResult = MessageBox.Show($"Tambahkan {jumlahStokBaru} ke stok saat ini ({_currentStok})?" +
-                    $"/nTambahkan {hppBaru} ke hpp saat ini?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult confirmResult = MessageBox.Show($"Tambahkan {jumlahStokBaru} ke stok saat ini ({_currentStok})? \n" +
+                    $"Tambahkan {hppBaru} ke hpp saat ini?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (confirmResult == DialogResult.Yes)
                 {

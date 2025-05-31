@@ -35,8 +35,7 @@ namespace Project_SpareLog.View
                 DataTable dt = controller.GetBarangPerluRestock();
                 dataGridView1.Rows.Clear();
 
-                // Debug: Cek jumlah baris yang diterima
-                Console.WriteLine($"Jumlah baris diterima: {dt.Rows.Count}");
+                //Console.WriteLine($"Jumlah baris diterima: {dt.Rows.Count}"); 
 
                 foreach (DataRow row in dt.Rows)
                 {
@@ -113,6 +112,16 @@ namespace Project_SpareLog.View
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToResizeRows = false;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            V_TambahBarang v_TambahBarang = new V_TambahBarang();
+            V_UpdateStok v_UpdateStok = new V_UpdateStok();
+            this.Controls.Add(v_TambahBarang);
+            v_TambahBarang.BringToFront();
+            v_TambahBarang.Show();
+            v_UpdateStok.Hide();
         }
     }
 }

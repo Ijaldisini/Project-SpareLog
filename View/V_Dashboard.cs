@@ -29,9 +29,6 @@ namespace Project_SpareLog.View
             v_Restock1.LoadBarangPerluRestock();
             v_ManajemenStok1.BringToFront();
             v_ManajemenStok1.Show();
-            v_TambahBarang1.Show();
-            v_Restock1.Show();
-            v_UpdateStok1.Show();
             v_DashboardAwal1.Hide();
             button2.Show();
             button1.Hide();
@@ -49,12 +46,6 @@ namespace Project_SpareLog.View
 
         private void button3_Click(object sender, EventArgs e)
         {
-
-            v_DashboardAwal1.Hide();
-            v_ManajemenStok1.Hide();
-            v_TambahBarang1.Hide();
-            v_UpdateStok1.Hide();
-            v_Restock1.Hide();
             button2.Hide();
             button1.Show();
         }
@@ -64,9 +55,6 @@ namespace Project_SpareLog.View
             v_DashboardAwal1.BringToFront();
             v_DashboardAwal1.Show();
             v_ManajemenStok1.Hide();
-            v_TambahBarang1.Hide();
-            v_Restock1.Hide();
-            v_UpdateStok1.Hide();
             button2.Hide();
             button1.Show();
         }

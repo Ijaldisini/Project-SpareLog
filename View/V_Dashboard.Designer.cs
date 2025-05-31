@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(V_Dashboard));
             label1 = new Label();
             panel1 = new Panel();
+            pictureBox1 = new PictureBox();
             button3 = new Button();
             button1 = new Button();
             button2 = new Button();
@@ -39,7 +40,6 @@
             v_TambahBarang1 = new V_TambahBarang();
             v_Restock1 = new V_Restock();
             v_UpdateStok1 = new V_UpdateStok();
-            pictureBox1 = new PictureBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -69,6 +69,15 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(341, 1080);
             panel1.TabIndex = 1;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(33, 90);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(279, 156);
+            pictureBox1.TabIndex = 7;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
             // 
             // button3
             // 
@@ -137,8 +146,7 @@
             v_TambahBarang1.Location = new Point(392, 62);
             v_TambahBarang1.Name = "v_TambahBarang1";
             v_TambahBarang1.Size = new Size(1426, 941);
-            v_TambahBarang1.TabIndex = 4;
-            v_TambahBarang1.Load += v_TambahBarang1_Load;
+            v_TambahBarang1.TabIndex = 7;
             // 
             // v_Restock1
             // 
@@ -148,7 +156,7 @@
             v_Restock1.Location = new Point(392, 62);
             v_Restock1.Name = "v_Restock1";
             v_Restock1.Size = new Size(1426, 941);
-            v_Restock1.TabIndex = 5;
+            v_Restock1.TabIndex = 8;
             // 
             // v_UpdateStok1
             // 
@@ -158,16 +166,7 @@
             v_UpdateStok1.Location = new Point(392, 62);
             v_UpdateStok1.Name = "v_UpdateStok1";
             v_UpdateStok1.Size = new Size(1426, 941);
-            v_UpdateStok1.TabIndex = 6;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Location = new Point(33, 90);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(279, 156);
-            pictureBox1.TabIndex = 7;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
+            v_UpdateStok1.TabIndex = 9;
             // 
             // V_Dashboard
             // 
@@ -203,9 +202,9 @@
         private V_DashboardAwal v_DashboardAwal1;
         private Button button2;
         private V_TambahBarang v_TambahBarang1;
-        private V_Restock v_Restock1;
         private Button button3;
-        private V_UpdateStok v_UpdateStok1;
         private PictureBox pictureBox1;
+        private V_Restock v_Restock1;
+        private V_UpdateStok v_UpdateStok1;
     }
 }

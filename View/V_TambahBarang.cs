@@ -123,9 +123,19 @@ namespace Project_SpareLog.View
         {
             V_TambahBarang_Load(sender, e);
             V_Restock v_Restock = new V_Restock();
+            this.Controls.Add(v_Restock);
             v_Restock.BringToFront();
             v_Restock.Show();
-            this.Hide();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            V_ManajemenStok v_ManajemenStok = new V_ManajemenStok();
+            V_Restock v_Restock = new V_Restock();
+            this.Controls.Add(v_ManajemenStok);
+            v_ManajemenStok.BringToFront();
+            v_ManajemenStok.Show();
+            v_Restock.Hide();
         }
     }
 }
