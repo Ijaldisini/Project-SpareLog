@@ -124,7 +124,7 @@
             // 
             // tambah_stok
             // 
-            tambah_stok.HeaderText = "Tambah";
+            tambah_stok.HeaderText = "Update";
             tambah_stok.MinimumWidth = 6;
             tambah_stok.Name = "tambah_stok";
             tambah_stok.Resizable = DataGridViewTriState.True;
