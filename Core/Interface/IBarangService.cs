@@ -20,5 +20,6 @@ namespace Project_SpareLog.Core.Interface
         DataTable GetBarangPerluRestock();
         bool HapusBarang(int id_barang);
         bool UpdateStokBarang(int idBarang, int jumlahStokBaru);
+        bool TambahAktivitasStok(int idBarang, int idSupplier, int hppBaru, int jumlah);
     }
 }

@@ -47,7 +47,15 @@ namespace Project_SpareLog.View
                 // Validasi input
                 if (string.IsNullOrEmpty(textBox2.Text))
                 {
-                    MessageBox.Show("Masukkan jumlah stok yang akan ditambahkan", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Masukkan jumlah stok yang akan ditambahkan", "Warning",
+                                  MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(textBox3.Text))
+                {
+                    MessageBox.Show("Masukkan HPP baru", "Warning",
+                                  MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -57,25 +65,48 @@ namespace Project_SpareLog.View
 
                 if (jumlahStokBaru <= 0)
                 {
-                    MessageBox.Show("Jumlah stok harus lebih dari 0", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Jumlah stok harus lebih dari 0", "Warning",
+                                  MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 // Konfirmasi
-                DialogResult confirmResult = MessageBox.Show($"Tambahkan {jumlahStokBaru} ke stok saat ini ({_currentStok})? \n" +
-                    $"Tambahkan {hppBaru} ke hpp saat ini?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult confirmResult = MessageBox.Show(
+                    $"Tambahkan {jumlahStokBaru} ke stok saat ini ({_currentStok})? \n" +
+                    $"Update HPP menjadi {hppBaru}?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (confirmResult == DialogResult.Yes)
                 {
-                    // Gunakan _controller yang sudah diinisialisasi
-                    bool success = controller.UpdateStokBarang(_currentIdBarang, jumlahStokBaru);
+                    // Eksekusi update
+                    bool successStok = controller.UpdateStokBarang(_currentIdBarang, jumlahStokBaru);
                     bool successHPP = controller.UpdateHPP(_currentIdBarang, hppBaru);
                     bool successHarga = controller.UpdateHargaBarang(_currentIdBarang, hargaBaru);
+
+                    if (successStok && successHPP && successHarga)
+                    {
+                        MessageBox.Show("Stok, HPP, dan Harga berhasil diupdate!", "Sukses",
+                                      MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        string errorMsg = "";
+                        if (!successStok) errorMsg += "Gagal update stok\n";
+                        if (!successHPP) errorMsg += "Gagal update HPP\n";
+                        if (!successHarga) errorMsg += "Gagal update harga";
+
+                        MessageBox.Show($"Beberapa update gagal:\n{errorMsg}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Format input tidak valid. Pastikan angka yang dimasukkan benar.",
+                              "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Terjadi kesalahan: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Terjadi kesalahan: {ex.Message}", "Error",
+                              MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
