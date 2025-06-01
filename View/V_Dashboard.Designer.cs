@@ -31,10 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(V_Dashboard));
             label1 = new Label();
             panel1 = new Panel();
+            button4 = new Button();
             pictureBox1 = new PictureBox();
-            button3 = new Button();
+            btntransaksiklik = new Button();
             button1 = new Button();
-            button2 = new Button();
+            btnmanajemenklik = new Button();
             v_ManajemenStok1 = new V_ManajemenStok();
             v_DashboardAwal1 = new V_DashboardAwal();
             v_TambahBarang1 = new V_TambahBarang();
@@ -61,14 +62,28 @@
             panel1.BackgroundImage = (Image)resources.GetObject("panel1.BackgroundImage");
             panel1.BackgroundImageLayout = ImageLayout.Zoom;
             panel1.Controls.Add(pictureBox1);
-            panel1.Controls.Add(button3);
             panel1.Controls.Add(button1);
-            panel1.Controls.Add(button2);
+            panel1.Controls.Add(btnmanajemenklik);
+            panel1.Controls.Add(button4);
+            panel1.Controls.Add(btntransaksiklik);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
             panel1.Size = new Size(341, 1080);
             panel1.TabIndex = 1;
+            // 
+            // button4
+            // 
+            button4.BackgroundImage = (Image)resources.GetObject("button4.BackgroundImage");
+            button4.BackgroundImageLayout = ImageLayout.Zoom;
+            button4.FlatAppearance.BorderSize = 0;
+            button4.FlatStyle = FlatStyle.Flat;
+            button4.Location = new Point(33, 452);
+            button4.Name = "button4";
+            button4.Size = new Size(279, 82);
+            button4.TabIndex = 8;
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // pictureBox1
             // 
@@ -79,18 +94,18 @@
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
             // 
-            // button3
+            // btntransaksiklik
             // 
-            button3.BackgroundImage = (Image)resources.GetObject("button3.BackgroundImage");
-            button3.BackgroundImageLayout = ImageLayout.Zoom;
-            button3.FlatAppearance.BorderSize = 0;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Location = new Point(33, 452);
-            button3.Name = "button3";
-            button3.Size = new Size(279, 82);
-            button3.TabIndex = 6;
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            btntransaksiklik.BackgroundImage = (Image)resources.GetObject("btntransaksiklik.BackgroundImage");
+            btntransaksiklik.BackgroundImageLayout = ImageLayout.Zoom;
+            btntransaksiklik.FlatAppearance.BorderSize = 0;
+            btntransaksiklik.FlatStyle = FlatStyle.Flat;
+            btntransaksiklik.Location = new Point(33, 452);
+            btntransaksiklik.Name = "btntransaksiklik";
+            btntransaksiklik.Size = new Size(279, 82);
+            btntransaksiklik.TabIndex = 6;
+            btntransaksiklik.UseVisualStyleBackColor = true;
+            btntransaksiklik.Click += button3_Click;
             // 
             // button1
             // 
@@ -105,18 +120,18 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // button2
+            // btnmanajemenklik
             // 
-            button2.BackgroundImage = (Image)resources.GetObject("button2.BackgroundImage");
-            button2.BackgroundImageLayout = ImageLayout.Zoom;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Location = new Point(33, 329);
-            button2.Name = "button2";
-            button2.Size = new Size(279, 82);
-            button2.TabIndex = 1;
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            btnmanajemenklik.BackgroundImage = (Image)resources.GetObject("btnmanajemenklik.BackgroundImage");
+            btnmanajemenklik.BackgroundImageLayout = ImageLayout.Zoom;
+            btnmanajemenklik.FlatAppearance.BorderSize = 0;
+            btnmanajemenklik.FlatStyle = FlatStyle.Flat;
+            btnmanajemenklik.Location = new Point(33, 329);
+            btnmanajemenklik.Name = "btnmanajemenklik";
+            btnmanajemenklik.Size = new Size(279, 82);
+            btnmanajemenklik.TabIndex = 1;
+            btnmanajemenklik.UseVisualStyleBackColor = true;
+            btnmanajemenklik.Click += button2_Click;
             // 
             // v_ManajemenStok1
             // 
@@ -200,11 +215,12 @@
         private Button button1;
         private V_ManajemenStok v_ManajemenStok1;
         private V_DashboardAwal v_DashboardAwal1;
-        private Button button2;
+        private Button btnmanajemenklik;
         private V_TambahBarang v_TambahBarang1;
-        private Button button3;
+        private Button btntransaksiklik;
         private PictureBox pictureBox1;
         private V_Restock v_Restock1;
         private V_UpdateStok v_UpdateStok1;
+        private Button button4;
     }
 }

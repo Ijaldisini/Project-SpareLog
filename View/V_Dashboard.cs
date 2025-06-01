@@ -30,8 +30,10 @@ namespace Project_SpareLog.View
             v_ManajemenStok1.BringToFront();
             v_ManajemenStok1.Show();
             v_DashboardAwal1.Hide();
-            button2.Show();
+            btnmanajemenklik.Show();
             button1.Hide();
+            btntransaksiklik.Hide();
+            button4.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -46,8 +48,7 @@ namespace Project_SpareLog.View
 
         private void button3_Click(object sender, EventArgs e)
         {
-            button2.Hide();
-            button1.Show();
+
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -55,8 +56,18 @@ namespace Project_SpareLog.View
             v_DashboardAwal1.BringToFront();
             v_DashboardAwal1.Show();
             v_ManajemenStok1.Hide();
-            button2.Hide();
+            btnmanajemenklik.Hide();
             button1.Show();
+            btntransaksiklik.Hide();
+            button4.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            button4.Hide();
+            btnmanajemenklik.Hide();
+            button1.Show();
+            btntransaksiklik.Show();
         }
     }
 }
