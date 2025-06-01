@@ -84,8 +84,10 @@ namespace Project_SpareLog.View
 
                     if (successStok && successHPP && successHarga)
                     {
-                        MessageBox.Show("Stok, HPP, dan Harga berhasil diupdate!", "Sukses",
-                                      MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Stok, HPP, dan Harga berhasil diupdate!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        textBox1.Clear();
+                        textBox2.Clear();
+                        textBox3.Clear();
                     }
                     else
                     {
