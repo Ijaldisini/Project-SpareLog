@@ -78,7 +78,7 @@ namespace Project_SpareLog.View
                 if (confirmResult == DialogResult.Yes)
                 {
                     // Eksekusi update
-                    bool successStok = controller.UpdateStokBarang(_currentIdBarang, jumlahStokBaru);
+                    bool successStok = controller.UpdateStokBarang(_currentIdBarang, jumlahStokBaru, hppBaru);
                     bool successHPP = controller.UpdateHPP(_currentIdBarang, hppBaru);
                     bool successHarga = controller.UpdateHargaBarang(_currentIdBarang, hargaBaru);
 

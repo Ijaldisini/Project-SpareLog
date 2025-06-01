@@ -114,9 +114,9 @@ namespace Project_SpareLog.Context
             }
         }
 
-        public bool UpdateStokBarang(int idBarang, int jumlahStokBaru)
+        public bool UpdateStokBarang(int idBarang, int jumlahStokBaru, int hppBaru)
         {
-            string getInfoQuery = "SELECT hpp, supplier_id_supplier FROM barang WHERE id_barang = @id";
+            string getInfoQuery = "SELECT supplier_id_supplier FROM barang WHERE id_barang = @id";
             var getInfoParams = new NpgsqlParameter[]
             {
                 new NpgsqlParameter("@id", idBarang)
@@ -126,7 +126,6 @@ namespace Project_SpareLog.Context
             if (dt.Rows.Count == 0)
                 return false;
 
-            int hpp = Convert.ToInt32(dt.Rows[0]["hpp"]);
             int supplierId = Convert.ToInt32(dt.Rows[0]["supplier_id_supplier"]);
 
             string query = "UPDATE barang SET stok_barang = stok_barang + @jumlah WHERE id_barang = @id";
@@ -139,11 +138,12 @@ namespace Project_SpareLog.Context
 
             if (success)
             {
-                // Catat aktivitas stok setelah berhasil update stok
-                TambahAktivitasStok(idBarang, supplierId, jumlahStokBaru, hpp);
+                // Simpan aktivitas stok dengan HPP baru yang diberikan
+                TambahAktivitasStok(idBarang, supplierId, jumlahStokBaru, hppBaru);
             }
             return success;
         }
+
 
         public bool UpdateHPP(int idBarang, int hpp_saat_ini)
         {
