@@ -14,6 +14,7 @@ namespace Project_SpareLog.View
     public partial class V_Restock : UserControl
     {
         private C_Barang controller;
+
         public V_Restock()
         {
             InitializeComponent();

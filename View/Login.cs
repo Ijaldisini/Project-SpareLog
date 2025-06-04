@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Npgsql;
 using Project_SpareLog.App.Core;
 using Project_SpareLog.Context;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Project_SpareLog.View
 {
@@ -62,5 +63,34 @@ namespace Project_SpareLog.View
             }
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (textBox1.PasswordChar == '*')
+            {
+                textBox1.PasswordChar = '\0';
+            }
+            else
+            {
+                textBox1.PasswordChar = '*';
+            }
+
+            button3.BringToFront();
+            button3.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (textBox1.PasswordChar == '\0')
+            {
+                textBox1.PasswordChar = '*';
+            }
+            else
+            {
+                textBox1.PasswordChar = '\0';
+            }
+
+            button2.BringToFront();
+            button2.Show();
+        }
     }
 }

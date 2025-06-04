@@ -39,7 +39,7 @@ namespace Project_SpareLog.Context
 
         public int? GetIdBarangByNama(string nama)
         {
-            string query = $"SELECT id_barang FROM barang WHERE nama_barang = '{nama}'";
+            string query = $"SELECT id_barang FROM barang WHERE nama_barang ILIKE '{nama}'";
             DataTable dt = db.queryExecutor(query);
 
             if (dt.Rows.Count > 0 && dt.Rows[0]["id_barang"] != DBNull.Value)
@@ -51,7 +51,7 @@ namespace Project_SpareLog.Context
 
         public string GetNamaBarangById(int id)
         {
-            string query = $"SELECT nama_barang FROM barang WHERE id_barang = '{id}'";
+            string query = $"SELECT nama_barang FROM barang WHERE id_barang ILIKE '{id}'";
             DataTable dt = db.queryExecutor(query);
 
             if (dt.Rows.Count > 0)
@@ -203,5 +203,26 @@ namespace Project_SpareLog.Context
 
             return db.ExecuteNonQuery(query, parameters) > 0;
         }
+
+        public string GetDetailBarang(string nama)
+        {
+            string query = "SELECT id_barang, harga_barang FROM barang WHERE nama_barang ILIKE @nama";
+            var parameters = new NpgsqlParameter[]
+            {
+                new NpgsqlParameter("@nama", nama)
+            };
+
+            DataTable dt = db.queryExecutor(query, parameters);
+
+            if (dt.Rows.Count > 0)
+            {
+                int id = Convert.ToInt32(dt.Rows[0]["id_barang"]);
+                int harga = Convert.ToInt32(dt.Rows[0]["harga_barang"]);
+                return $"{id}|{harga}"; // dipisahkan dengan tanda "|"
+            }
+
+            return null;
+        }
+
     }
 }

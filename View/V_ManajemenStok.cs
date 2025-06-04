@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Project_SpareLog.Context;
 using Project_SpareLog.Core.Model;
+using System.IO;
+using Project_SpareLog.Properties;
 
 namespace Project_SpareLog.View
 {
@@ -108,7 +110,7 @@ namespace Project_SpareLog.View
             dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
             dataGridView1.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView1.ColumnHeadersHeight = 36;
+            dataGridView1.ColumnHeadersHeight = 45;
 
             // Cell Style
             dataGridView1.DefaultCellStyle.BackColor = Color.FromArgb(228, 228, 228);
@@ -120,34 +122,65 @@ namespace Project_SpareLog.View
             dataGridView1.DefaultCellStyle.Padding = new Padding(8);
             dataGridView1.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
 
-            // Style khusus untuk tombol
-            dataGridView1.Columns["hapus"].DefaultCellStyle.BackColor = Color.FromArgb(255, 100, 100);
-            dataGridView1.Columns["hapus"].DefaultCellStyle.ForeColor = Color.White;
-            dataGridView1.Columns["hapus"].DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
-
-            dataGridView1.Columns["tambah_stok"].DefaultCellStyle.BackColor = Color.FromArgb(255, 100, 100);
-            dataGridView1.Columns["tambah_stok"].DefaultCellStyle.ForeColor = Color.White;
-            dataGridView1.Columns["tambah_stok"].DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
-
-            // Border and lines
+            // Grid & Border
             dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             dataGridView1.GridColor = Color.White;
             dataGridView1.BorderStyle = BorderStyle.None;
             dataGridView1.RowHeadersVisible = false;
 
-            // Row and column sizing
-            dataGridView1.RowTemplate.Height = 34;
+            // Row height
+            dataGridView1.RowTemplate.Height = 45;
+
+            // AutoSize columns (fill except for tombol)
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.Columns["hapus"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None; // Biarkan lebar tetap
+
+            // Matikan opsi tambahan pengguna
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToResizeRows = false;
 
-            dataGridView1.RowTemplate.Height = 34;
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.Columns["tambah_stok"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None; // Biarkan lebar tetap
-            dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToResizeRows = false;
+            // Setup kolom tombol (gambar dan ukuran tetap)
+            if (dataGridView1.Columns.Contains("hapus"))
+            {
+                dataGridView1.Columns["hapus"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                dataGridView1.Columns["hapus"].Width = 40;
+            }
+
+            if (dataGridView1.Columns.Contains("tambah_stok"))
+            {
+                dataGridView1.Columns["tambah_stok"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                dataGridView1.Columns["tambah_stok"].Width = 40;
+            }
+
+            // Replace tombol teks dengan gambar (di CellPainting)
+            dataGridView1.CellPainting += (s, e) =>
+            {
+                if (e.RowIndex >= 0 && (e.ColumnIndex == dataGridView1.Columns["hapus"].Index || e.ColumnIndex == dataGridView1.Columns["tambah_stok"].Index))
+                {
+                    e.PaintBackground(e.CellBounds, true);
+                    e.Paint(e.CellBounds, DataGridViewPaintParts.Border);
+
+                    Image img = null;
+                    if (e.ColumnIndex == dataGridView1.Columns["hapus"].Index)
+                    {
+                        img = Image.FromFile(@"D:\Kulyeah\PBO\Tugas\Tugas Besar\Project SpareLog\Resources\delete.png"); // pastikan ada file Resources dengan nama 'trash'
+                    }
+                    else if (e.ColumnIndex == dataGridView1.Columns["tambah_stok"].Index)
+                    {
+                        img = Image.FromFile(@"D:\Kulyeah\PBO\Tugas\Tugas Besar\Project SpareLog\Resources\Pen.png"); // pastikan ada file Resources dengan nama 'plus'
+                    }
+
+                    if (img != null)
+                    {
+                        int imgX = e.CellBounds.Left + (e.CellBounds.Width - img.Width) / 2;
+                        int imgY = e.CellBounds.Top + (e.CellBounds.Height - img.Height) / 2;
+                        e.Graphics.DrawImage(img, new Rectangle(imgX, imgY, img.Width, img.Height));
+                    }
+
+                    e.Handled = true;
+                }
+            };
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {

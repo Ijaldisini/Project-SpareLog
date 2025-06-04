@@ -38,7 +38,13 @@
             textBox2 = new TextBox();
             textBox3 = new TextBox();
             dateTimePicker1 = new DateTimePicker();
+            pictureBox1 = new PictureBox();
+            button1 = new Button();
+            button2 = new Button();
+            textBox4 = new TextBox();
+            button3 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // dataGridView1
@@ -50,6 +56,7 @@
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(1255, 446);
             dataGridView1.TabIndex = 0;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // id_barang
             // 
@@ -116,6 +123,61 @@
             dateTimePicker1.Size = new Size(302, 27);
             dateTimePicker1.TabIndex = 4;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
+            pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox1.Location = new Point(22, 24);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(436, 59);
+            pictureBox1.TabIndex = 5;
+            pictureBox1.TabStop = false;
+            // 
+            // button1
+            // 
+            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
+            button1.BackgroundImageLayout = ImageLayout.Zoom;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            button1.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Location = new Point(928, 29);
+            button1.Name = "button1";
+            button1.Size = new Size(218, 56);
+            button1.TabIndex = 6;
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            button2.BackgroundImage = (Image)resources.GetObject("button2.BackgroundImage");
+            button2.BackgroundImageLayout = ImageLayout.Zoom;
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            button2.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Location = new Point(1170, 29);
+            button2.Name = "button2";
+            button2.Size = new Size(218, 56);
+            button2.TabIndex = 7;
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // textBox4
+            // 
+            textBox4.Location = new Point(1213, 776);
+            textBox4.Name = "textBox4";
+            textBox4.Size = new Size(125, 27);
+            textBox4.TabIndex = 8;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(1244, 877);
+            button3.Name = "button3";
+            button3.Size = new Size(94, 29);
+            button3.TabIndex = 9;
+            button3.Text = "Simpan";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // V_TransaksiPelanggan
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -123,6 +185,11 @@
             BackColor = Color.Transparent;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Zoom;
+            Controls.Add(button3);
+            Controls.Add(textBox4);
+            Controls.Add(button2);
+            Controls.Add(button1);
+            Controls.Add(pictureBox1);
             Controls.Add(dateTimePicker1);
             Controls.Add(textBox3);
             Controls.Add(textBox2);
@@ -133,6 +200,7 @@
             Size = new Size(1426, 941);
             Load += V_TransaksiPelanggan_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -148,5 +216,10 @@
         private TextBox textBox2;
         private TextBox textBox3;
         private DateTimePicker dateTimePicker1;
+        private PictureBox pictureBox1;
+        private Button button1;
+        private Button button2;
+        private TextBox textBox4;
+        private Button button3;
     }
 }

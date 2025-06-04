@@ -124,7 +124,7 @@
             // 
             // tambah_stok
             // 
-            tambah_stok.HeaderText = "Update";
+            tambah_stok.HeaderText = "";
             tambah_stok.MinimumWidth = 6;
             tambah_stok.Name = "tambah_stok";
             tambah_stok.Resizable = DataGridViewTriState.True;
@@ -133,7 +133,7 @@
             // 
             // hapus
             // 
-            hapus.HeaderText = "Hapus";
+            hapus.HeaderText = "";
             hapus.MinimumWidth = 6;
             hapus.Name = "hapus";
             hapus.Resizable = DataGridViewTriState.True;

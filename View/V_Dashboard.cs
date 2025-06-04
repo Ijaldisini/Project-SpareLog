@@ -68,6 +68,9 @@ namespace Project_SpareLog.View
             btnmanajemenklik.Hide();
             button1.Show();
             btntransaksiklik.Show();
+            v_TransaksiPelanggan1.BringToFront();
+            v_TransaksiPelanggan1.Show();
+            v_DashboardAwal1.Hide();
         }
     }
 }
