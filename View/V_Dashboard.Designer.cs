@@ -42,6 +42,7 @@
             v_Restock1 = new V_Restock();
             v_UpdateStok1 = new V_UpdateStok();
             v_TransaksiPelanggan1 = new V_TransaksiPelanggan();
+            v_TransaksiToko1 = new V_TransaksiToko();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -194,6 +195,16 @@
             v_TransaksiPelanggan1.Size = new Size(1426, 941);
             v_TransaksiPelanggan1.TabIndex = 10;
             // 
+            // v_TransaksiToko1
+            // 
+            v_TransaksiToko1.BackColor = Color.Transparent;
+            v_TransaksiToko1.BackgroundImage = (Image)resources.GetObject("v_TransaksiToko1.BackgroundImage");
+            v_TransaksiToko1.BackgroundImageLayout = ImageLayout.Zoom;
+            v_TransaksiToko1.Location = new Point(392, 62);
+            v_TransaksiToko1.Name = "v_TransaksiToko1";
+            v_TransaksiToko1.Size = new Size(1426, 941);
+            v_TransaksiToko1.TabIndex = 11;
+            // 
             // V_Dashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -209,6 +220,7 @@
             Controls.Add(v_Restock1);
             Controls.Add(v_UpdateStok1);
             Controls.Add(v_TransaksiPelanggan1);
+            Controls.Add(v_TransaksiToko1);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
             Name = "V_Dashboard";
@@ -235,5 +247,6 @@
         private V_UpdateStok v_UpdateStok1;
         private Button button4;
         private V_TransaksiPelanggan v_TransaksiPelanggan1;
+        private V_TransaksiToko v_TransaksiToko1;
     }
 }

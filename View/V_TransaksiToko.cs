@@ -8,26 +8,43 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Project_SpareLog.Context;
-using Project_SpareLog.Core.Abstract;
-using Project_SpareLog.Core.Model;
 
 namespace Project_SpareLog.View
 {
-    public partial class V_TransaksiPelanggan : UserControl
+    public partial class V_TransaksiToko : UserControl
     {
         private C_Transaksi controller;
 
-        public V_TransaksiPelanggan()
+        public V_TransaksiToko()
         {
             controller = new C_Transaksi();
             InitializeComponent();
             dataGridView1.CellEndEdit += dataGridView1_CellEndEdit;
-            textBox3.Leave += TextBox3_Leave;
+            textBox2.Leave += TextBox2_Leave;
         }
 
-        private void V_TransaksiPelanggan_Load(object sender, EventArgs e)
+        private void V_TransaksiToko_Load(object sender, EventArgs e)
         {
             StyleDataGridView();
+        }
+
+        private void TextBox2_Leave(object sender, EventArgs e)
+        {
+            if (DesignMode) return;
+
+            string namaPelanggan = textBox2.Text.Trim();
+            if (!string.IsNullOrEmpty(namaPelanggan))
+            {
+                try
+                {
+                    int idPelanggan = controller.GetIdPelanggan(namaPelanggan);
+                    textBox1.Text = idPelanggan.ToString();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Gagal mendapatkan ID pelanggan: " + ex.Message);
+                }
+            }
         }
 
         private void StyleDataGridView()
@@ -69,25 +86,6 @@ namespace Project_SpareLog.View
             }
         }
 
-        private void TextBox3_Leave(object sender, EventArgs e)
-        {
-            if (DesignMode) return;
-
-            string namaPelanggan = textBox3.Text.Trim();
-            if (!string.IsNullOrEmpty(namaPelanggan))
-            {
-                try
-                {
-                    int idPelanggan = controller.GetIdPelanggan(namaPelanggan);
-                    textBox1.Text = idPelanggan.ToString();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal mendapatkan ID pelanggan: " + ex.Message);
-                }
-            }
-        }
-
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "nama_barang")
@@ -113,9 +111,8 @@ namespace Project_SpareLog.View
                 }
             }
 
-            // Hitung ulang total keseluruhan jika jumlah/harga diubah
             if (e.RowIndex >= 0 && (dataGridView1.Columns[e.ColumnIndex].Name == "jumlah" ||
-                                   dataGridView1.Columns[e.ColumnIndex].Name == "harga"))
+                                   dataGridView1.Columns[e.ColumnIndex].Name == "harga_diskon"))
             {
                 HitungTotalKeseluruhan();
             }
@@ -124,80 +121,15 @@ namespace Project_SpareLog.View
         private void HitungTotalKeseluruhan()
         {
             int total = controller.HitungTotalKeseluruhan(dataGridView1);
-            textBox4.Text = total.ToString("N0");
+            textBox3.Text = total.ToString("N0");
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            string namaPelanggan = textBox3.Text.Trim();
-            string noPolisi = textBox2.Text.Trim();
-
-            if (string.IsNullOrEmpty(namaPelanggan) || string.IsNullOrEmpty(noPolisi))
-            {
-                MessageBox.Show("Nama pelanggan dan nomor polisi harus diisi.");
-                return;
-            }
-
-            int pelangganId = controller.GetIdPelanggan(namaPelanggan);
-            textBox1.Text = pelangganId.ToString(); // tampilkan di TextBox1
-
-            List<M_Transaksi> transaksiList = new List<M_Transaksi>();
-            int total = 0;
-
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                if (row.IsNewRow) continue;
-
-                if (row.Cells["id_barang"].Value == null ||
-                    row.Cells["jumlah"].Value == null ||
-                    row.Cells["harga"].Value == null)
-                    continue;
-
-                var item = new M_Transaksi
-                {
-                    pelanggan_id_pelanggan = pelangganId,
-                    user_id_user = 1,
-                    barang_id_barang = Convert.ToInt32(row.Cells["id_barang"].Value),
-                    jumlah_detail_transaksi = Convert.ToInt32(row.Cells["jumlah"].Value),
-                    harga_detail_transaksi = Convert.ToInt32(row.Cells["harga"].Value)
-                };
-
-                transaksiList.Add(item);
-            }
-
-            textBox4.Text = total.ToString();
-
-            bool success = controller.SimpanTransaksi(transaksiList);
-            if (success)
-            {
-                MessageBox.Show("Transaksi berhasil disimpan.");
-                dataGridView1.Rows.Clear();
-                textBox1.Text = textBox2.Text = textBox3.Text = textBox4.Text = "";
-            }
-            else
-            {
-                MessageBox.Show("Gagal menyimpan transaksi.");
-            }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Terjadi kesalahan: " + ex.Message);
-            //}
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            V_TransaksiToko v_TransaksiToko = new V_TransaksiToko();
-            this.Controls.Add(v_TransaksiToko);
-            v_TransaksiToko.BringToFront();
-            v_TransaksiToko.Show();
+            V_TransaksiPelanggan v_TransaksiPelanggan = new V_TransaksiPelanggan();
+            this.Controls.Add(v_TransaksiPelanggan);
+            v_TransaksiPelanggan.BringToFront();
+            v_TransaksiPelanggan.Show();
         }
     }
 }

@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Project_SpareLog.Context;
 using Project_SpareLog.Core.Model;
-using System.IO;
-using Project_SpareLog.Properties;
 
 namespace Project_SpareLog.View
 {

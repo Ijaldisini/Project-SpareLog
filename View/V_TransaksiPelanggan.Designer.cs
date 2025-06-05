@@ -41,8 +41,8 @@
             pictureBox1 = new PictureBox();
             button1 = new Button();
             button2 = new Button();
-            textBox4 = new TextBox();
             button3 = new Button();
+            textBox4 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -160,13 +160,7 @@
             button2.Size = new Size(218, 56);
             button2.TabIndex = 7;
             button2.UseVisualStyleBackColor = true;
-            // 
-            // textBox4
-            // 
-            textBox4.Location = new Point(1213, 776);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(125, 27);
-            textBox4.TabIndex = 8;
+            button2.Click += button2_Click;
             // 
             // button3
             // 
@@ -177,6 +171,14 @@
             button3.Text = "Simpan";
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
+            // 
+            // textBox4
+            // 
+            textBox4.BackColor = Color.LightGray;
+            textBox4.Location = new Point(1213, 776);
+            textBox4.Name = "textBox4";
+            textBox4.Size = new Size(125, 27);
+            textBox4.TabIndex = 8;
             // 
             // V_TransaksiPelanggan
             // 
@@ -208,10 +210,6 @@
         #endregion
 
         private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn id_barang;
-        private DataGridViewTextBoxColumn nama_barang;
-        private DataGridViewTextBoxColumn jumlah;
-        private DataGridViewTextBoxColumn harga;
         private TextBox textBox1;
         private TextBox textBox2;
         private TextBox textBox3;
@@ -219,7 +217,11 @@
         private PictureBox pictureBox1;
         private Button button1;
         private Button button2;
-        private TextBox textBox4;
         private Button button3;
+        private DataGridViewTextBoxColumn id_barang;
+        private DataGridViewTextBoxColumn nama_barang;
+        private DataGridViewTextBoxColumn jumlah;
+        private DataGridViewTextBoxColumn harga;
+        private TextBox textBox4;
     }
 }
