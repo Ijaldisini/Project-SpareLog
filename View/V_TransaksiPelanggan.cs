@@ -16,6 +16,7 @@ namespace Project_SpareLog.View
     public partial class V_TransaksiPelanggan : UserControl
     {
         private C_Transaksi controller;
+        //private C_Barang controllerBarang;
 
         public V_TransaksiPelanggan()
         {
@@ -129,14 +130,12 @@ namespace Project_SpareLog.View
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //try
-            //{
             string namaPelanggan = textBox3.Text.Trim();
             string noPolisi = textBox2.Text.Trim();
 
-            if (string.IsNullOrEmpty(namaPelanggan) || string.IsNullOrEmpty(noPolisi))
+            if (string.IsNullOrEmpty(namaPelanggan))
             {
-                MessageBox.Show("Nama pelanggan dan nomor polisi harus diisi.");
+                MessageBox.Show("Nama pelanggan harus diisi.");
                 return;
             }
 
@@ -165,6 +164,14 @@ namespace Project_SpareLog.View
                 };
 
                 transaksiList.Add(item);
+
+                var controllerBarang = new C_Barang();
+                bool kurangiStok = controllerBarang.KurangiStokBarang(Convert.ToInt32(row.Cells["id_barang"].Value), Convert.ToInt32(row.Cells["jumlah"].Value));
+                if (!kurangiStok)
+                {
+                    MessageBox.Show("Gagal mengurangi stok untuk barang " + row.Cells["nama_barang"].Value.ToString());
+                    return; // Berhenti jika stok gagal dikurangi
+                }
             }
 
             textBox4.Text = total.ToString();
@@ -174,17 +181,15 @@ namespace Project_SpareLog.View
             {
                 MessageBox.Show("Transaksi berhasil disimpan.");
                 dataGridView1.Rows.Clear();
-                textBox1.Text = textBox2.Text = textBox3.Text = textBox4.Text = "";
+                textBox1.Clear();
+                textBox2.Clear();
+                textBox3.Clear();
+                textBox4.Clear();
             }
             else
             {
                 MessageBox.Show("Gagal menyimpan transaksi.");
             }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Terjadi kesalahan: " + ex.Message);
-            //}
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -198,6 +203,15 @@ namespace Project_SpareLog.View
             this.Controls.Add(v_TransaksiToko);
             v_TransaksiToko.BringToFront();
             v_TransaksiToko.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.Clear();
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
         }
     }
 }

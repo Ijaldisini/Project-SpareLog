@@ -85,6 +85,7 @@
             id_barang.HeaderText = "ID Barang";
             id_barang.MinimumWidth = 6;
             id_barang.Name = "id_barang";
+            id_barang.ReadOnly = true;
             id_barang.Width = 125;
             // 
             // nama_barang
@@ -92,6 +93,7 @@
             nama_barang.HeaderText = "Nama Barang";
             nama_barang.MinimumWidth = 6;
             nama_barang.Name = "nama_barang";
+            nama_barang.ReadOnly = true;
             nama_barang.Width = 125;
             // 
             // jumlah_stok
@@ -99,6 +101,7 @@
             jumlah_stok.HeaderText = "Jumlah Stok";
             jumlah_stok.MinimumWidth = 6;
             jumlah_stok.Name = "jumlah_stok";
+            jumlah_stok.ReadOnly = true;
             jumlah_stok.Width = 125;
             // 
             // harga_jual
@@ -106,6 +109,7 @@
             harga_jual.HeaderText = "Harga Jual";
             harga_jual.MinimumWidth = 6;
             harga_jual.Name = "harga_jual";
+            harga_jual.ReadOnly = true;
             harga_jual.Width = 125;
             // 
             // hpp
@@ -113,6 +117,7 @@
             hpp.HeaderText = "HPP";
             hpp.MinimumWidth = 6;
             hpp.Name = "hpp";
+            hpp.ReadOnly = true;
             hpp.Width = 125;
             // 
             // id_pemasok
@@ -120,6 +125,7 @@
             id_pemasok.HeaderText = "ID Pemasok";
             id_pemasok.MinimumWidth = 6;
             id_pemasok.Name = "id_pemasok";
+            id_pemasok.ReadOnly = true;
             id_pemasok.Width = 125;
             // 
             // tambah_stok

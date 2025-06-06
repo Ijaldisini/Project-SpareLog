@@ -48,7 +48,7 @@
             // 
             textBox1.BackColor = Color.LightGray;
             textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Location = new Point(277, 212);
+            textBox1.Location = new Point(277, 214);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(349, 20);
             textBox1.TabIndex = 7;
@@ -57,7 +57,7 @@
             // 
             textBox2.BackColor = Color.LightGray;
             textBox2.BorderStyle = BorderStyle.None;
-            textBox2.Location = new Point(277, 254);
+            textBox2.Location = new Point(277, 257);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(349, 20);
             textBox2.TabIndex = 8;
@@ -66,7 +66,7 @@
             // 
             textBox3.BackColor = Color.LightGray;
             textBox3.BorderStyle = BorderStyle.None;
-            textBox3.Location = new Point(277, 385);
+            textBox3.Location = new Point(277, 388);
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(349, 20);
             textBox3.TabIndex = 9;
@@ -75,7 +75,7 @@
             // 
             textBox4.BackColor = Color.LightGray;
             textBox4.BorderStyle = BorderStyle.None;
-            textBox4.Location = new Point(277, 473);
+            textBox4.Location = new Point(277, 476);
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(349, 20);
             textBox4.TabIndex = 10;
@@ -84,7 +84,7 @@
             // 
             textBox5.BackColor = Color.LightGray;
             textBox5.BorderStyle = BorderStyle.None;
-            textBox5.Location = new Point(277, 429);
+            textBox5.Location = new Point(277, 431);
             textBox5.Name = "textBox5";
             textBox5.Size = new Size(349, 20);
             textBox5.TabIndex = 11;

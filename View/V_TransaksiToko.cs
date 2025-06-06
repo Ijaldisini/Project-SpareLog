@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Project_SpareLog.Context;
+using Project_SpareLog.Core.Model;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Project_SpareLog.View
 {
@@ -112,15 +114,23 @@ namespace Project_SpareLog.View
             }
 
             if (e.RowIndex >= 0 && (dataGridView1.Columns[e.ColumnIndex].Name == "jumlah" ||
-                                   dataGridView1.Columns[e.ColumnIndex].Name == "harga_diskon"))
+                        dataGridView1.Columns[e.ColumnIndex].Name == "harga_diskon"))
             {
-                HitungTotalKeseluruhan();
+                // Tambahkan ini:
+                var hargaCell = dataGridView1.Rows[e.RowIndex].Cells["harga"];
+                if (hargaCell.Value != null && int.TryParse(hargaCell.Value.ToString(), out int harga))
+                {
+                    int hargaDiskon = harga - (int)(harga * 0.05);
+                    dataGridView1.Rows[e.RowIndex].Cells["harga_diskon"].Value = hargaDiskon;
+                }
+
+                HitungTotalToko();
             }
         }
 
-        private void HitungTotalKeseluruhan()
+        private void HitungTotalToko()
         {
-            int total = controller.HitungTotalKeseluruhan(dataGridView1);
+            int total = controller.HitungTotalToko(dataGridView1);
             textBox3.Text = total.ToString("N0");
         }
 
@@ -130,6 +140,69 @@ namespace Project_SpareLog.View
             this.Controls.Add(v_TransaksiPelanggan);
             v_TransaksiPelanggan.BringToFront();
             v_TransaksiPelanggan.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string namaPelanggan = textBox3.Text.Trim();
+            string noPolisi = textBox2.Text.Trim();
+
+            if (string.IsNullOrEmpty(namaPelanggan))
+            {
+                MessageBox.Show("Nama pelanggan harus diisi.");
+                return;
+            }
+
+            int pelangganId = controller.GetIdPelanggan(namaPelanggan);
+            textBox1.Text = pelangganId.ToString(); // tampilkan di TextBox1
+
+            List<M_Transaksi> transaksiList = new List<M_Transaksi>();
+            int total = 0;
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                if (row.Cells["id_barang"].Value == null ||
+                    row.Cells["jumlah"].Value == null ||
+                    row.Cells["harga"].Value == null)
+                    continue;
+
+                var item = new M_Transaksi
+                {
+                    pelanggan_id_pelanggan = pelangganId,
+                    user_id_user = 1,
+                    barang_id_barang = Convert.ToInt32(row.Cells["id_barang"].Value),
+                    jumlah_detail_transaksi = Convert.ToInt32(row.Cells["jumlah"].Value),
+                    harga_detail_transaksi = Convert.ToInt32(row.Cells["harga"].Value)
+                };
+
+                transaksiList.Add(item);
+
+                var controllerBarang = new C_Barang();
+                bool kurangiStok = controllerBarang.KurangiStokBarang(Convert.ToInt32(row.Cells["id_barang"].Value), Convert.ToInt32(row.Cells["jumlah"].Value));
+                if (!kurangiStok)
+                {
+                    MessageBox.Show("Gagal mengurangi stok untuk barang " + row.Cells["nama_barang"].Value.ToString());
+                    return; // Berhenti jika stok gagal dikurangi
+                }
+            }
+
+            textBox3.Text = total.ToString();
+
+            bool success = controller.SimpanTransaksi(transaksiList);
+            if (success)
+            {
+                MessageBox.Show("Transaksi berhasil disimpan.");
+                dataGridView1.Rows.Clear();
+                textBox1.Clear();
+                textBox2.Clear();
+                textBox3.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Gagal menyimpan transaksi.");
+            }
         }
     }
 }

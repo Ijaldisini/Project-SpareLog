@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -222,6 +223,27 @@ namespace Project_SpareLog.Context
             }
 
             return null;
+        }
+
+        public bool KurangiStokBarang(int idBarang, int jumlah)
+        {
+            try
+            {
+                // Update stok barang di database
+                string query = "UPDATE barang SET stok_barang = stok_barang - @jumlah WHERE id_barang = @idBarang";
+                var parameters = new NpgsqlParameter[]
+                {
+                    new NpgsqlParameter("@jumlah", jumlah),
+                    new NpgsqlParameter("@idBarang", idBarang)
+                };
+                return db.ExecuteNonQuery(query, parameters) > 0;
+            }
+            catch (Exception ex)
+            {
+                // Log error atau tampilkan pesan error
+                MessageBox.Show("Gagal mengurangi stok barang: " + ex.Message);
+                return false;
+            }
         }
 
     }

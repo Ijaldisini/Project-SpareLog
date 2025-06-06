@@ -129,7 +129,23 @@ namespace Project_SpareLog.Context
                     grandTotal += jumlah * harga;
                 }
             }
+            return grandTotal;
+        }
 
+        public override int HitungTotalToko(DataGridView dataGridView)
+        {
+            int grandTotal = 0;
+
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                if (int.TryParse(row.Cells["jumlah"].Value?.ToString(), out int jumlah) &&
+                    int.TryParse(row.Cells["harga_diskon"].Value?.ToString(), out int harga))
+                {
+                    grandTotal += jumlah * harga;
+                }
+            }
             return grandTotal;
         }
     }

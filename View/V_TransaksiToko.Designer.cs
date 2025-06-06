@@ -175,6 +175,7 @@
             button3.TabIndex = 15;
             button3.Text = "Simpan";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // V_TransaksiToko
             // 

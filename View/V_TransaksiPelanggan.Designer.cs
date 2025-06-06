@@ -41,8 +41,9 @@
             pictureBox1 = new PictureBox();
             button1 = new Button();
             button2 = new Button();
-            button3 = new Button();
             textBox4 = new TextBox();
+            button4 = new Button();
+            button3 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -118,6 +119,7 @@
             dateTimePicker1.CalendarMonthBackground = Color.Transparent;
             dateTimePicker1.CalendarTitleBackColor = Color.Transparent;
             dateTimePicker1.CalendarTrailingForeColor = Color.Transparent;
+            dateTimePicker1.ImeMode = ImeMode.NoControl;
             dateTimePicker1.Location = new Point(264, 259);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(302, 27);
@@ -162,16 +164,6 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
-            // button3
-            // 
-            button3.Location = new Point(1244, 877);
-            button3.Name = "button3";
-            button3.Size = new Size(94, 29);
-            button3.TabIndex = 9;
-            button3.Text = "Simpan";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
-            // 
             // textBox4
             // 
             textBox4.BackColor = Color.LightGray;
@@ -179,6 +171,36 @@
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(125, 27);
             textBox4.TabIndex = 8;
+            // 
+            // button4
+            // 
+            button4.BackgroundImage = (Image)resources.GetObject("button4.BackgroundImage");
+            button4.BackgroundImageLayout = ImageLayout.Zoom;
+            button4.FlatAppearance.BorderSize = 0;
+            button4.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            button4.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            button4.FlatStyle = FlatStyle.Flat;
+            button4.Location = new Point(75, 855);
+            button4.Name = "button4";
+            button4.Size = new Size(218, 56);
+            button4.TabIndex = 19;
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
+            // button3
+            // 
+            button3.BackgroundImage = (Image)resources.GetObject("button3.BackgroundImage");
+            button3.BackgroundImageLayout = ImageLayout.Zoom;
+            button3.FlatAppearance.BorderSize = 0;
+            button3.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            button3.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.Location = new Point(316, 855);
+            button3.Name = "button3";
+            button3.Size = new Size(218, 56);
+            button3.TabIndex = 20;
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // V_TransaksiPelanggan
             // 
@@ -188,6 +210,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Zoom;
             Controls.Add(button3);
+            Controls.Add(button4);
             Controls.Add(textBox4);
             Controls.Add(button2);
             Controls.Add(button1);
@@ -217,11 +240,14 @@
         private PictureBox pictureBox1;
         private Button button1;
         private Button button2;
-        private Button button3;
+        private Button button4;
         private DataGridViewTextBoxColumn id_barang;
         private DataGridViewTextBoxColumn nama_barang;
         private DataGridViewTextBoxColumn jumlah;
         private DataGridViewTextBoxColumn harga;
         private TextBox textBox4;
+        private Button button5;
+        private Button button3;
+        //private Button button3;
     }
 }

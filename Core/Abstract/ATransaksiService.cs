@@ -14,5 +14,6 @@ namespace Project_SpareLog.Core.Abstract
         public abstract int GetNextIdDetailTransaksi();
         public abstract int GetIdPelanggan(string namaPelanggan);
         public abstract int HitungTotalKeseluruhan(DataGridView dataGridView);
+        public abstract int HitungTotalToko(DataGridView dataGridView);
     }
 }

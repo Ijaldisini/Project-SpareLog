@@ -111,5 +111,11 @@ namespace Project_SpareLog.View
                               MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            textBox2.Clear();
+            textBox3.Clear();
+        }
     }
 }
