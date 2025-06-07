@@ -40,6 +40,9 @@ namespace Project_SpareLog.View
         private void button2_Click(object sender, EventArgs e)
         {
             button2.Hide();
+            v_rtPelanggan1.BringToFront();
+            v_rtPelanggan1.Show();
+            v_DashboardAwal1.Hide();
             btntransaksiklik.Show();
             button1.Show();
             button4.Show();
