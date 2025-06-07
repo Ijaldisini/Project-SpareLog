@@ -174,7 +174,7 @@ namespace Project_SpareLog.View
                     user_id_user = 1,
                     barang_id_barang = Convert.ToInt32(row.Cells["id_barang"].Value),
                     jumlah_detail_transaksi = Convert.ToInt32(row.Cells["jumlah"].Value),
-                    harga_detail_transaksi = Convert.ToInt32(row.Cells["harga"].Value)
+                    harga_detail_transaksi = Convert.ToInt32(row.Cells["harga_diskon"].Value)
                 };
 
                 transaksiList.Add(item);

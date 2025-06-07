@@ -14,6 +14,7 @@ namespace Project_SpareLog.Core.Model
 
         public int barang_id_barang { get; set; }
         public int jumlah_detail_transaksi { get; set; }
+        public int harga_barang { get; set; }
         public int harga_detail_transaksi { get; set; }
     }
 }

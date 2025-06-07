@@ -105,6 +105,7 @@ namespace Project_SpareLog.Context
                     pelanggan_id_pelanggan = Convert.ToInt32(row["pelanggan_id_pelanggan"]),
                     barang_id_barang = Convert.ToInt32(row["barang_id_barang"]),
                     jumlah_detail_transaksi = Convert.ToInt32(row["jumlah_detail_transaksi"]),
+                    harga_barang = Convert.ToInt32(row["harga_barang"]),
                     harga_detail_transaksi = Convert.ToInt32(row["harga_detail_transaksi"]),
                 });
             }
@@ -120,11 +121,14 @@ namespace Project_SpareLog.Context
                     t.pelanggan_id_pelanggan,  
                     d.barang_id_barang, 
                     d.jumlah_detail_transaksi, 
+	                b.harga_barang,
                     d.harga_detail_transaksi  
                 FROM 
                     transaksi t  
                 JOIN 
-                    detail_transaksi d ON t.detail_transaksi_id_detail_transaksi = d.id_detail_transaksi  
+	                detail_transaksi d ON t.detail_transaksi_id_detail_transaksi = d.id_detail_transaksi  
+                JOIN
+	                barang b ON d.barang_id_barang = b.id_barang
                 JOIN 
                     pelanggan p ON t.pelanggan_id_pelanggan = p.id_pelanggan
                 WHERE 
@@ -138,15 +142,15 @@ namespace Project_SpareLog.Context
 
         public override List<M_RiwayatTransaksi> GetRiwayatByNamaToko(string namaPelanggan)
         {
-            string query = @"  
+            string query = @"
                 SELECT   
                     t.id_transaksi,   
                     t.tanggal_transaksi,   
                     t.pelanggan_id_pelanggan,  
                     d.barang_id_barang,  
+	                b.harga_barang,
                     d.jumlah_detail_transaksi,  
-                    d.harga_detail_transaksi,  
-                    b.nama_barang  
+                    d.harga_detail_transaksi
                 FROM   
                     transaksi t  
                 JOIN   
@@ -156,9 +160,8 @@ namespace Project_SpareLog.Context
                 JOIN   
                     pelanggan p ON t.pelanggan_id_pelanggan = p.id_pelanggan  
                 WHERE   
-                    p.nama_pelanggan ILIKE @namaPelanggan  
-                    AND p.nomor_polisi IS NOT NULL  
-                    AND p.nomor_polisi <> ''";
+                    p.nama_pelanggan ILIKE 'Raditya'  
+                    AND p.nomor_polisi IS NULL";
 
             var parameters = new NpgsqlParameter[]
             {
@@ -177,6 +180,7 @@ namespace Project_SpareLog.Context
                     pelanggan_id_pelanggan = Convert.ToInt32(row["pelanggan_id_pelanggan"]),
                     barang_id_barang = Convert.ToInt32(row["barang_id_barang"]),
                     jumlah_detail_transaksi = Convert.ToInt32(row["jumlah_detail_transaksi"]),
+                    harga_barang = Convert.ToInt32(row["harga_barang"]),
                     harga_detail_transaksi = Convert.ToInt32(row["harga_detail_transaksi"]),
                 });
             }

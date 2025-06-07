@@ -1,6 +1,6 @@
 ﻿namespace Project_SpareLog.View
 {
-    partial class V_RTPelanggan
+    partial class V_RTToko
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(V_RTPelanggan));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(V_RTToko));
             textBox2 = new TextBox();
             dateTimePicker1 = new DateTimePicker();
             textBox1 = new TextBox();
@@ -42,6 +42,7 @@
             id_barang = new DataGridViewTextBoxColumn();
             jumlah = new DataGridViewTextBoxColumn();
             harga = new DataGridViewTextBoxColumn();
+            harga_diskon = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -52,7 +53,7 @@
             textBox2.Location = new Point(1213, 830);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(125, 27);
-            textBox2.TabIndex = 19;
+            textBox2.TabIndex = 26;
             // 
             // dateTimePicker1
             // 
@@ -63,7 +64,7 @@
             dateTimePicker1.Location = new Point(264, 259);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(302, 27);
-            dateTimePicker1.TabIndex = 18;
+            dateTimePicker1.TabIndex = 25;
             // 
             // textBox1
             // 
@@ -72,7 +73,7 @@
             textBox1.Location = new Point(264, 223);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(302, 20);
-            textBox1.TabIndex = 17;
+            textBox1.TabIndex = 24;
             // 
             // button2
             // 
@@ -85,9 +86,8 @@
             button2.Location = new Point(1170, 29);
             button2.Name = "button2";
             button2.Size = new Size(218, 56);
-            button2.TabIndex = 16;
+            button2.TabIndex = 23;
             button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
             // 
             // button1
             // 
@@ -100,28 +100,30 @@
             button1.Location = new Point(928, 29);
             button1.Name = "button1";
             button1.Size = new Size(218, 56);
-            button1.TabIndex = 15;
+            button1.TabIndex = 22;
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // pictureBox1
             // 
             pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
             pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox1.ErrorImage = (Image)resources.GetObject("pictureBox1.ErrorImage");
             pictureBox1.Location = new Point(22, 24);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(583, 59);
-            pictureBox1.TabIndex = 14;
+            pictureBox1.Size = new Size(505, 59);
+            pictureBox1.TabIndex = 21;
             pictureBox1.TabStop = false;
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { id_transaksi, tanggal_transaksi, id_pelanggan, id_barang, jumlah, harga });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { id_transaksi, tanggal_transaksi, id_pelanggan, id_barang, jumlah, harga, harga_diskon });
             dataGridView1.Location = new Point(83, 324);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(1255, 500);
-            dataGridView1.TabIndex = 13;
+            dataGridView1.TabIndex = 20;
             // 
             // id_transaksi
             // 
@@ -165,7 +167,14 @@
             harga.Name = "harga";
             harga.Width = 125;
             // 
-            // V_RTPelanggan
+            // harga_diskon
+            // 
+            harga_diskon.HeaderText = "Harga Diskon";
+            harga_diskon.MinimumWidth = 6;
+            harga_diskon.Name = "harga_diskon";
+            harga_diskon.Width = 125;
+            // 
+            // V_RTToko
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -180,9 +189,9 @@
             Controls.Add(pictureBox1);
             Controls.Add(dataGridView1);
             DoubleBuffered = true;
-            Name = "V_RTPelanggan";
+            Name = "V_RTToko";
             Size = new Size(1426, 941);
-            Load += V_RTPelanggan_Load;
+            Load += V_RTToko_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
@@ -204,5 +213,6 @@
         private DataGridViewTextBoxColumn id_barang;
         private DataGridViewTextBoxColumn jumlah;
         private DataGridViewTextBoxColumn harga;
+        private DataGridViewTextBoxColumn harga_diskon;
     }
 }

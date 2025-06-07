@@ -7,17 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Project_SpareLog.Context;
 using Project_SpareLog.Core.Abstract;
+using Project_SpareLog.Context;
 using Project_SpareLog.Core.Model;
 
 namespace Project_SpareLog.View
 {
-    public partial class V_RTPelanggan : UserControl
+    public partial class V_RTToko : UserControl
     {
         private ARiwayatTransaksiService riwayatTransaksiService;
 
-        public V_RTPelanggan()
+        public V_RTToko()
         {
             riwayatTransaksiService = new C_RiwayatTransaksi();
             InitializeComponent();
@@ -32,7 +32,7 @@ namespace Project_SpareLog.View
                 string nama = textBox1.Text.Trim();
                 if (!string.IsNullOrEmpty(nama))
                 {
-                    var data = riwayatTransaksiService.GetRiwayatByNamaPelanggan(nama);
+                    var data = riwayatTransaksiService.GetRiwayatByNamaToko(nama);
                     LoadDataGrid(data);
                 }
             }
@@ -50,6 +50,7 @@ namespace Project_SpareLog.View
                     item.pelanggan_id_pelanggan,
                     item.barang_id_barang,
                     item.jumlah_detail_transaksi,
+                    item.harga_barang,  
                     item.harga_detail_transaksi
                 );
             }
@@ -101,18 +102,18 @@ namespace Project_SpareLog.View
             }
         }
 
-        private void V_RTPelanggan_Load(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            StyleDataGridView();
-            LoadDataGrid(riwayatTransaksiService.GetAllRiwayatPelanggan());
+            V_RTPelanggan v_RTPelanggan = new V_RTPelanggan();
+            this.Controls.Add(v_RTPelanggan);
+            v_RTPelanggan.BringToFront();
+            v_RTPelanggan.Show();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void V_RTToko_Load(object sender, EventArgs e)
         {
-            V_RTToko v_RTToko = new V_RTToko();
-            this.Controls.Add(v_RTToko);
-            v_RTToko.BringToFront();
-            v_RTToko.Show();
+            StyleDataGridView();
+            LoadDataGrid(riwayatTransaksiService.GetAllRiwayatToko());
         }
     }
 }
