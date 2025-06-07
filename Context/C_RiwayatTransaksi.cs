@@ -42,7 +42,7 @@ namespace Project_SpareLog.Context
                     t.tanggal_transaksi DESC";
 
             DataTable dt = db.queryExecutor(query);
-            return ConvertToList(dt);
+            return ConvertToListPelanggan(dt);
         }
 
         public override List<M_RiwayatTransaksi> GetRiwayatByNamaPelanggan(string namaPelanggan)
@@ -75,7 +75,46 @@ namespace Project_SpareLog.Context
             };
 
             DataTable dt = db.queryExecutor(query, parameters);
+            return ConvertToListPelanggan(dt);
+        }
 
+        public override List<M_RiwayatTransaksi> GetRiwayatPelangganByTanggal(DateTime tanggal)
+        {
+            string query = @"
+                SELECT   
+                    t.id_transaksi,   
+                    t.tanggal_transaksi,   
+                    t.pelanggan_id_pelanggan,  
+                    d.barang_id_barang,  
+                    d.jumlah_detail_transaksi,  
+                    d.harga_detail_transaksi,  
+                    b.nama_barang  
+                FROM   
+                    transaksi t  
+                JOIN   
+                    detail_transaksi d ON t.detail_transaksi_id_detail_transaksi = d.id_detail_transaksi  
+                JOIN   
+                    barang b ON d.barang_id_barang = b.id_barang  
+                JOIN   
+                    pelanggan p ON t.pelanggan_id_pelanggan = p.id_pelanggan  
+                WHERE   
+                    p.nomor_polisi IS NOT NULL  
+                    AND p.nomor_polisi <> ''  
+                    AND DATE(t.tanggal_transaksi) = @tanggal
+                ORDER BY 
+                    t.tanggal_transaksi DESC";
+
+            var parameters = new Npgsql.NpgsqlParameter[]
+            {
+                new Npgsql.NpgsqlParameter("@tanggal", tanggal.Date)
+            };
+
+            DataTable dt = db.queryExecutor(query, parameters);
+            return ConvertToListPelanggan(dt);
+        }
+
+        private List<M_RiwayatTransaksi> ConvertToListPelanggan(DataTable dt)
+        {
             List<M_RiwayatTransaksi> list = new List<M_RiwayatTransaksi>();
             foreach (DataRow row in dt.Rows)
             {
@@ -92,8 +131,7 @@ namespace Project_SpareLog.Context
             return list;
         }
 
-
-        private List<M_RiwayatTransaksi> ConvertToList(DataTable dt)
+        private List<M_RiwayatTransaksi> ConvertToListToko(DataTable dt)
         {
             List<M_RiwayatTransaksi> list = new List<M_RiwayatTransaksi>();
             foreach (DataRow row in dt.Rows)
@@ -137,7 +175,7 @@ namespace Project_SpareLog.Context
                     t.tanggal_transaksi DESC";
 
             DataTable dt = db.queryExecutor(query);
-            return ConvertToList(dt);
+            return ConvertToListToko(dt);
         }
 
         public override List<M_RiwayatTransaksi> GetRiwayatByNamaToko(string namaPelanggan)
@@ -160,7 +198,7 @@ namespace Project_SpareLog.Context
                 JOIN   
                     pelanggan p ON t.pelanggan_id_pelanggan = p.id_pelanggan  
                 WHERE   
-                    p.nama_pelanggan ILIKE 'Raditya'  
+                    p.nama_pelanggan ILIKE @namaPelanggan  
                     AND p.nomor_polisi IS NULL";
 
             var parameters = new NpgsqlParameter[]
@@ -169,22 +207,42 @@ namespace Project_SpareLog.Context
             };
 
             DataTable dt = db.queryExecutor(query, parameters);
-
-            List<M_RiwayatTransaksi> list = new List<M_RiwayatTransaksi>();
-            foreach (DataRow row in dt.Rows)
-            {
-                list.Add(new M_RiwayatTransaksi
-                {
-                    id_transaksi = Convert.ToInt32(row["id_transaksi"]),
-                    tanggal_transaksi = Convert.ToDateTime(row["tanggal_transaksi"]),
-                    pelanggan_id_pelanggan = Convert.ToInt32(row["pelanggan_id_pelanggan"]),
-                    barang_id_barang = Convert.ToInt32(row["barang_id_barang"]),
-                    jumlah_detail_transaksi = Convert.ToInt32(row["jumlah_detail_transaksi"]),
-                    harga_barang = Convert.ToInt32(row["harga_barang"]),
-                    harga_detail_transaksi = Convert.ToInt32(row["harga_detail_transaksi"]),
-                });
-            }
-            return list;
+            return ConvertToListToko(dt);
         }
+
+        public override List<M_RiwayatTransaksi> GetRiwayatTokoByTanggal(DateTime tanggal)
+        {
+            string query = @"  
+                SELECT 
+                    t.id_transaksi, 
+                    t.tanggal_transaksi, 
+                    t.pelanggan_id_pelanggan,  
+                    d.barang_id_barang, 
+                    d.jumlah_detail_transaksi, 
+                    d.harga_detail_transaksi,
+                    b.harga_barang
+                FROM 
+                    transaksi t  
+                JOIN 
+                    detail_transaksi d ON t.detail_transaksi_id_detail_transaksi = d.id_detail_transaksi  
+                JOIN 
+                    pelanggan p ON t.pelanggan_id_pelanggan = p.id_pelanggan
+                JOIN
+                    barang b ON d.barang_id_barang = b.id_barang
+                WHERE 
+                    p.nomor_polisi IS NULL AND
+                    DATE(t.tanggal_transaksi) = @tanggal
+                ORDER BY 
+                    t.tanggal_transaksi DESC";
+
+            var parameters = new NpgsqlParameter[]
+            {
+                new NpgsqlParameter("@tanggal", tanggal.Date)
+            };
+
+            DataTable dt = db.queryExecutor(query, parameters);
+            return ConvertToListToko(dt);
+        }
+
     }
 }

@@ -11,7 +11,10 @@ namespace Project_SpareLog.Core.Abstract
     {
         public abstract List<M_RiwayatTransaksi> GetAllRiwayatPelanggan();
         public abstract List<M_RiwayatTransaksi> GetRiwayatByNamaPelanggan(string namaPelanggan);
+        public abstract List<M_RiwayatTransaksi> GetRiwayatPelangganByTanggal(DateTime tanggal);
+
         public abstract List<M_RiwayatTransaksi> GetAllRiwayatToko();
         public abstract List<M_RiwayatTransaksi> GetRiwayatByNamaToko(string namaToko);
+        public abstract List<M_RiwayatTransaksi> GetRiwayatTokoByTanggal(DateTime tanggal);
     }
 }

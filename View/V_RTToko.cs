@@ -23,9 +23,10 @@ namespace Project_SpareLog.View
             InitializeComponent();
 
             textBox1.KeyDown += TextBox1_KeyDown;
+
         }
 
-        private void TextBox1_KeyDown(object sender, KeyEventArgs e) // Changed event handler to KeyDown
+        private void TextBox1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -34,6 +35,11 @@ namespace Project_SpareLog.View
                 {
                     var data = riwayatTransaksiService.GetRiwayatByNamaToko(nama);
                     LoadDataGrid(data);
+                }
+
+                else
+                {
+                    LoadDataGrid(riwayatTransaksiService.GetAllRiwayatToko());
                 }
             }
         }
@@ -50,7 +56,7 @@ namespace Project_SpareLog.View
                     item.pelanggan_id_pelanggan,
                     item.barang_id_barang,
                     item.jumlah_detail_transaksi,
-                    item.harga_barang,  
+                    item.harga_barang,
                     item.harga_detail_transaksi
                 );
             }
@@ -62,6 +68,14 @@ namespace Project_SpareLog.View
             }
             textBox2.Text = total.ToString("N0");
         }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime selectedDate = dateTimePicker1.Value.Date;
+            var data = riwayatTransaksiService.GetRiwayatTokoByTanggal(selectedDate);
+            LoadDataGrid(data);
+        }
+
 
         private void StyleDataGridView()
         {

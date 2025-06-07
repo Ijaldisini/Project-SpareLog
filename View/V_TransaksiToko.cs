@@ -39,7 +39,7 @@ namespace Project_SpareLog.View
             {
                 try
                 {
-                    int idPelanggan = controller.GetIdPelanggan(namaPelanggan);
+                    int idPelanggan = controller.GetIdToko(namaPelanggan);
                     textBox1.Text = idPelanggan.ToString();
                 }
                 catch (Exception ex)
@@ -153,7 +153,7 @@ namespace Project_SpareLog.View
                 return;
             }
 
-            int pelangganId = controller.GetIdPelanggan(namaPelanggan);
+            int pelangganId = controller.GetIdToko(namaPelanggan);
             textBox1.Text = pelangganId.ToString(); // tampilkan di TextBox1
 
             List<M_Transaksi> transaksiList = new List<M_Transaksi>();

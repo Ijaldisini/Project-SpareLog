@@ -114,5 +114,12 @@ namespace Project_SpareLog.View
             v_RTToko.BringToFront();
             v_RTToko.Show();
         }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime selectedDate = dateTimePicker1.Value.Date;
+            var data = riwayatTransaksiService.GetRiwayatPelangganByTanggal(selectedDate);
+            LoadDataGrid(data);
+        }
     }
 }

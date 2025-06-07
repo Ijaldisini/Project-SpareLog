@@ -89,7 +89,34 @@ namespace Project_SpareLog.Context
         }
 
 
-        public override int GetIdPelanggan(string namaPelanggan)
+        public override int GetIdPelanggan(string namaPelanggan, string noPolisi)
+        {
+            string query = "SELECT id_pelanggan FROM pelanggan WHERE nama_pelanggan = @nama AND nomor_polisi = @nomor_polisi";
+            var dt = db.queryExecutor(query, new NpgsqlParameter[]
+            {
+            new NpgsqlParameter("@nama", namaPelanggan),
+            new NpgsqlParameter("@nomor_polisi", noPolisi)
+            });
+
+            if (dt.Rows.Count > 0)
+            {
+                return Convert.ToInt32(dt.Rows[0]["id_pelanggan"]);
+            }
+            else
+            {
+                string insert = "INSERT INTO pelanggan (nama_pelanggan, nomor_polisi) VALUES (@nama, @nomor_polisi) RETURNING id_pelanggan";
+                var result = db.queryExecutor(insert, new NpgsqlParameter[]
+                {
+                new NpgsqlParameter("@nama", namaPelanggan),
+                new NpgsqlParameter("@nomor_polisi", noPolisi)
+                });
+
+                return Convert.ToInt32(result.Rows[0]["id_pelanggan"]);
+            }
+
+        }
+
+        public override int GetIdToko(string namaPelanggan)
         {
             string query = "SELECT id_pelanggan FROM pelanggan WHERE nama_pelanggan = @nama ";
             var dt = db.queryExecutor(query, new NpgsqlParameter[]
@@ -108,7 +135,6 @@ namespace Project_SpareLog.Context
                 var result = db.queryExecutor(insert, new NpgsqlParameter[]
                 {
                     new NpgsqlParameter("@nama", namaPelanggan),
-                    //new NpgsqlParameter("@no_polisi", noPolisi)
                 });
 
                 return Convert.ToInt32(result.Rows[0]["id_pelanggan"]);
