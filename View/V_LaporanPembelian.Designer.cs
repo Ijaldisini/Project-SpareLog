@@ -1,6 +1,6 @@
 ﻿namespace Project_SpareLog.View
 {
-    partial class V_LaporanPenjualan
+    partial class V_LaporanPembelian
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,21 +28,50 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(V_LaporanPenjualan));
-            dateTimePicker1 = new DateTimePicker();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(V_LaporanPembelian));
+            pictureBox1 = new PictureBox();
             dataGridView1 = new DataGridView();
             textBox1 = new TextBox();
-            pictureBox1 = new PictureBox();
+            dateTimePicker1 = new DateTimePicker();
             button2 = new Button();
             button1 = new Button();
             id_barang = new DataGridViewTextBoxColumn();
             nama_barang = new DataGridViewTextBoxColumn();
-            jumlah_terjual = new DataGridViewTextBoxColumn();
-            harga_jual = new DataGridViewTextBoxColumn();
+            jumlah_dibeli = new DataGridViewTextBoxColumn();
+            harga_beli = new DataGridViewTextBoxColumn();
             harga_total = new DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
+            pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox1.Location = new Point(22, 24);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(312, 59);
+            pictureBox1.TabIndex = 23;
+            pictureBox1.TabStop = false;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { id_barang, nama_barang, jumlah_dibeli, harga_beli, harga_total });
+            dataGridView1.Location = new Point(83, 279);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(1255, 570);
+            dataGridView1.TabIndex = 24;
+            // 
+            // textBox1
+            // 
+            textBox1.BackColor = Color.LightGray;
+            textBox1.Location = new Point(1213, 856);
+            textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
+            textBox1.Size = new Size(125, 27);
+            textBox1.TabIndex = 25;
             // 
             // dateTimePicker1
             // 
@@ -53,38 +82,8 @@
             dateTimePicker1.Location = new Point(263, 227);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(302, 27);
-            dateTimePicker1.TabIndex = 19;
+            dateTimePicker1.TabIndex = 26;
             dateTimePicker1.ValueChanged += dateTimePicker1_ValueChanged;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { id_barang, nama_barang, jumlah_terjual, harga_jual, harga_total });
-            dataGridView1.Location = new Point(83, 279);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(1255, 570);
-            dataGridView1.TabIndex = 20;
-            // 
-            // textBox1
-            // 
-            textBox1.BackColor = Color.LightGray;
-            textBox1.Location = new Point(1213, 856);
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new Size(125, 27);
-            textBox1.TabIndex = 21;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
-            pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox1.Location = new Point(22, 24);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(315, 59);
-            pictureBox1.TabIndex = 22;
-            pictureBox1.TabStop = false;
             // 
             // button2
             // 
@@ -97,9 +96,8 @@
             button2.Location = new Point(1170, 29);
             button2.Name = "button2";
             button2.Size = new Size(218, 56);
-            button2.TabIndex = 24;
+            button2.TabIndex = 28;
             button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
             // 
             // button1
             // 
@@ -112,8 +110,9 @@
             button1.Location = new Point(928, 29);
             button1.Name = "button1";
             button1.Size = new Size(218, 56);
-            button1.TabIndex = 23;
+            button1.TabIndex = 27;
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // id_barang
             // 
@@ -131,21 +130,21 @@
             nama_barang.ReadOnly = true;
             nama_barang.Width = 125;
             // 
-            // jumlah_terjual
+            // jumlah_dibeli
             // 
-            jumlah_terjual.HeaderText = "Jumlah Terjual";
-            jumlah_terjual.MinimumWidth = 6;
-            jumlah_terjual.Name = "jumlah_terjual";
-            jumlah_terjual.ReadOnly = true;
-            jumlah_terjual.Width = 125;
+            jumlah_dibeli.HeaderText = "Jumlah Dibeli";
+            jumlah_dibeli.MinimumWidth = 6;
+            jumlah_dibeli.Name = "jumlah_dibeli";
+            jumlah_dibeli.ReadOnly = true;
+            jumlah_dibeli.Width = 125;
             // 
-            // harga_jual
+            // harga_beli
             // 
-            harga_jual.HeaderText = "Harga Jual";
-            harga_jual.MinimumWidth = 6;
-            harga_jual.Name = "harga_jual";
-            harga_jual.ReadOnly = true;
-            harga_jual.Width = 125;
+            harga_beli.HeaderText = "Harga Beli";
+            harga_beli.MinimumWidth = 6;
+            harga_beli.Name = "harga_beli";
+            harga_beli.ReadOnly = true;
+            harga_beli.Width = 125;
             // 
             // harga_total
             // 
@@ -155,7 +154,7 @@
             harga_total.ReadOnly = true;
             harga_total.Width = 125;
             // 
-            // V_LaporanPenjualan
+            // V_LaporanPembelian
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -164,37 +163,32 @@
             BackgroundImageLayout = ImageLayout.Zoom;
             Controls.Add(button2);
             Controls.Add(button1);
-            Controls.Add(pictureBox1);
+            Controls.Add(dateTimePicker1);
             Controls.Add(textBox1);
             Controls.Add(dataGridView1);
-            Controls.Add(dateTimePicker1);
+            Controls.Add(pictureBox1);
             DoubleBuffered = true;
-            Name = "V_LaporanPenjualan";
+            Name = "V_LaporanPembelian";
             Size = new Size(1426, 941);
-            Load += V_LaporanPenjualan_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            Load += V_LaporanPembelian_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private DateTimePicker dateTimePicker1;
-        private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn id_transaksi;
-        private DataGridViewTextBoxColumn tanggal_transaksi;
-        private DataGridViewTextBoxColumn id_pelanggan;
-        private DataGridViewTextBoxColumn jumlah;
-        private DataGridViewTextBoxColumn harga;
-        private TextBox textBox1;
         private PictureBox pictureBox1;
+        private DataGridView dataGridView1;
+        private TextBox textBox1;
+        private DateTimePicker dateTimePicker1;
         private Button button2;
         private Button button1;
         private DataGridViewTextBoxColumn id_barang;
         private DataGridViewTextBoxColumn nama_barang;
-        private DataGridViewTextBoxColumn jumlah_terjual;
-        private DataGridViewTextBoxColumn harga_jual;
+        private DataGridViewTextBoxColumn jumlah_dibeli;
+        private DataGridViewTextBoxColumn harga_beli;
         private DataGridViewTextBoxColumn harga_total;
     }
 }

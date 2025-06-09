@@ -102,13 +102,11 @@ namespace Project_SpareLog.View
             }
             catch (FormatException)
             {
-                MessageBox.Show("Format input tidak valid. Pastikan angka yang dimasukkan benar.",
-                              "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Format input tidak valid. Pastikan angka yang dimasukkan benar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Terjadi kesalahan: {ex.Message}", "Error",
-                              MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Terjadi kesalahan: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

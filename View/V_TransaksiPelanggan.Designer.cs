@@ -93,8 +93,10 @@
             textBox1.BorderStyle = BorderStyle.None;
             textBox1.Location = new Point(264, 148);
             textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
             textBox1.Size = new Size(302, 20);
             textBox1.TabIndex = 1;
+            textBox1.Text = "Auto";
             // 
             // textBox2
             // 
@@ -169,6 +171,7 @@
             textBox4.BackColor = Color.LightGray;
             textBox4.Location = new Point(1213, 776);
             textBox4.Name = "textBox4";
+            textBox4.ReadOnly = true;
             textBox4.Size = new Size(125, 27);
             textBox4.TabIndex = 8;
             // 

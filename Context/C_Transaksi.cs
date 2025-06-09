@@ -58,11 +58,11 @@ namespace Project_SpareLog.Context
 
                 var paramDetail = new NpgsqlParameter[]
                 {
-            new NpgsqlParameter("@id_detail", currentDetailId),
-            new NpgsqlParameter("@id_barang", item.barang_id_barang),
-            new NpgsqlParameter("@jumlah", item.jumlah_detail_transaksi),
-            new NpgsqlParameter("@harga", item.harga_detail_transaksi),
-            new NpgsqlParameter("@id_user", item.user_id_user)
+                    new NpgsqlParameter("@id_detail", currentDetailId),
+                    new NpgsqlParameter("@id_barang", item.barang_id_barang),
+                    new NpgsqlParameter("@jumlah", item.jumlah_detail_transaksi),
+                    new NpgsqlParameter("@harga", item.harga_detail_transaksi),
+                    new NpgsqlParameter("@id_user", item.user_id_user)
                 };
 
                 if (db.ExecuteNonQuery(insertDetail, paramDetail) <= 0)
@@ -78,11 +78,11 @@ namespace Project_SpareLog.Context
 
             var paramTransaksi = new NpgsqlParameter[]
             {
-        new NpgsqlParameter("@id", idTransaksi),
-        new NpgsqlParameter("@tanggal", tanggal),
-        new NpgsqlParameter("@pelanggan", idPelanggan),
-        new NpgsqlParameter("@user", idUser),
-        new NpgsqlParameter("@id_detail", firstDetailId)
+                new NpgsqlParameter("@id", idTransaksi),
+                new NpgsqlParameter("@tanggal", tanggal),
+                new NpgsqlParameter("@pelanggan", idPelanggan),
+                new NpgsqlParameter("@user", idUser),
+                new NpgsqlParameter("@id_detail", firstDetailId)
             };
 
             return db.ExecuteNonQuery(insertTransaksi, paramTransaksi) > 0;

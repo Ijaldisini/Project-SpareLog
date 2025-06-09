@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(V_Dashboard));
             label1 = new Label();
             panel1 = new Panel();
+            button3 = new Button();
             button2 = new Button();
             pictureBox1 = new PictureBox();
             button1 = new Button();
@@ -38,6 +39,8 @@
             button4 = new Button();
             btntransaksiklik = new Button();
             btnriwayatklik = new Button();
+            button5 = new Button();
+            btnlaporanklik = new Button();
             v_ManajemenStok1 = new V_ManajemenStok();
             v_DashboardAwal1 = new V_DashboardAwal();
             v_TambahBarang1 = new V_TambahBarang();
@@ -47,8 +50,7 @@
             v_TransaksiToko1 = new V_TransaksiToko();
             v_rtPelanggan1 = new V_RTPelanggan();
             v_LaporanPenjualan1 = new V_LaporanPenjualan();
-            btnlaporanklik = new Button();
-            button5 = new Button();
+            v_LaporanPembelian1 = new V_LaporanPembelian();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -69,6 +71,7 @@
             panel1.BackColor = Color.Transparent;
             panel1.BackgroundImage = (Image)resources.GetObject("panel1.BackgroundImage");
             panel1.BackgroundImageLayout = ImageLayout.Zoom;
+            panel1.Controls.Add(button3);
             panel1.Controls.Add(button2);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(button1);
@@ -84,11 +87,28 @@
             panel1.Size = new Size(341, 1080);
             panel1.TabIndex = 1;
             // 
+            // button3
+            // 
+            button3.BackgroundImage = (Image)resources.GetObject("button3.BackgroundImage");
+            button3.BackgroundImageLayout = ImageLayout.Zoom;
+            button3.FlatAppearance.BorderSize = 0;
+            button3.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            button3.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.Location = new Point(92, 884);
+            button3.Name = "button3";
+            button3.Size = new Size(166, 36);
+            button3.TabIndex = 13;
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click_1;
+            // 
             // button2
             // 
             button2.BackgroundImage = (Image)resources.GetObject("button2.BackgroundImage");
             button2.BackgroundImageLayout = ImageLayout.Zoom;
             button2.FlatAppearance.BorderSize = 0;
+            button2.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            button2.FlatAppearance.MouseOverBackColor = Color.Transparent;
             button2.FlatStyle = FlatStyle.Flat;
             button2.Location = new Point(33, 572);
             button2.Name = "button2";
@@ -111,6 +131,8 @@
             button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
             button1.BackgroundImageLayout = ImageLayout.Zoom;
             button1.FlatAppearance.BorderSize = 0;
+            button1.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            button1.FlatAppearance.MouseOverBackColor = Color.Transparent;
             button1.FlatStyle = FlatStyle.Flat;
             button1.Location = new Point(33, 329);
             button1.Name = "button1";
@@ -137,6 +159,8 @@
             button4.BackgroundImage = (Image)resources.GetObject("button4.BackgroundImage");
             button4.BackgroundImageLayout = ImageLayout.Zoom;
             button4.FlatAppearance.BorderSize = 0;
+            button4.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            button4.FlatAppearance.MouseOverBackColor = Color.Transparent;
             button4.FlatStyle = FlatStyle.Flat;
             button4.Location = new Point(33, 452);
             button4.Name = "button4";
@@ -169,6 +193,33 @@
             btnriwayatklik.Size = new Size(279, 82);
             btnriwayatklik.TabIndex = 10;
             btnriwayatklik.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            button5.BackgroundImage = (Image)resources.GetObject("button5.BackgroundImage");
+            button5.BackgroundImageLayout = ImageLayout.Zoom;
+            button5.FlatAppearance.BorderSize = 0;
+            button5.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            button5.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            button5.FlatStyle = FlatStyle.Flat;
+            button5.Location = new Point(33, 694);
+            button5.Name = "button5";
+            button5.Size = new Size(279, 82);
+            button5.TabIndex = 12;
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
+            // btnlaporanklik
+            // 
+            btnlaporanklik.BackgroundImage = (Image)resources.GetObject("btnlaporanklik.BackgroundImage");
+            btnlaporanklik.BackgroundImageLayout = ImageLayout.Zoom;
+            btnlaporanklik.FlatAppearance.BorderSize = 0;
+            btnlaporanklik.FlatStyle = FlatStyle.Flat;
+            btnlaporanklik.Location = new Point(33, 694);
+            btnlaporanklik.Name = "btnlaporanklik";
+            btnlaporanklik.Size = new Size(279, 82);
+            btnlaporanklik.TabIndex = 11;
+            btnlaporanklik.UseVisualStyleBackColor = true;
             // 
             // v_ManajemenStok1
             // 
@@ -260,30 +311,15 @@
             v_LaporanPenjualan1.Size = new Size(1426, 941);
             v_LaporanPenjualan1.TabIndex = 13;
             // 
-            // btnlaporanklik
+            // v_LaporanPembelian1
             // 
-            btnlaporanklik.BackgroundImage = (Image)resources.GetObject("btnlaporanklik.BackgroundImage");
-            btnlaporanklik.BackgroundImageLayout = ImageLayout.Zoom;
-            btnlaporanklik.FlatAppearance.BorderSize = 0;
-            btnlaporanklik.FlatStyle = FlatStyle.Flat;
-            btnlaporanklik.Location = new Point(33, 694);
-            btnlaporanklik.Name = "btnlaporanklik";
-            btnlaporanklik.Size = new Size(279, 82);
-            btnlaporanklik.TabIndex = 11;
-            btnlaporanklik.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            button5.BackgroundImage = (Image)resources.GetObject("button5.BackgroundImage");
-            button5.BackgroundImageLayout = ImageLayout.Zoom;
-            button5.FlatAppearance.BorderSize = 0;
-            button5.FlatStyle = FlatStyle.Flat;
-            button5.Location = new Point(33, 694);
-            button5.Name = "button5";
-            button5.Size = new Size(279, 82);
-            button5.TabIndex = 12;
-            button5.UseVisualStyleBackColor = true;
-            button5.Click += button5_Click;
+            v_LaporanPembelian1.BackColor = Color.Transparent;
+            v_LaporanPembelian1.BackgroundImage = (Image)resources.GetObject("v_LaporanPembelian1.BackgroundImage");
+            v_LaporanPembelian1.BackgroundImageLayout = ImageLayout.Zoom;
+            v_LaporanPembelian1.Location = new Point(392, 62);
+            v_LaporanPembelian1.Name = "v_LaporanPembelian1";
+            v_LaporanPembelian1.Size = new Size(1426, 941);
+            v_LaporanPembelian1.TabIndex = 14;
             // 
             // V_Dashboard
             // 
@@ -303,6 +339,7 @@
             Controls.Add(v_TransaksiToko1);
             Controls.Add(v_rtPelanggan1);
             Controls.Add(v_LaporanPenjualan1);
+            Controls.Add(v_LaporanPembelian1);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.None;
             Name = "V_Dashboard";
@@ -336,5 +373,7 @@
         private V_LaporanPenjualan v_LaporanPenjualan1;
         private Button button5;
         private Button btnlaporanklik;
+        private V_LaporanPembelian v_LaporanPembelian1;
+        private Button button3;
     }
 }

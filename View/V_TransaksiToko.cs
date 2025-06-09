@@ -204,5 +204,13 @@ namespace Project_SpareLog.View
                 MessageBox.Show("Gagal menyimpan transaksi.");
             }
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.Clear();
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+        }
     }
 }

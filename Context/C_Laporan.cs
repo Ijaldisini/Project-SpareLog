@@ -54,7 +54,6 @@ namespace Project_SpareLog.Context
             return laporanList;
         }
 
-
         public override List<M_Laporan> GetLaporanPelangganByTanggal(DateTime tanggal)
         {
             List<M_Laporan> laporanList = new List<M_Laporan>();
@@ -95,5 +94,76 @@ namespace Project_SpareLog.Context
 
             return laporanList;
         }
+
+        public override List<M_Laporan> GetLaporanPembelian()
+        {
+            string query = @"
+                SELECT 
+                    b.id_barang,
+                    b.nama_barang,
+                    a.jumlah_barang AS jumlah_dibeli,
+                    a.hpp_saat_ini AS harga_beli,
+                    (a.jumlah_barang * a.hpp_saat_ini) AS total_harga
+                FROM aktivitas_stok a
+                JOIN barang b ON a.barang_id_barang = b.id_barang
+                ORDER BY a.tanggal ASC
+            ";
+
+            DataTable dt = db.queryExecutor(query);
+            List<M_Laporan> laporanList = new List<M_Laporan>();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                laporanList.Add(new M_Laporan
+                {
+                    id_barang = Convert.ToInt32(row["id_barang"]),
+                    nama_barang = row["nama_barang"].ToString(),
+                    jumlah_dibeli = Convert.ToInt32(row["jumlah_dibeli"]),
+                    harga_beli = Convert.ToInt32(row["harga_beli"]),
+                    harga_total = Convert.ToInt32(row["total_harga"]),
+                });
+            }
+
+            return laporanList;
+        }
+
+        public override List<M_Laporan> GetLaporanPembelianByTanggal(DateTime tanggal)
+        {
+            string query = @"
+                SELECT 
+                    b.id_barang,
+                    b.nama_barang,
+                    a.jumlah_barang AS jumlah_dibeli,
+                    a.hpp_saat_ini AS harga_beli,
+                    (a.jumlah_barang * a.hpp_saat_ini) AS total_harga
+                FROM aktivitas_stok a
+                JOIN barang b ON a.barang_id_barang = b.id_barang
+                WHERE a.tanggal = @tanggal
+                ORDER BY a.tanggal ASC
+            ";
+
+            NpgsqlParameter[] parameters = new NpgsqlParameter[]
+            {
+                new NpgsqlParameter("@tanggal", tanggal)
+            };
+
+            DataTable dt = db.queryExecutor(query, parameters);
+            List<M_Laporan> laporanList = new List<M_Laporan>();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                laporanList.Add(new M_Laporan
+                {
+                    id_barang = Convert.ToInt32(row["id_barang"]),
+                    nama_barang = row["nama_barang"].ToString(),
+                    jumlah_dibeli = Convert.ToInt32(row["jumlah_dibeli"]),
+                    harga_beli = Convert.ToInt32(row["harga_beli"]),
+                    harga_total = Convert.ToInt32(row["total_harga"]),
+                });
+            }
+
+            return laporanList;
+        }
+
     }
 }

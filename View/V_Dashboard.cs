@@ -98,5 +98,14 @@ namespace Project_SpareLog.View
             v_LaporanPenjualan1.Show();
             v_DashboardAwal1.Hide();
         }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            DialogResult confirmResult = MessageBox.Show("Apakah anda ingin Logout?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (confirmResult == DialogResult.Yes)
+            {
+                Application.Restart();
+            }
+        }
     }
 }

@@ -97,6 +97,7 @@
             Column1.HeaderText = "ID Barang";
             Column1.MinimumWidth = 6;
             Column1.Name = "Column1";
+            Column1.ReadOnly = true;
             Column1.Width = 125;
             // 
             // Column2
@@ -104,6 +105,7 @@
             Column2.HeaderText = "Nama Barang";
             Column2.MinimumWidth = 6;
             Column2.Name = "Column2";
+            Column2.ReadOnly = true;
             Column2.Width = 125;
             // 
             // Column3
@@ -111,6 +113,7 @@
             Column3.HeaderText = "Stok Barang";
             Column3.MinimumWidth = 6;
             Column3.Name = "Column3";
+            Column3.ReadOnly = true;
             Column3.Width = 125;
             // 
             // Column4
@@ -118,6 +121,7 @@
             Column4.HeaderText = "Harga Barang";
             Column4.MinimumWidth = 6;
             Column4.Name = "Column4";
+            Column4.ReadOnly = true;
             Column4.Width = 125;
             // 
             // Column5
@@ -125,6 +129,7 @@
             Column5.HeaderText = "hpp";
             Column5.MinimumWidth = 6;
             Column5.Name = "Column5";
+            Column5.ReadOnly = true;
             Column5.Width = 125;
             // 
             // Column6
@@ -132,6 +137,7 @@
             Column6.HeaderText = "Nama Supplier";
             Column6.MinimumWidth = 6;
             Column6.Name = "Column6";
+            Column6.ReadOnly = true;
             Column6.Width = 125;
             // 
             // V_Restock

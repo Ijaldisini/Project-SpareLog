@@ -43,6 +43,7 @@
             textBox1 = new TextBox();
             textBox3 = new TextBox();
             button3 = new Button();
+            button4 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -156,26 +157,49 @@
             textBox1.BorderStyle = BorderStyle.None;
             textBox1.Location = new Point(264, 148);
             textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
             textBox1.Size = new Size(302, 20);
             textBox1.TabIndex = 11;
+            textBox1.Text = "Auto";
             // 
             // textBox3
             // 
             textBox3.BackColor = Color.LightGray;
             textBox3.Location = new Point(1213, 776);
             textBox3.Name = "textBox3";
+            textBox3.ReadOnly = true;
             textBox3.Size = new Size(125, 27);
             textBox3.TabIndex = 14;
             // 
             // button3
             // 
-            button3.Location = new Point(1244, 878);
+            button3.BackgroundImage = (Image)resources.GetObject("button3.BackgroundImage");
+            button3.BackgroundImageLayout = ImageLayout.Zoom;
+            button3.FlatAppearance.BorderSize = 0;
+            button3.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            button3.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.Location = new Point(316, 855);
             button3.Name = "button3";
-            button3.Size = new Size(94, 29);
+            button3.Size = new Size(218, 56);
             button3.TabIndex = 15;
-            button3.Text = "Simpan";
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
+            // 
+            // button4
+            // 
+            button4.BackgroundImage = (Image)resources.GetObject("button4.BackgroundImage");
+            button4.BackgroundImageLayout = ImageLayout.Zoom;
+            button4.FlatAppearance.BorderSize = 0;
+            button4.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            button4.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            button4.FlatStyle = FlatStyle.Flat;
+            button4.Location = new Point(75, 855);
+            button4.Name = "button4";
+            button4.Size = new Size(218, 56);
+            button4.TabIndex = 20;
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // V_TransaksiToko
             // 
@@ -184,6 +208,7 @@
             BackColor = Color.Transparent;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Zoom;
+            Controls.Add(button4);
             Controls.Add(button3);
             Controls.Add(textBox3);
             Controls.Add(dateTimePicker1);
@@ -219,5 +244,6 @@
         private DataGridViewTextBoxColumn jumlah;
         private DataGridViewTextBoxColumn harga;
         private DataGridViewTextBoxColumn harga_diskon;
+        private Button button4;
     }
 }

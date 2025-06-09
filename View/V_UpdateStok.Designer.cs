@@ -71,11 +71,16 @@
             // 
             // button1
             // 
-            button1.Location = new Point(51, 576);
+            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
+            button1.BackgroundImageLayout = ImageLayout.Zoom;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            button1.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Location = new Point(22, 20);
             button1.Name = "button1";
-            button1.Size = new Size(94, 29);
+            button1.Size = new Size(67, 67);
             button1.TabIndex = 4;
-            button1.Text = "back";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
@@ -124,7 +129,7 @@
             // 
             pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
             pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox1.Location = new Point(22, 24);
+            pictureBox1.Location = new Point(95, 24);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(307, 59);
             pictureBox1.TabIndex = 9;

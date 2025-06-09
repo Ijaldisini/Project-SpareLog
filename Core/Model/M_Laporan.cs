@@ -13,5 +13,8 @@ namespace Project_SpareLog.Core.Model
         public int jumlah_terjual { get; set; }
         public int harga_jual { get; set; }
         public int harga_total { get; set; }
+
+        public int harga_beli { get; set; }
+        public int jumlah_dibeli { get; set; }
     }
 }

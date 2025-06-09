@@ -80,14 +80,14 @@ namespace Project_SpareLog.View
         {
             dataGridView1.EnableHeadersVisualStyles = false;
 
-            // Header style
+            // Header Style
             dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(89, 96, 124);
             dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
             dataGridView1.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dataGridView1.ColumnHeadersHeight = 40;
 
-            // Cell style
+            // Cell Style
             dataGridView1.DefaultCellStyle.BackColor = Color.FromArgb(228, 228, 228);
             dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 240, 240);
             dataGridView1.DefaultCellStyle.ForeColor = Color.Black;
@@ -106,13 +106,8 @@ namespace Project_SpareLog.View
             // Row and column sizing
             dataGridView1.RowTemplate.Height = 40;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.AllowUserToAddRows = true; // <-- Penting untuk tetap bisa input
+            dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToResizeRows = false;
-
-            if (dataGridView1.Rows.Count > 0)
-            {
-                dataGridView1.Rows[0].Height = 40; // atau tinggi sesuai kebutuhan
-            }
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
@@ -120,6 +115,14 @@ namespace Project_SpareLog.View
             DateTime selectedDate = dateTimePicker1.Value.Date;
             var data = laporanService.GetLaporanPelangganByTanggal(selectedDate);
             LoadDataGrid(data);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            V_LaporanPembelian pembelian = new V_LaporanPembelian();
+            this.Controls.Add(pembelian);
+            pembelian.BringToFront();
+            pembelian.Show();
         }
     }
 }

@@ -7,59 +7,72 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Project_SpareLog.Context;
 using Project_SpareLog.Core.Abstract;
+using Project_SpareLog.Context;
 using Project_SpareLog.Core.Model;
 
 namespace Project_SpareLog.View
 {
-    public partial class V_RTPelanggan : UserControl
+    public partial class V_LaporanPembelian : UserControl
     {
-        private ARiwayatTransaksiService riwayatTransaksiService;
+        private ALaporanService laporanService;
 
-        public V_RTPelanggan()
+        public V_LaporanPembelian()
         {
-            riwayatTransaksiService = new C_RiwayatTransaksi();
+            laporanService = new C_Laporan();
             InitializeComponent();
-
-            textBox1.KeyDown += TextBox1_KeyDown;
         }
 
-        private void TextBox1_KeyDown(object sender, KeyEventArgs e) // Changed event handler to KeyDown
+        private void V_LaporanPembelian_Load(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                string nama = textBox1.Text.Trim();
-                if (!string.IsNullOrEmpty(nama))
-                {
-                    var data = riwayatTransaksiService.GetRiwayatByNamaPelanggan(nama);
-                    LoadDataGrid(data);
-                }
-            }
+            StyleDataGridView();
+            LoadLaporan();
         }
 
-        private void LoadDataGrid(List<M_RiwayatTransaksi> riwayat)
+        private void LoadLaporan()
+        {
+            // Bersihkan data lama
+            dataGridView1.Rows.Clear();
+
+            var laporan = laporanService.GetLaporanPembelian();
+
+            foreach (var item in laporan)
+            {
+                dataGridView1.Rows.Add(
+                    item.id_barang,
+                    item.nama_barang,
+                    item.jumlah_dibeli,
+                    item.harga_beli,
+                    item.harga_total
+                );
+            }
+
+            // Hitung total seluruh penjualan hari itu
+            int total = laporan.Sum(l => l.harga_total);
+            textBox1.Text = total.ToString("N0");
+        }
+
+        private void LoadDataGrid(List<M_Laporan> laporan)
         {
             dataGridView1.Rows.Clear();
 
-            foreach (var item in riwayat)
+            foreach (var item in laporan)
             {
                 dataGridView1.Rows.Add(
-                    item.id_transaksi,
-                    item.tanggal_transaksi.ToShortDateString(),
-                    item.pelanggan_id_pelanggan,
-                    item.barang_id_barang,
-                    item.jumlah_detail_transaksi,
-                    item.harga_detail_transaksi
+                    item.id_barang,
+                    item.nama_barang,
+                    item.jumlah_dibeli,
+                    item.harga_beli,
+                    item.harga_total
                 );
             }
 
             int total = 0;
-            foreach (var item in riwayat)
+            foreach (var item in laporan)
             {
-                total += item.jumlah_detail_transaksi * item.harga_detail_transaksi; ;
+                total += item.jumlah_terjual * item.harga_total; ;
             }
-            textBox2.Text = total.ToString("N0");
+            textBox1.Text = total.ToString("N0");
         }
 
         private void StyleDataGridView()
@@ -96,25 +109,19 @@ namespace Project_SpareLog.View
             dataGridView1.AllowUserToResizeRows = false;
         }
 
-        private void V_RTPelanggan_Load(object sender, EventArgs e)
-        {
-            StyleDataGridView();
-            LoadDataGrid(riwayatTransaksiService.GetAllRiwayatPelanggan());
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            V_RTToko v_RTToko = new V_RTToko();
-            this.Controls.Add(v_RTToko);
-            v_RTToko.BringToFront();
-            v_RTToko.Show();
-        }
-
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
             DateTime selectedDate = dateTimePicker1.Value.Date;
-            var data = riwayatTransaksiService.GetRiwayatPelangganByTanggal(selectedDate);
+            var data = laporanService.GetLaporanPelangganByTanggal(selectedDate);
             LoadDataGrid(data);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            V_LaporanPenjualan penjualan = new V_LaporanPenjualan();
+            this.Controls.Add(penjualan);
+            penjualan.BringToFront();
+            penjualan.Show();
         }
     }
 }

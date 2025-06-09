@@ -90,7 +90,7 @@ namespace Project_SpareLog.View
             dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
             dataGridView1.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridView1.ColumnHeadersHeight = 36;
+            dataGridView1.ColumnHeadersHeight = 40;
 
             // Cell Style
             dataGridView1.DefaultCellStyle.BackColor = Color.FromArgb(228, 228, 228);
@@ -109,7 +109,7 @@ namespace Project_SpareLog.View
             dataGridView1.RowHeadersVisible = false;
 
             // Row and column sizing
-            dataGridView1.RowTemplate.Height = 34;
+            dataGridView1.RowTemplate.Height = 40;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToResizeRows = false;

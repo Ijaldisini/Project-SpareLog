@@ -51,6 +51,7 @@
             textBox2.BackColor = Color.LightGray;
             textBox2.Location = new Point(1213, 830);
             textBox2.Name = "textBox2";
+            textBox2.ReadOnly = true;
             textBox2.Size = new Size(125, 27);
             textBox2.TabIndex = 19;
             // 
@@ -129,6 +130,7 @@
             id_transaksi.HeaderText = "ID Transaksi";
             id_transaksi.MinimumWidth = 6;
             id_transaksi.Name = "id_transaksi";
+            id_transaksi.ReadOnly = true;
             id_transaksi.Width = 125;
             // 
             // tanggal_transaksi
@@ -136,6 +138,7 @@
             tanggal_transaksi.HeaderText = "Tanggal Transaksi";
             tanggal_transaksi.MinimumWidth = 6;
             tanggal_transaksi.Name = "tanggal_transaksi";
+            tanggal_transaksi.ReadOnly = true;
             tanggal_transaksi.Width = 125;
             // 
             // id_pelanggan
@@ -143,6 +146,7 @@
             id_pelanggan.HeaderText = "ID Pelanggan";
             id_pelanggan.MinimumWidth = 6;
             id_pelanggan.Name = "id_pelanggan";
+            id_pelanggan.ReadOnly = true;
             id_pelanggan.Width = 125;
             // 
             // id_barang
@@ -150,6 +154,7 @@
             id_barang.HeaderText = "ID Barang";
             id_barang.MinimumWidth = 6;
             id_barang.Name = "id_barang";
+            id_barang.ReadOnly = true;
             id_barang.Width = 125;
             // 
             // jumlah
@@ -157,6 +162,7 @@
             jumlah.HeaderText = "Jumlah";
             jumlah.MinimumWidth = 6;
             jumlah.Name = "jumlah";
+            jumlah.ReadOnly = true;
             jumlah.Width = 125;
             // 
             // harga
@@ -164,6 +170,7 @@
             harga.HeaderText = "Harga";
             harga.MinimumWidth = 6;
             harga.Name = "harga";
+            harga.ReadOnly = true;
             harga.Width = 125;
             // 
             // V_RTPelanggan
