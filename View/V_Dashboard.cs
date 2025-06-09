@@ -35,6 +35,7 @@ namespace Project_SpareLog.View
             btntransaksiklik.Hide();
             button4.Show();
             button2.Show();
+            button5.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -46,6 +47,7 @@ namespace Project_SpareLog.View
             btntransaksiklik.Show();
             button1.Show();
             button4.Show();
+            button5.Show();
         }
 
         private void v_TambahBarang1_Load(object sender, EventArgs e)
@@ -69,6 +71,7 @@ namespace Project_SpareLog.View
             button4.Show();
             btnriwayatklik.Hide();
             button2.Show();
+            button5.Show();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -77,9 +80,22 @@ namespace Project_SpareLog.View
             btnmanajemenklik.Hide();
             button1.Show();
             button2.Show();
+            button5.Show();
             btntransaksiklik.Show();
             v_TransaksiPelanggan1.BringToFront();
             v_TransaksiPelanggan1.Show();
+            v_DashboardAwal1.Hide();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            button5.Hide();
+            btnlaporanklik.Show();
+            button1.Show();
+            button2.Show();
+            button4.Show();
+            v_LaporanPenjualan1.BringToFront();
+            v_LaporanPenjualan1.Show();
             v_DashboardAwal1.Hide();
         }
     }
