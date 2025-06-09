@@ -71,7 +71,7 @@ namespace Project_SpareLog.View
             int total = 0;
             foreach (var item in laporan)
             {
-                total += item.jumlah_terjual * item.harga_total; ;
+                total += item.harga_total;
             }
             textBox1.Text = total.ToString("N0");
         }
@@ -113,7 +113,7 @@ namespace Project_SpareLog.View
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
             DateTime selectedDate = dateTimePicker1.Value.Date;
-            var data = laporanService.GetLaporanPelangganByTanggal(selectedDate);
+            var data = laporanService.GetLaporanPenjualanByTanggal(selectedDate);
             LoadDataGrid(data);
         }
 

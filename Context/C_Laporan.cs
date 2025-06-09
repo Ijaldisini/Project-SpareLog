@@ -31,10 +31,10 @@ namespace Project_SpareLog.Context
                     d.harga_detail_transaksi AS harga_jual,
                     SUM(d.jumlah_detail_transaksi * d.harga_detail_transaksi) AS total_harga
                 FROM transaksi t
-                JOIN detail_transaksi d ON t.detail_transaksi_id_detail_transaksi = d.id_detail_transaksi
+                JOIN detail_transaksi d ON d.id_transaksi = t.id_transaksi
                 JOIN barang b ON d.barang_id_barang = b.id_barang
                 GROUP BY b.id_barang, b.nama_barang, d.harga_detail_transaksi
-    ";
+            ";
 
             DataTable dt = db.queryExecutor(query);
             List<M_Laporan> laporanList = new List<M_Laporan>();
@@ -54,7 +54,7 @@ namespace Project_SpareLog.Context
             return laporanList;
         }
 
-        public override List<M_Laporan> GetLaporanPelangganByTanggal(DateTime tanggal)
+        public override List<M_Laporan> GetLaporanPenjualanByTanggal(DateTime tanggal)
         {
             List<M_Laporan> laporanList = new List<M_Laporan>();
 
@@ -66,7 +66,7 @@ namespace Project_SpareLog.Context
                     d.harga_detail_transaksi AS harga_jual,
                     SUM(d.jumlah_detail_transaksi * d.harga_detail_transaksi) AS total_harga
                 FROM transaksi t
-                JOIN detail_transaksi d ON t.detail_transaksi_id_detail_transaksi = d.id_detail_transaksi
+                JOIN detail_transaksi d ON t.id_transaksi = d.id_transaksi
                 JOIN barang b ON d.barang_id_barang = b.id_barang
                 WHERE t.tanggal_transaksi = @tanggal
                 GROUP BY d.barang_id_barang, b.nama_barang, d.harga_detail_transaksi

@@ -44,21 +44,35 @@ namespace Project_SpareLog.Context
             int idPelanggan = transaksiList[0].pelanggan_id_pelanggan;
             int idUser = transaksiList[0].user_id_user;
 
-            int firstDetailId = GetNextIdDetailTransaksi(); // ID pertama detail transaksi, akan disimpan di tabel transaksi
-            int currentDetailId = firstDetailId;
+            // 1. Insert transaksi dulu
+            string insertTransaksi = "INSERT INTO transaksi " +
+                                     "(id_transaksi, tanggal_transaksi, pelanggan_id_pelanggan, user_id_user) " +
+                                     "VALUES (@id, @tanggal, @pelanggan, @user)";
 
-            // Insert semua detail transaksi dulu
+            var paramTransaksi = new NpgsqlParameter[]
+            {
+                new NpgsqlParameter("@id", idTransaksi),
+                new NpgsqlParameter("@tanggal", tanggal),
+                new NpgsqlParameter("@pelanggan", idPelanggan),
+                new NpgsqlParameter("@user", idUser)
+            };
+
+            if (db.ExecuteNonQuery(insertTransaksi, paramTransaksi) <= 0)
+                return false;
+
+            // 2. Insert semua detail transaksi, dengan id_transaksi yang sama
+            int currentDetailId = GetNextIdDetailTransaksi();
+
             foreach (var item in transaksiList)
             {
-                int subtotal = item.jumlah_detail_transaksi * item.harga_detail_transaksi;
-
                 string insertDetail = "INSERT INTO detail_transaksi " +
-                                      "(id_detail_transaksi, barang_id_barang, jumlah_detail_transaksi, harga_detail_transaksi, id_user) " +
-                                      "VALUES (@id_detail, @id_barang, @jumlah, @harga, @id_user)";
+                                      "(id_detail_transaksi, id_transaksi, barang_id_barang, jumlah_detail_transaksi, harga_detail_transaksi, id_user) " +
+                                      "VALUES (@id_detail, @id_transaksi, @id_barang, @jumlah, @harga, @id_user)";
 
                 var paramDetail = new NpgsqlParameter[]
                 {
                     new NpgsqlParameter("@id_detail", currentDetailId),
+                    new NpgsqlParameter("@id_transaksi", idTransaksi),
                     new NpgsqlParameter("@id_barang", item.barang_id_barang),
                     new NpgsqlParameter("@jumlah", item.jumlah_detail_transaksi),
                     new NpgsqlParameter("@harga", item.harga_detail_transaksi),
@@ -71,22 +85,9 @@ namespace Project_SpareLog.Context
                 currentDetailId++;
             }
 
-            // Setelah insert semua detail, insert ke tabel transaksi
-            string insertTransaksi = "INSERT INTO transaksi " +
-                                     "(id_transaksi, tanggal_transaksi, pelanggan_id_pelanggan, user_id_user, detail_transaksi_id_detail_transaksi) " +
-                                     "VALUES (@id, @tanggal, @pelanggan, @user, @id_detail)";
-
-            var paramTransaksi = new NpgsqlParameter[]
-            {
-                new NpgsqlParameter("@id", idTransaksi),
-                new NpgsqlParameter("@tanggal", tanggal),
-                new NpgsqlParameter("@pelanggan", idPelanggan),
-                new NpgsqlParameter("@user", idUser),
-                new NpgsqlParameter("@id_detail", firstDetailId)
-            };
-
-            return db.ExecuteNonQuery(insertTransaksi, paramTransaksi) > 0;
+            return true;
         }
+
 
 
         public override int GetIdPelanggan(string namaPelanggan, string noPolisi)

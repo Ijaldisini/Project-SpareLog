@@ -10,7 +10,7 @@ namespace Project_SpareLog.Core.Abstract
     public abstract class ALaporanService
     {
         public abstract List<M_Laporan> GetLaporanPenjualan();
-        public abstract List<M_Laporan> GetLaporanPelangganByTanggal(DateTime tanggal);
+        public abstract List<M_Laporan> GetLaporanPenjualanByTanggal(DateTime tanggal);
 
         public abstract List<M_Laporan> GetLaporanPembelian();
         public abstract List<M_Laporan> GetLaporanPembelianByTanggal(DateTime tanggal);

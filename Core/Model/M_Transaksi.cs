@@ -10,7 +10,6 @@ namespace Project_SpareLog.Core.Model
     {
         public int id_transaksi { get; set; }
         public DateTime tanggal_transaksi { get; set; }
-        public int detail_transaksi_id_detail_transaksi { get; set; }
 
         public int pelanggan_id_pelanggan { get; set; }
         public int user_id_user { get; set; }

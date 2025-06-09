@@ -33,13 +33,14 @@ namespace Project_SpareLog.Context
                 FROM 
                     transaksi t  
                 JOIN 
-                    detail_transaksi d ON t.detail_transaksi_id_detail_transaksi = d.id_detail_transaksi  
+                    detail_transaksi d ON t.id_transaksi = d.id_transaksi  
                 JOIN 
                     pelanggan p ON t.pelanggan_id_pelanggan = p.id_pelanggan
                 WHERE 
                     p.nomor_polisi IS NOT NULL
                 ORDER BY 
-                    t.tanggal_transaksi DESC";
+                    t.tanggal_transaksi DESC
+            ";
 
             DataTable dt = db.queryExecutor(query);
             return ConvertToListPelanggan(dt);
@@ -59,7 +60,7 @@ namespace Project_SpareLog.Context
                 FROM   
                     transaksi t  
                 JOIN   
-                    detail_transaksi d ON t.detail_transaksi_id_detail_transaksi = d.id_detail_transaksi  
+                    detail_transaksi d ON t.id_transaksi = d.id_transaksi  
                 JOIN   
                     barang b ON d.barang_id_barang = b.id_barang  
                 JOIN   
@@ -67,7 +68,8 @@ namespace Project_SpareLog.Context
                 WHERE   
                     p.nama_pelanggan ILIKE @namaPelanggan  
                     AND p.nomor_polisi IS NOT NULL  
-                    AND p.nomor_polisi <> ''";
+                    AND p.nomor_polisi <> ''
+            ";
 
             var parameters = new NpgsqlParameter[]
             {
@@ -92,7 +94,7 @@ namespace Project_SpareLog.Context
                 FROM   
                     transaksi t  
                 JOIN   
-                    detail_transaksi d ON t.detail_transaksi_id_detail_transaksi = d.id_detail_transaksi  
+                    detail_transaksi d ON t.id_transaksi = d.id_transaksi  
                 JOIN   
                     barang b ON d.barang_id_barang = b.id_barang  
                 JOIN   
@@ -102,7 +104,8 @@ namespace Project_SpareLog.Context
                     AND p.nomor_polisi <> ''  
                     AND DATE(t.tanggal_transaksi) = @tanggal
                 ORDER BY 
-                    t.tanggal_transaksi DESC";
+                    t.tanggal_transaksi DESC
+            ";
 
             var parameters = new Npgsql.NpgsqlParameter[]
             {
@@ -164,7 +167,7 @@ namespace Project_SpareLog.Context
                 FROM 
                     transaksi t  
                 JOIN 
-	                detail_transaksi d ON t.detail_transaksi_id_detail_transaksi = d.id_detail_transaksi  
+	                detail_transaksi d ON t.id_transaksi = d.id_transaksi  
                 JOIN
 	                barang b ON d.barang_id_barang = b.id_barang
                 JOIN 
@@ -192,7 +195,7 @@ namespace Project_SpareLog.Context
                 FROM   
                     transaksi t  
                 JOIN   
-                    detail_transaksi d ON t.detail_transaksi_id_detail_transaksi = d.id_detail_transaksi  
+                    detail_transaksi d ON t.id_transaksi = d.id_transaksi  
                 JOIN   
                     barang b ON d.barang_id_barang = b.id_barang  
                 JOIN   
@@ -224,7 +227,7 @@ namespace Project_SpareLog.Context
                 FROM 
                     transaksi t  
                 JOIN 
-                    detail_transaksi d ON t.detail_transaksi_id_detail_transaksi = d.id_detail_transaksi  
+                    detail_transaksi d ON t.id_transaksi = d.id_transaksi  
                 JOIN 
                     pelanggan p ON t.pelanggan_id_pelanggan = p.id_pelanggan
                 JOIN
