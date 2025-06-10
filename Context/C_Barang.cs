@@ -184,7 +184,8 @@ namespace Project_SpareLog.Context
             string query = @"SELECT b.id_barang, b.nama_barang, b.stok_barang, b.harga_barang, b.hpp, s.nama_supplier
                     FROM barang b
                     JOIN supplier s ON b.supplier_id_supplier = s.id_supplier
-                    WHERE b.stok_barang < 10
+                    WHERE b.stok_barang < 10 AND
+                            b.terhapus = false
                     ORDER BY b.stok_barang ASC";
             return db.queryExecutor(query);
         }
