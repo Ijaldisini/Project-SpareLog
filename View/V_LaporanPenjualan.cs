@@ -32,48 +32,60 @@ namespace Project_SpareLog.View
 
         private void LoadLaporan()
         {
-            // Bersihkan data lama
-            dataGridView1.Rows.Clear();
-
-            var laporan = laporanService.GetLaporanPenjualan();
-
-            foreach (var item in laporan)
+            try
             {
-                dataGridView1.Rows.Add(
-                    item.id_barang,
-                    item.nama_barang,
-                    item.jumlah_terjual,
-                    item.harga_jual,
-                    item.harga_total
-                );
-            }
+                dataGridView1.Rows.Clear();
 
-            // Hitung total seluruh penjualan hari itu
-            int total = laporan.Sum(l => l.harga_total);
-            textBox1.Text = total.ToString("N0");
+                var laporan = laporanService.GetLaporanPenjualan();
+
+                foreach (var item in laporan)
+                {
+                    dataGridView1.Rows.Add(
+                        item.id_barang,
+                        item.nama_barang,
+                        item.jumlah_terjual,
+                        item.harga_jual,
+                        item.harga_total
+                    );
+                }
+
+                int total = laporan.Sum(l => l.harga_total);
+                textBox1.Text = total.ToString("N0");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Terjadi kesalahan saat memuat laporan: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void LoadDataGrid(List<M_Laporan> laporan)
         {
             dataGridView1.Rows.Clear();
 
-            foreach (var item in laporan)
+            try
             {
-                dataGridView1.Rows.Add(
-                    item.id_barang,
-                    item.nama_barang,
-                    item.jumlah_terjual,
-                    item.harga_jual,
-                    item.harga_total
-                );
-            }
+                foreach (var item in laporan)
+                {
+                    dataGridView1.Rows.Add(
+                        item.id_barang,
+                        item.nama_barang,
+                        item.jumlah_terjual,
+                        item.harga_jual,
+                        item.harga_total
+                    );
+                }
 
-            int total = 0;
-            foreach (var item in laporan)
-            {
-                total += item.harga_total;
+                int total = 0;
+                foreach (var item in laporan)
+                {
+                    total += item.harga_total;
+                }
+                textBox1.Text = total.ToString("N0");
             }
-            textBox1.Text = total.ToString("N0");
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Terjadi kesalahan saat memuat data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void StyleDataGridView()

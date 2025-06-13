@@ -36,8 +36,6 @@ namespace Project_SpareLog.View
                 DataTable dt = controller.GetBarangPerluRestock();
                 dataGridView1.Rows.Clear();
 
-                //Console.WriteLine($"Jumlah baris diterima: {dt.Rows.Count}"); 
-
                 foreach (DataRow row in dt.Rows)
                 {
                     dataGridView1.Rows.Add(
@@ -50,7 +48,6 @@ namespace Project_SpareLog.View
                     );
                 }
 
-                // Tambahkan label jika tidak ada barang yang perlu direstock
                 if (dataGridView1.Rows.Count == 0)
                 {
                     Label lblEmpty = new Label();
@@ -64,7 +61,6 @@ namespace Project_SpareLog.View
                 else
                 {
                     dataGridView1.Visible = true;
-                    // Hapus semua label yang mungkin ada sebelumnya
                     foreach (Control control in this.Controls)
                     {
                         if (control is Label)

@@ -27,25 +27,31 @@ namespace Project_SpareLog.View
 
         public void LoadDataStok()
         {
-            var controller = new C_Barang();
-            DataTable dt = controller.GetAllBarang();
-            dataGridView1.Rows.Clear();
-            foreach (DataRow row in dt.Rows)
+            try
             {
-                dataGridView1.Rows.Add(
-                    row["id_barang"],
-                    row["nama_barang"],
-                    row["stok_barang"],
-                    row["harga_barang"],
-                    row["hpp"],
-                    row["supplier_id_supplier"]
-                );
+                var controller = new C_Barang();
+                DataTable dt = controller.GetAllBarang();
+                dataGridView1.Rows.Clear();
+                foreach (DataRow row in dt.Rows)
+                {
+                    dataGridView1.Rows.Add(
+                        row["id_barang"],
+                        row["nama_barang"],
+                        row["stok_barang"],
+                        row["harga_barang"],
+                        row["hpp"],
+                        row["supplier_id_supplier"]
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Handle tombol hapus
             if (e.ColumnIndex == dataGridView1.Columns["hapus"].Index && e.RowIndex >= 0)
             {
                 int idBarang = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["id_barang"].Value);
@@ -63,7 +69,7 @@ namespace Project_SpareLog.View
                     }
                     else
                     {
-                        MessageBox.Show("Gagal menghapus barang");
+                        MessageBox.Show("Gagal menghapus barang", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
 
@@ -73,7 +79,6 @@ namespace Project_SpareLog.View
                 }
             }
 
-            // Handle tombol update stok
             if (e.ColumnIndex == dataGridView1.Columns["tambah_stok"].Index && e.RowIndex >= 0)
             {
                 try
@@ -149,7 +154,6 @@ namespace Project_SpareLog.View
                 dataGridView1.Columns["tambah_stok"].Width = 40;
             }
 
-            // Replace tombol teks dengan gambar (di CellPainting)
             dataGridView1.CellPainting += (s, e) =>
             {
                 if (e.RowIndex >= 0 && (e.ColumnIndex == dataGridView1.Columns["hapus"].Index || e.ColumnIndex == dataGridView1.Columns["tambah_stok"].Index))
