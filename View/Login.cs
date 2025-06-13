@@ -33,10 +33,9 @@ namespace Project_SpareLog.View
             string password = textBox1.Text.Trim();
             if (string.IsNullOrEmpty(password))
             {
-                MessageBox.Show("Please enter your password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Password tidak boleh kosong!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
             try
             {
                 C_Login login = new C_Login();
@@ -44,8 +43,7 @@ namespace Project_SpareLog.View
 
                 if (success)
                 {
-                    MessageBox.Show("Login success!!", "Success",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Login success!!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     V_Dashboard dashboard = new V_Dashboard();
                     dashboard.Show();
                     this.Hide();
@@ -53,13 +51,17 @@ namespace Project_SpareLog.View
                 }
                 else
                 {
-                    MessageBox.Show("Wrong Password!!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Password salah!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     textBox1.Clear();
                 }
             }
+            catch (NpgsqlException ex)
+            {
+                MessageBox.Show($"Database error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (Exception ex)
             {
-                MessageBox.Show($"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"An unexpected error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
