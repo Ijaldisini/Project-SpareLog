@@ -17,13 +17,21 @@ namespace Project_SpareLog.Context
 
         public bool Login(string password)
         {
-            string query = "SELECT * FROM users WHERE password = @password";
-            NpgsqlParameter[] parameters = {
-                new NpgsqlParameter("@password", password)
-            };
+            try
+            {
+                string query = "SELECT * FROM users WHERE password = @password";
+                NpgsqlParameter[] parameters = {
+                    new NpgsqlParameter("@password", password)
+                };
 
-            DataTable dt = db.queryExecutor(query, parameters);
-            return dt.Rows.Count > 0;
+                DataTable dt = db.queryExecutor(query, parameters);
+                return dt.Rows.Count > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error untuk login: {ex.Message}");
+                return false;
+            }
         }
     }
 }
