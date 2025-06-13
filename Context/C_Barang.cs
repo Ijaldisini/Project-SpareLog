@@ -28,38 +28,62 @@ namespace Project_SpareLog.Context
 
         public int GetNextIdBarang()
         {
-            string query = "SELECT MAX(id_barang) AS max_id FROM barang";
-            DataTable dt = db.queryExecutor(query);
+            try
+            { 
+                string query = "SELECT MAX(id_barang) AS max_id FROM barang";
+                DataTable dt = db.queryExecutor(query);
 
-            if (dt.Rows.Count > 0 && dt.Rows[0]["max_id"] != DBNull.Value)
-            {
-                return Convert.ToInt32(dt.Rows[0]["max_id"]) + 1;
+                if (dt.Rows.Count > 0 && dt.Rows[0]["max_id"] != DBNull.Value)
+                {
+                    return Convert.ToInt32(dt.Rows[0]["max_id"]) + 1;
+                }
+                return 1;
             }
-            return 1;
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal mendapatkan ID barang: " + ex.Message);
+                return -1;
+            }
         }
 
         public int? GetIdBarangByNama(string nama)
         {
-            string query = $"SELECT id_barang FROM barang WHERE nama_barang ILIKE '{nama}'";
-            DataTable dt = db.queryExecutor(query);
-
-            if (dt.Rows.Count > 0 && dt.Rows[0]["id_barang"] != DBNull.Value)
+            try
             {
-                return Convert.ToInt32(dt.Rows[0]["id_barang"]);
+                string query = $"SELECT id_barang FROM barang WHERE nama_barang ILIKE '{nama}'";
+                DataTable dt = db.queryExecutor(query);
+
+                if (dt.Rows.Count > 0 && dt.Rows[0]["id_barang"] != DBNull.Value)
+                {
+                    return Convert.ToInt32(dt.Rows[0]["id_barang"]);
+                }
+                return null;
             }
-            return null;
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal mendapatkan ID barang: " + ex.Message);
+                return null;
+            }
         }
 
         public string GetNamaBarangById(int id)
         {
-            string query = $"SELECT nama_barang FROM barang WHERE id_barang ILIKE '{id}'";
-            DataTable dt = db.queryExecutor(query);
-
-            if (dt.Rows.Count > 0)
+            try
             {
-                return dt.Rows[0]["nama_barang"].ToString();
+                string query = $"SELECT nama_barang FROM barang WHERE id_barang ILIKE '{id}'";
+                DataTable dt = db.queryExecutor(query);
+
+                if (dt.Rows.Count > 0)
+                {
+                    return dt.Rows[0]["nama_barang"].ToString();
+                }
+                return null;
             }
-            return null;
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal mendapatkan nama barang: " + ex.Message);
+                return null;
+            }
         }
 
         public DataTable GetSuppliers()
@@ -69,168 +93,237 @@ namespace Project_SpareLog.Context
 
         public bool TambahAktivitasStok(int idBarang, int idSupplier, int jumlah, int hpp_saat_ini)
         {
-            string query = @"INSERT INTO aktivitas_stok 
-                    (barang_id_barang, supplier_id_supplier, jumlah_barang, hpp_saat_ini, tanggal) 
-                    VALUES (@idBarang, @idSupplier, @jumlah, @hpp_saat_ini, @tanggal)";
-
-            var parameters = new NpgsqlParameter[]
+            try
             {
-                new NpgsqlParameter("@idBarang", idBarang),
-                new NpgsqlParameter("@idSupplier", idSupplier),
-                new NpgsqlParameter("@jumlah", jumlah),
-                new NpgsqlParameter("@hpp_saat_ini", hpp_saat_ini),
-                new NpgsqlParameter("@tanggal", DateTime.Now)
-            };
+                string query = @"INSERT INTO aktivitas_stok 
+                        (barang_id_barang, supplier_id_supplier, jumlah_barang, hpp_saat_ini, tanggal) 
+                        VALUES (@idBarang, @idSupplier, @jumlah, @hpp_saat_ini, @tanggal)";
 
-            return db.ExecuteNonQuery(query, parameters) > 0;
+                var parameters = new NpgsqlParameter[]
+                {
+                    new NpgsqlParameter("@idBarang", idBarang),
+                    new NpgsqlParameter("@idSupplier", idSupplier),
+                    new NpgsqlParameter("@jumlah", jumlah),
+                    new NpgsqlParameter("@hpp_saat_ini", hpp_saat_ini),
+                    new NpgsqlParameter("@tanggal", DateTime.Now)
+                };
+
+                return db.ExecuteNonQuery(query, parameters) > 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal menambahkan aktivitas stok: " + ex.Message);
+                return false;
+            }
         }
 
         public bool SimpanBarang(M_Barang barang)
         {
-            if (IsBarangExists(barang.id_barang))
-            {
-                MessageBox.Show("Barang dengan ID ini sudah ada.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-            else
-            {
-                string insertQuery = "INSERT INTO barang (id_barang, nama_barang, stok_barang, harga_barang, hpp, supplier_id_supplier) " +
-                                     "VALUES (@id, @nama, @stok, @harga, @hpp, @supplier)";
-                var insertParams = new NpgsqlParameter[]
+            try
+            { 
+                if (IsBarangExists(barang.id_barang))
                 {
-                    new NpgsqlParameter("@id", barang.id_barang),
-                    new NpgsqlParameter("@nama", barang.nama_barang),
-                    new NpgsqlParameter("@stok", barang.stok_barang),
-                    new NpgsqlParameter("@harga", barang.harga_barang),
-                    new NpgsqlParameter("@hpp", barang.hpp),
-                    new NpgsqlParameter("@supplier", barang.supplier_id_supplier)
-                };
-                bool success = db.ExecuteNonQuery(insertQuery, insertParams) > 0;
-
-                if (success)
-                {
-                    TambahAktivitasStok(barang.id_barang, barang.supplier_id_supplier, barang.stok_barang, barang.hpp);
+                    MessageBox.Show("Barang dengan ID ini sudah ada.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
                 }
-                return success;
+                else
+                {
+                    string insertQuery = "INSERT INTO barang (id_barang, nama_barang, stok_barang, harga_barang, hpp, supplier_id_supplier) " +
+                                         "VALUES (@id, @nama, @stok, @harga, @hpp, @supplier)";
+                    var insertParams = new NpgsqlParameter[]
+                    {
+                        new NpgsqlParameter("@id", barang.id_barang),
+                        new NpgsqlParameter("@nama", barang.nama_barang),
+                        new NpgsqlParameter("@stok", barang.stok_barang),
+                        new NpgsqlParameter("@harga", barang.harga_barang),
+                        new NpgsqlParameter("@hpp", barang.hpp),
+                        new NpgsqlParameter("@supplier", barang.supplier_id_supplier)
+                    };
+                    bool success = db.ExecuteNonQuery(insertQuery, insertParams) > 0;
+
+                    if (success)
+                    {
+                        TambahAktivitasStok(barang.id_barang, barang.supplier_id_supplier, barang.stok_barang, barang.hpp);
+                    }
+                    return success;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal menyimpan barang: " + ex.Message);
+                return false;
             }
         }
 
         public bool UpdateStokBarang(int idBarang, int jumlahStokBaru, int hppBaru)
         {
-            string getInfoQuery = "SELECT supplier_id_supplier FROM barang WHERE id_barang = @id";
-            var getInfoParams = new NpgsqlParameter[]
+            try
             {
-                new NpgsqlParameter("@id", idBarang)
-            };
-            DataTable dt = db.queryExecutor(getInfoQuery, getInfoParams);
+                string getInfoQuery = "SELECT supplier_id_supplier FROM barang WHERE id_barang = @id";
+                var getInfoParams = new NpgsqlParameter[]
+                {
+                    new NpgsqlParameter("@id", idBarang)
+                };
+                DataTable dt = db.queryExecutor(getInfoQuery, getInfoParams);
 
-            if (dt.Rows.Count == 0)
-                return false;
+                if (dt.Rows.Count == 0)
+                    return false;
 
-            int supplierId = Convert.ToInt32(dt.Rows[0]["supplier_id_supplier"]);
+                int supplierId = Convert.ToInt32(dt.Rows[0]["supplier_id_supplier"]);
 
-            string query = "UPDATE barang SET stok_barang = stok_barang + @jumlah WHERE id_barang = @id";
-            var parameters = new NpgsqlParameter[]
-            {
-                new NpgsqlParameter("@jumlah", jumlahStokBaru),
-                new NpgsqlParameter("@id", idBarang)
-            };
-            bool success = db.ExecuteNonQuery(query, parameters) > 0;
+                string query = "UPDATE barang SET stok_barang = stok_barang + @jumlah WHERE id_barang = @id";
+                var parameters = new NpgsqlParameter[]
+                {
+                    new NpgsqlParameter("@jumlah", jumlahStokBaru),
+                    new NpgsqlParameter("@id", idBarang)
+                };
+                bool success = db.ExecuteNonQuery(query, parameters) > 0;
 
-            if (success)
-            {
-                // Simpan aktivitas stok dengan HPP baru yang diberikan
-                TambahAktivitasStok(idBarang, supplierId, jumlahStokBaru, hppBaru);
+                if (success)
+                {
+                    TambahAktivitasStok(idBarang, supplierId, jumlahStokBaru, hppBaru);
+                }
+                return success;
             }
-            return success;
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal memperbarui stok barang: " + ex.Message);
+                return false;
+            }
         }
 
 
         public bool UpdateHPP(int idBarang, int hpp_saat_ini)
         {
-            string query = "UPDATE barang SET hpp = @harga WHERE id_barang = @id";
-            var parameters = new NpgsqlParameter[]
+            try
             {
-                new NpgsqlParameter("@harga", hpp_saat_ini),
-                new NpgsqlParameter("@id", idBarang)
-            };
-            return db.ExecuteNonQuery(query, parameters) > 0;
+                string query = "UPDATE barang SET hpp = @harga WHERE id_barang = @id";
+                var parameters = new NpgsqlParameter[]
+                {
+                    new NpgsqlParameter("@harga", hpp_saat_ini),
+                    new NpgsqlParameter("@id", idBarang)
+                };
+                return db.ExecuteNonQuery(query, parameters) > 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal memperbarui HPP: " + ex.Message);
+                return false;
+            }
         }
 
         public bool UpdateHargaBarang(int idBarang, int hargaBaru)
         {
-            string query = "UPDATE barang SET harga_barang = @harga WHERE id_barang = @id";
-            var parameters = new NpgsqlParameter[]
+            try
             {
-                new NpgsqlParameter("@harga", hargaBaru),
-                new NpgsqlParameter("@id", idBarang)
-            };
-            return db.ExecuteNonQuery(query, parameters) > 0;
+                string query = "UPDATE barang SET harga_barang = @harga WHERE id_barang = @id";
+                var parameters = new NpgsqlParameter[]
+                {
+                    new NpgsqlParameter("@harga", hargaBaru),
+                    new NpgsqlParameter("@id", idBarang)
+                };
+                return db.ExecuteNonQuery(query, parameters) > 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal memperbarui harga barang: " + ex.Message);
+                return false;
+            }
         }
 
         public bool IsBarangExists(int idBarang)
         {
-            string query = "SELECT COUNT(*) FROM barang WHERE id_barang = @id";
-            var parameters = new NpgsqlParameter[]
+            try 
             {
-                new NpgsqlParameter("@id", idBarang)
-            };
-            DataTable dt = db.queryExecutor(query, parameters);
-            return Convert.ToInt32(dt.Rows[0][0]) > 0;
+                string query = "SELECT COUNT(*) FROM barang WHERE id_barang = @id";
+                var parameters = new NpgsqlParameter[]
+                {
+                    new NpgsqlParameter("@id", idBarang)
+                };
+                DataTable dt = db.queryExecutor(query, parameters);
+                return Convert.ToInt32(dt.Rows[0][0]) > 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal memeriksa keberadaan barang: " + ex.Message);
+                return false;
+            }
         }
 
         public DataTable GetBarangPerluRestock()
         {
-            string query = @"SELECT b.id_barang, b.nama_barang, b.stok_barang, b.harga_barang, b.hpp, s.nama_supplier
-                    FROM barang b
-                    JOIN supplier s ON b.supplier_id_supplier = s.id_supplier
-                    WHERE b.stok_barang < 10 AND
-                            b.terhapus = false
-                    ORDER BY b.stok_barang ASC";
-            return db.queryExecutor(query);
+            try
+            {
+                string query = @"SELECT b.id_barang, b.nama_barang, b.stok_barang, b.harga_barang, b.hpp, s.nama_supplier
+                        FROM barang b
+                        JOIN supplier s ON b.supplier_id_supplier = s.id_supplier
+                        WHERE b.stok_barang < 10 AND
+                                b.terhapus = false
+                        ORDER BY b.stok_barang ASC";
+                return db.queryExecutor(query);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal mendapatkan barang yang perlu direstock: " + ex.Message);
+                return new DataTable();
+            }
         }
 
         public bool HapusBarang(int idBarang)
         {
-            string query = @"UPDATE barang 
-                            SET terhapus = true, 
-                                tanggal_hapus = @deletedAt 
-                            WHERE id_barang = @id";
-
-            var parameters = new NpgsqlParameter[]
+            try
             {
-                new NpgsqlParameter("@id", idBarang),
-                new NpgsqlParameter("@deletedAt", DateTime.Now)
-            };
+                string query = @"UPDATE barang 
+                                SET terhapus = true, 
+                                    tanggal_hapus = @deletedAt 
+                                WHERE id_barang = @id";
 
-            return db.ExecuteNonQuery(query, parameters) > 0;
+                var parameters = new NpgsqlParameter[]
+                {
+                    new NpgsqlParameter("@id", idBarang),
+                    new NpgsqlParameter("@deletedAt", DateTime.Now)
+                };
+
+                return db.ExecuteNonQuery(query, parameters) > 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal menghapus barang: " + ex.Message);
+                return false;
+            }
         }
 
         public string GetDetailBarang(string nama)
         {
-            string query = "SELECT id_barang, harga_barang FROM barang WHERE nama_barang ILIKE @nama";
-            var parameters = new NpgsqlParameter[]
+            try
             {
-                new NpgsqlParameter("@nama", nama)
-            };
+                string query = "SELECT id_barang, harga_barang FROM barang WHERE nama_barang ILIKE @nama";
+                var parameters = new NpgsqlParameter[]
+                {
+                    new NpgsqlParameter("@nama", nama)
+                };
 
-            DataTable dt = db.queryExecutor(query, parameters);
+                DataTable dt = db.queryExecutor(query, parameters);
 
-            if (dt.Rows.Count > 0)
-            {
-                int id = Convert.ToInt32(dt.Rows[0]["id_barang"]);
-                int harga = Convert.ToInt32(dt.Rows[0]["harga_barang"]);
-                return $"{id}|{harga}"; // dipisahkan dengan tanda "|"
+                if (dt.Rows.Count > 0)
+                {
+                    int id = Convert.ToInt32(dt.Rows[0]["id_barang"]);
+                    int harga = Convert.ToInt32(dt.Rows[0]["harga_barang"]);
+                    return $"{id}|{harga}";
+                }
+
+                return null;
             }
-
-            return null;
+            catch (Exception ex)
+            {
+                MessageBox.Show("Gagal mendapatkan detail barang: " + ex.Message);
+                return null;
+            }
         }
-
         public bool KurangiStokBarang(int idBarang, int jumlah)
         {
             try
             {
-                // Update stok barang di database
                 string query = "UPDATE barang SET stok_barang = stok_barang - @jumlah WHERE id_barang = @idBarang";
                 var parameters = new NpgsqlParameter[]
                 {
@@ -241,7 +334,6 @@ namespace Project_SpareLog.Context
             }
             catch (Exception ex)
             {
-                // Log error atau tampilkan pesan error
                 MessageBox.Show("Gagal mengurangi stok barang: " + ex.Message);
                 return false;
             }

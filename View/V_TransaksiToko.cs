@@ -201,12 +201,13 @@ namespace Project_SpareLog.View
             }
             else
             {
-                MessageBox.Show("Gagal menyimpan transaksi.");
+                MessageBox.Show("Gagal menyimpan transaksi!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("Transaksi berhasil dihapus!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
             dataGridView1.Rows.Clear();
             textBox1.Clear();
             textBox2.Clear();

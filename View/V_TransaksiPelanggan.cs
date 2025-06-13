@@ -61,7 +61,7 @@ namespace Project_SpareLog.View
             // Row and column sizing
             dataGridView1.RowTemplate.Height = 40;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.AllowUserToAddRows = true; // <-- Penting untuk tetap bisa input
+            dataGridView1.AllowUserToAddRows = true;
             dataGridView1.AllowUserToResizeRows = false;
 
             if (dataGridView1.Rows.Count > 0)
@@ -136,7 +136,7 @@ namespace Project_SpareLog.View
 
             if (string.IsNullOrEmpty(namaPelanggan))
             {
-                MessageBox.Show("Nama pelanggan harus diisi.");
+                MessageBox.Show("Nama pelanggan harus diisi!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -180,7 +180,7 @@ namespace Project_SpareLog.View
             bool success = controller.SimpanTransaksi(transaksiList);
             if (success)
             {
-                MessageBox.Show("Transaksi berhasil disimpan.");
+                MessageBox.Show("Transaksi berhasil disimpan!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 dataGridView1.Rows.Clear();
                 textBox1.Clear();
                 textBox2.Clear();
@@ -208,6 +208,7 @@ namespace Project_SpareLog.View
 
         private void button4_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("Transaksi berhasil dihapus!", "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information);
             dataGridView1.Rows.Clear();
             textBox1.Clear();
             textBox2.Clear();
