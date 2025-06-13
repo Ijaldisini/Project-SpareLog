@@ -61,7 +61,7 @@
             dateTimePicker1.CalendarTitleBackColor = Color.Transparent;
             dateTimePicker1.CalendarTrailingForeColor = Color.Transparent;
             dateTimePicker1.ImeMode = ImeMode.NoControl;
-            dateTimePicker1.Location = new Point(264, 259);
+            dateTimePicker1.Location = new Point(264, 230);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(302, 27);
             dateTimePicker1.TabIndex = 18;
@@ -71,7 +71,7 @@
             // 
             textBox1.BackColor = Color.LightGray;
             textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Location = new Point(264, 223);
+            textBox1.Location = new Point(264, 195);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(302, 20);
             textBox1.TabIndex = 17;
