@@ -25,16 +25,23 @@ namespace Project_SpareLog.View
             textBox1.KeyDown += TextBox1_KeyDown;
         }
 
-        private void TextBox1_KeyDown(object sender, KeyEventArgs e) // Changed event handler to KeyDown
+        private void TextBox1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
+            try
             {
-                string nama = textBox1.Text.Trim();
-                if (!string.IsNullOrEmpty(nama))
+                if (e.KeyCode == Keys.Enter)
                 {
-                    var data = riwayatTransaksiService.GetRiwayatByNamaPelanggan(nama);
-                    LoadDataGrid(data);
+                    string nama = textBox1.Text.Trim();
+                    if (!string.IsNullOrEmpty(nama))
+                    {
+                        var data = riwayatTransaksiService.GetRiwayatByNamaPelanggan(nama);
+                        LoadDataGrid(data);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Terjadi kesalahan saat mencari data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -42,24 +49,31 @@ namespace Project_SpareLog.View
         {
             dataGridView1.Rows.Clear();
 
-            foreach (var item in riwayat)
+            try
             {
-                dataGridView1.Rows.Add(
-                    item.id_transaksi,
-                    item.tanggal_transaksi.ToShortDateString(),
-                    item.pelanggan_id_pelanggan,
-                    item.barang_id_barang,
-                    item.jumlah_detail_transaksi,
-                    item.harga_detail_transaksi
-                );
-            }
+                foreach (var item in riwayat)
+                {
+                    dataGridView1.Rows.Add(
+                        item.id_transaksi,
+                        item.tanggal_transaksi.ToShortDateString(),
+                        item.pelanggan_id_pelanggan,
+                        item.barang_id_barang,
+                        item.jumlah_detail_transaksi,
+                        item.harga_detail_transaksi
+                    );
+                }
 
-            int total = 0;
-            foreach (var item in riwayat)
-            {
-                total += item.jumlah_detail_transaksi * item.harga_detail_transaksi; ;
+                int total = 0;
+                foreach (var item in riwayat)
+                {
+                    total += item.jumlah_detail_transaksi * item.harga_detail_transaksi; ;
+                }
+                textBox2.Text = total.ToString("N0");
             }
-            textBox2.Text = total.ToString("N0");
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Terjadi kesalahan saat memuat data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void StyleDataGridView()
