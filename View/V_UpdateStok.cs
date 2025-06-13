@@ -25,7 +25,6 @@ namespace Project_SpareLog.View
             controller = new C_Barang();
         }
 
-        // Method untuk mengisi data barang yang akan diupdate
         public void SetBarangData(int idBarang, string namaBarang, int currentStok)
         {
             _currentIdBarang = idBarang;
@@ -44,7 +43,6 @@ namespace Project_SpareLog.View
         {
             try
             {
-                // Validasi input
                 if (string.IsNullOrEmpty(textBox2.Text))
                 {
                     MessageBox.Show("Masukkan jumlah stok yang akan ditambahkan", "Warning",
@@ -70,14 +68,12 @@ namespace Project_SpareLog.View
                     return;
                 }
 
-                // Konfirmasi
                 DialogResult confirmResult = MessageBox.Show(
                     $"Tambahkan {jumlahStokBaru} ke stok saat ini ({_currentStok})? \n" +
                     $"Update HPP menjadi {hppBaru}?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (confirmResult == DialogResult.Yes)
                 {
-                    // Eksekusi update
                     bool successStok = controller.UpdateStokBarang(_currentIdBarang, jumlahStokBaru, hppBaru);
                     bool successHPP = controller.UpdateHPP(_currentIdBarang, hppBaru);
                     bool successHarga = controller.UpdateHargaBarang(_currentIdBarang, hargaBaru);

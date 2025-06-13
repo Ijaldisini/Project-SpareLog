@@ -116,7 +116,6 @@ namespace Project_SpareLog.View
             if (e.RowIndex >= 0 && (dataGridView1.Columns[e.ColumnIndex].Name == "jumlah" ||
                         dataGridView1.Columns[e.ColumnIndex].Name == "harga_diskon"))
             {
-                // Tambahkan ini:
                 var hargaCell = dataGridView1.Rows[e.RowIndex].Cells["harga"];
                 if (hargaCell.Value != null && int.TryParse(hargaCell.Value.ToString(), out int harga))
                 {
@@ -144,64 +143,71 @@ namespace Project_SpareLog.View
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string namaPelanggan = textBox3.Text.Trim();
-            string noPolisi = textBox2.Text.Trim();
-
-            if (string.IsNullOrEmpty(namaPelanggan))
+            try
             {
-                MessageBox.Show("Nama pelanggan harus diisi.");
-                return;
-            }
+                string namaPelanggan = textBox3.Text.Trim();
+                string noPolisi = textBox2.Text.Trim();
 
-            int pelangganId = controller.GetIdToko(namaPelanggan);
-            textBox1.Text = pelangganId.ToString(); // tampilkan di TextBox1
-
-            List<M_Transaksi> transaksiList = new List<M_Transaksi>();
-            int total = 0;
-
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                if (row.IsNewRow) continue;
-
-                if (row.Cells["id_barang"].Value == null ||
-                    row.Cells["jumlah"].Value == null ||
-                    row.Cells["harga"].Value == null)
-                    continue;
-
-                var item = new M_Transaksi
+                if (string.IsNullOrEmpty(namaPelanggan))
                 {
-                    pelanggan_id_pelanggan = pelangganId,
-                    user_id_user = 1,
-                    barang_id_barang = Convert.ToInt32(row.Cells["id_barang"].Value),
-                    jumlah_detail_transaksi = Convert.ToInt32(row.Cells["jumlah"].Value),
-                    harga_detail_transaksi = Convert.ToInt32(row.Cells["harga_diskon"].Value)
-                };
+                    MessageBox.Show("Nama pelanggan harus diisi.");
+                    return;
+                }
 
-                transaksiList.Add(item);
+                int pelangganId = controller.GetIdToko(namaPelanggan);
+                textBox1.Text = pelangganId.ToString(); // tampilkan di TextBox1
 
-                var controllerBarang = new C_Barang();
-                bool kurangiStok = controllerBarang.KurangiStokBarang(Convert.ToInt32(row.Cells["id_barang"].Value), Convert.ToInt32(row.Cells["jumlah"].Value));
-                if (!kurangiStok)
+                List<M_Transaksi> transaksiList = new List<M_Transaksi>();
+                int total = 0;
+
+                foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
-                    MessageBox.Show("Gagal mengurangi stok untuk barang " + row.Cells["nama_barang"].Value.ToString());
-                    return; // Berhenti jika stok gagal dikurangi
+                    if (row.IsNewRow) continue;
+
+                    if (row.Cells["id_barang"].Value == null ||
+                        row.Cells["jumlah"].Value == null ||
+                        row.Cells["harga"].Value == null)
+                        continue;
+
+                    var item = new M_Transaksi
+                    {
+                        pelanggan_id_pelanggan = pelangganId,
+                        user_id_user = 1,
+                        barang_id_barang = Convert.ToInt32(row.Cells["id_barang"].Value),
+                        jumlah_detail_transaksi = Convert.ToInt32(row.Cells["jumlah"].Value),
+                        harga_detail_transaksi = Convert.ToInt32(row.Cells["harga_diskon"].Value)
+                    };
+
+                    transaksiList.Add(item);
+
+                    var controllerBarang = new C_Barang();
+                    bool kurangiStok = controllerBarang.KurangiStokBarang(Convert.ToInt32(row.Cells["id_barang"].Value), Convert.ToInt32(row.Cells["jumlah"].Value));
+                    if (!kurangiStok)
+                    {
+                        MessageBox.Show("Gagal mengurangi stok untuk barang " + row.Cells["nama_barang"].Value.ToString());
+                        return; // Berhenti jika stok gagal dikurangi
+                    }
+                }
+
+                textBox3.Text = total.ToString();
+
+                bool success = controller.SimpanTransaksi(transaksiList);
+                if (success)
+                {
+                    MessageBox.Show("Transaksi berhasil disimpan.");
+                    dataGridView1.Rows.Clear();
+                    textBox1.Clear();
+                    textBox2.Clear();
+                    textBox3.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Gagal menyimpan transaksi!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
-            textBox3.Text = total.ToString();
-
-            bool success = controller.SimpanTransaksi(transaksiList);
-            if (success)
+            catch (Exception ex)
             {
-                MessageBox.Show("Transaksi berhasil disimpan.");
-                dataGridView1.Rows.Clear();
-                textBox1.Clear();
-                textBox2.Clear();
-                textBox3.Clear();
-            }
-            else
-            {
-                MessageBox.Show("Gagal menyimpan transaksi!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Terjadi kesalahan saat menyimpan transaksi: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

@@ -33,39 +33,60 @@ namespace Project_SpareLog.View
 
         private void V_TambahBarang_Load(object sender, EventArgs e)
         {
-            if (DesignMode) return;
+            try
+            {
+                if (DesignMode) return;
 
-            controller = controller ?? new C_Barang();
+                controller = controller ?? new C_Barang();
 
-            DataTable dt = controller.GetSuppliers();
-            comboBox1.DataSource = dt;
-            comboBox1.DisplayMember = "nama_supplier";
-            comboBox1.ValueMember = "id_supplier";
+                DataTable dt = controller.GetSuppliers();
+                comboBox1.DataSource = dt;
+                comboBox1.DisplayMember = "nama_supplier";
+                comboBox1.ValueMember = "id_supplier";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading suppliers: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void TextBox1_Leave(object sender, EventArgs e)
         {
-            if (DesignMode) return;
-
-            if (int.TryParse(textBox1.Text.Trim(), out int idBarang))
+            try
             {
-                string namaBarang = controller.GetNamaBarangById(idBarang);
-                if (!string.IsNullOrEmpty(namaBarang))
+                if (DesignMode) return;
+
+                if (int.TryParse(textBox1.Text.Trim(), out int idBarang))
                 {
-                    textBox2.Text = namaBarang;
+                    string namaBarang = controller.GetNamaBarangById(idBarang);
+                    if (!string.IsNullOrEmpty(namaBarang))
+                    {
+                        textBox2.Text = namaBarang;
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error retrieving barang: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void TextBox2_Leave(object sender, EventArgs e)
         {
-            if (DesignMode) return;
+            try
+            {
+                if (DesignMode) return;
 
-            string namaBarang = textBox2.Text.Trim();
-            if (string.IsNullOrEmpty(namaBarang)) return;
+                string namaBarang = textBox2.Text.Trim();
+                if (string.IsNullOrEmpty(namaBarang)) return;
 
-            int? idBarang = controller.GetIdBarangByNama(namaBarang);
-            textBox1.Text = idBarang?.ToString() ?? controller.GetNextIdBarang().ToString();
+                int? idBarang = controller.GetIdBarangByNama(namaBarang);
+                textBox1.Text = idBarang?.ToString() ?? controller.GetNextIdBarang().ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error retrieving barang ID: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void TextBox5_TextChanged(object sender, EventArgs e)
