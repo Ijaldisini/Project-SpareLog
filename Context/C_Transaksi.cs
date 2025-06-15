@@ -101,8 +101,8 @@ namespace Project_SpareLog.Context
                 string query = "SELECT id_pelanggan FROM pelanggan WHERE nama_pelanggan = @nama AND nomor_polisi = @nomor_polisi";
                 var dt = db.queryExecutor(query, new NpgsqlParameter[]
                 {
-            new NpgsqlParameter("@nama", namaPelanggan),
-            new NpgsqlParameter("@nomor_polisi", noPolisi)
+                    new NpgsqlParameter("@nama", namaPelanggan),
+                    new NpgsqlParameter("@nomor_polisi", noPolisi)
                 });
 
                 if (dt.Rows.Count > 0)

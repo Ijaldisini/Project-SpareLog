@@ -20,6 +20,7 @@ namespace Project_SpareLog.Context
         {
             db = new DatabaseWrapper();
         }
+
         public DataTable GetAllBarang()
         {
             string query = "SELECT * FROM barang WHERE terhapus = false";
@@ -191,7 +192,6 @@ namespace Project_SpareLog.Context
                 return false;
             }
         }
-
 
         public bool UpdateHPP(int idBarang, int hpp_saat_ini)
         {
