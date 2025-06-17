@@ -87,7 +87,7 @@ namespace Project_SpareLog.View
                     string namaBarang = dataGridView1.Rows[e.RowIndex].Cells["nama_barang"].Value.ToString();
                     int stokSaatIni = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells["jumlah_stok"].Value);
 
-                    // Langsung buka form update stok
+                    
                     V_UpdateStok v_UpdateStok = new V_UpdateStok();
                     V_TambahBarang v_TambahBarang = new V_TambahBarang();
                     v_UpdateStok.SetBarangData(idBarang, namaBarang, stokSaatIni);
@@ -164,11 +164,11 @@ namespace Project_SpareLog.View
                     Image img = null;
                     if (e.ColumnIndex == dataGridView1.Columns["hapus"].Index)
                     {
-                        img = Image.FromFile(@"D:\Kulyeah\PBO\Tugas\Tugas Besar\Project SpareLog\Resources\delete.png"); // pastikan ada file Resources dengan nama 'trash'
+                        img = Image.FromFile(@"D:\Kulyeah\PBO\Tugas\Tugas Besar\Project SpareLog\Resources\delete.png");
                     }
                     else if (e.ColumnIndex == dataGridView1.Columns["tambah_stok"].Index)
                     {
-                        img = Image.FromFile(@"D:\Kulyeah\PBO\Tugas\Tugas Besar\Project SpareLog\Resources\Pen.png"); // pastikan ada file Resources dengan nama 'plus'
+                        img = Image.FromFile(@"D:\Kulyeah\PBO\Tugas\Tugas Besar\Project SpareLog\Resources\Pen.png");
                     }
 
                     if (img != null)

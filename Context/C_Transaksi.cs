@@ -52,10 +52,10 @@ namespace Project_SpareLog.Context
 
                 var paramTransaksi = new NpgsqlParameter[]
                 {
-                new NpgsqlParameter("@id", idTransaksi),
-                new NpgsqlParameter("@tanggal", tanggal),
-                new NpgsqlParameter("@pelanggan", idPelanggan),
-                new NpgsqlParameter("@user", idUser)
+            new NpgsqlParameter("@id", idTransaksi),
+            new NpgsqlParameter("@tanggal", tanggal),
+            new NpgsqlParameter("@pelanggan", idPelanggan),
+            new NpgsqlParameter("@user", idUser)
                 };
 
                 if (db.ExecuteNonQuery(insertTransaksi, paramTransaksi) <= 0)
@@ -71,12 +71,12 @@ namespace Project_SpareLog.Context
 
                     var paramDetail = new NpgsqlParameter[]
                     {
-                    new NpgsqlParameter("@id_detail", currentDetailId),
-                    new NpgsqlParameter("@id_transaksi", idTransaksi),
-                    new NpgsqlParameter("@id_barang", item.barang_id_barang),
-                    new NpgsqlParameter("@jumlah", item.jumlah_detail_transaksi),
-                    new NpgsqlParameter("@harga", item.harga_detail_transaksi),
-                    new NpgsqlParameter("@id_user", item.user_id_user)
+                new NpgsqlParameter("@id_detail", currentDetailId),
+                new NpgsqlParameter("@id_transaksi", idTransaksi),
+                new NpgsqlParameter("@id_barang", item.barang_id_barang),
+                new NpgsqlParameter("@jumlah", item.jumlah_detail_transaksi),
+                new NpgsqlParameter("@harga", item.harga_detail_transaksi),
+                new NpgsqlParameter("@id_user", item.user_id_user)
                     };
 
                     if (db.ExecuteNonQuery(insertDetail, paramDetail) <= 0)
@@ -124,7 +124,7 @@ namespace Project_SpareLog.Context
             catch (Exception ex)
             {
                 Console.WriteLine($"Error in GetIdPelanggan: {ex.Message}");
-                return -1; // Return -1 or throw an exception based on your error handling strategy
+                return -1;
             }
         }
 
@@ -132,11 +132,16 @@ namespace Project_SpareLog.Context
         {
             try
             {
-                string query = "SELECT id_pelanggan FROM pelanggan WHERE nama_pelanggan = @nama ";
+                // Validasi nama toko tidak boleh angka saja
+                if (string.IsNullOrWhiteSpace(namaPelanggan) || namaPelanggan.All(char.IsDigit))
+                {
+                    throw new ArgumentException("Nama toko tidak valid. Harus mengandung karakter non-angka.");
+                }
+
+                string query = "SELECT id_pelanggan FROM pelanggan WHERE nama_pelanggan = @nama";
                 var dt = db.queryExecutor(query, new NpgsqlParameter[]
                 {
-                new NpgsqlParameter("@nama", namaPelanggan),
-                    //new NpgsqlParameter("@no_polisi", noPolisi)
+            new NpgsqlParameter("@nama", namaPelanggan)
                 });
 
                 if (dt.Rows.Count > 0)
@@ -148,7 +153,7 @@ namespace Project_SpareLog.Context
                     string insert = "INSERT INTO pelanggan (nama_pelanggan) VALUES (@nama) RETURNING id_pelanggan";
                     var result = db.queryExecutor(insert, new NpgsqlParameter[]
                     {
-                    new NpgsqlParameter("@nama", namaPelanggan),
+                new NpgsqlParameter("@nama", namaPelanggan.Trim())
                     });
 
                     return Convert.ToInt32(result.Rows[0]["id_pelanggan"]);
@@ -157,7 +162,7 @@ namespace Project_SpareLog.Context
             catch (Exception ex)
             {
                 Console.WriteLine($"Error in GetIdToko: {ex.Message}");
-                return -1; // Return -1 or throw an exception based on your error handling strategy
+                throw;
             }
         }
 
@@ -207,7 +212,7 @@ namespace Project_SpareLog.Context
             catch (Exception ex)
             {
                 Console.WriteLine($"Error in HitungTotalToko: {ex.Message}");
-                return 0; // Return 0 or handle the error as needed
+                return 0;
             }
         }
     }

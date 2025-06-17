@@ -35,17 +35,30 @@ namespace Project_SpareLog.View
             if (DesignMode) return;
 
             string namaPelanggan = textBox2.Text.Trim();
-            if (!string.IsNullOrEmpty(namaPelanggan))
+
+            if (string.IsNullOrWhiteSpace(namaPelanggan))
             {
-                try
-                {
-                    int idPelanggan = controller.GetIdToko(namaPelanggan);
-                    textBox1.Text = idPelanggan.ToString();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Gagal mendapatkan ID pelanggan: " + ex.Message);
-                }
+                MessageBox.Show("Nama toko tidak boleh kosong", "Warning", MessageBoxButtons.OK , MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (namaPelanggan.All(char.IsDigit))
+            {
+                MessageBox.Show("Nama toko tidak valid!!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                textBox2.Focus();
+                return;
+            }
+
+            try
+            {
+                int idPelanggan = controller.GetIdToko(namaPelanggan);
+                textBox1.Text = idPelanggan.ToString();
+
+                textBox2.Text = namaPelanggan;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Gagal mendapatkan ID toko: {ex.Message}");
             }
         }
 
@@ -79,12 +92,12 @@ namespace Project_SpareLog.View
             // Row and column sizing
             dataGridView1.RowTemplate.Height = 40;
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridView1.AllowUserToAddRows = true; // <-- Penting untuk tetap bisa input
+            dataGridView1.AllowUserToAddRows = true;
             dataGridView1.AllowUserToResizeRows = false;
 
             if (dataGridView1.Rows.Count > 0)
             {
-                dataGridView1.Rows[0].Height = 40; // atau tinggi sesuai kebutuhan
+                dataGridView1.Rows[0].Height = 40;
             }
         }
 
@@ -145,17 +158,23 @@ namespace Project_SpareLog.View
         {
             try
             {
-                string namaPelanggan = textBox3.Text.Trim();
-                string noPolisi = textBox2.Text.Trim();
+                string namaPelanggan = textBox2.Text.Trim();
 
-                if (string.IsNullOrEmpty(namaPelanggan))
+                if (string.IsNullOrWhiteSpace(namaPelanggan))
                 {
-                    MessageBox.Show("Nama pelanggan harus diisi.");
+                    MessageBox.Show("Nama toko harus diisi!!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (namaPelanggan.All(char.IsDigit))
+                {
+                    MessageBox.Show("Nama toko tidak valid!!", "Warning", ,MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    textBox2.Focus();
                     return;
                 }
 
                 int pelangganId = controller.GetIdToko(namaPelanggan);
-                textBox1.Text = pelangganId.ToString(); // tampilkan di TextBox1
+                textBox1.Text = pelangganId.ToString();
 
                 List<M_Transaksi> transaksiList = new List<M_Transaksi>();
                 int total = 0;
@@ -185,7 +204,7 @@ namespace Project_SpareLog.View
                     if (!kurangiStok)
                     {
                         MessageBox.Show("Gagal mengurangi stok untuk barang " + row.Cells["nama_barang"].Value.ToString());
-                        return; // Berhenti jika stok gagal dikurangi
+                        return;
                     }
                 }
 
@@ -194,7 +213,7 @@ namespace Project_SpareLog.View
                 bool success = controller.SimpanTransaksi(transaksiList);
                 if (success)
                 {
-                    MessageBox.Show("Transaksi berhasil disimpan.");
+                    MessageBox.Show("Transaksi berhasil disimpan!!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     dataGridView1.Rows.Clear();
                     textBox1.Clear();
                     textBox2.Clear();

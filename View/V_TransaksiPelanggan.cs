@@ -17,7 +17,6 @@ namespace Project_SpareLog.View
     public partial class V_TransaksiPelanggan : UserControl
     {
         private C_Transaksi controller;
-        //private C_Barang controllerBarang;
 
         public V_TransaksiPelanggan()
         {
@@ -67,7 +66,7 @@ namespace Project_SpareLog.View
 
             if (dataGridView1.Rows.Count > 0)
             {
-                dataGridView1.Rows[0].Height = 40; // atau tinggi sesuai kebutuhan
+                dataGridView1.Rows[0].Height = 40;
             }
         }
 

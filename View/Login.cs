@@ -43,7 +43,7 @@ namespace Project_SpareLog.View
 
                 if (success)
                 {
-                    MessageBox.Show("Login success!!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Login berhasil!!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     V_Dashboard dashboard = new V_Dashboard();
                     dashboard.Show();
                     this.Hide();
